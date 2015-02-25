@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <GL/glew.h>
 
 #include "EventHandler.h"
 
@@ -13,10 +14,12 @@ public:
 
 private:
 	SDL_Window * createWindow();
+	void initOpenGL();
+	void testDraw();
 	void cleanup();
 
 	SDL_Window * window;
-	EventHandler * handler;
+	EventHandler handler;
 
 	bool exit = false;
 	int screenWidth = 1024;
