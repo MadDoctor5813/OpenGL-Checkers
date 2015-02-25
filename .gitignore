@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io
 
 #dependencies folder
-deps\
+GL Checkers\deps
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
