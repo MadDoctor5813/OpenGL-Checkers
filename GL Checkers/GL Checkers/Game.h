@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 
 #include "EventHandler.h"
+#include "Sprite.h"
 
 class Game {
 

@@ -30,11 +30,12 @@ void Game::initOpenGL() {
 	//Turn on double buffering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	//Set background
-	glClearColor(255, 0, 255, 0);
+	glClearColor(0, 0, 0, 0);
 }
 
 
 void Game::runLoop() {
+	Sprite testSprite = Sprite(-1.0f, -1.0f, 1.0f, 1.0f);
 	SDL_Event nextEvent;
 	while (exit == false) {
 		SDL_PollEvent(&nextEvent);
@@ -45,7 +46,8 @@ void Game::runLoop() {
 		else {
 			handler.processEvent(nextEvent);
 		}
-		testDraw();
+		testSprite.draw();
+		SDL_GL_SwapWindow(window);
 	}
 }
 
@@ -53,19 +55,5 @@ void Game::cleanup()  {
 	//Place for cleanup operations in the future?
 }
 
-void Game::testDraw() {
-	glClearDepth(1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glEnableClientState(GL_COLOR_ARRAY);
-	glBegin(GL_TRIANGLES);
-	glColor3f(255, 0, 0);
-	glVertex2f(-1, -1);
-	glVertex2f(0, 1);
-	glVertex2f(1, -1);
-	glEnd();
-
-	SDL_GL_SwapWindow(window);
-}
 
 
