@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)deps/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)deps/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)deps\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,6 +78,10 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Sprite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\Frag\colorShading.frag" />
+    <Text Include="Shaders\Vertex\colorShading.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
