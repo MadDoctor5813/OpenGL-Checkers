@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{4de1eec9-491f-403f-ab16-384b093739ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -40,7 +43,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\Vertex\colorShading.vert" />
-    <Text Include="Shaders\Frag\colorShading.frag" />
+    <Text Include="Shaders\Frag\colorShading.frag">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Shaders\Vertex\colorShading.vert">
+      <Filter>Shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>
