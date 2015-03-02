@@ -15,10 +15,12 @@ public:
 
 private:
 	std::string loadFile(std::string filename);
-	void loadShaders();
+	GLuint linkShaders();
 
 	GLuint shaderProgram;
 
+	std::string vertCode;
+	std::string fragCode;
 
 };
 
