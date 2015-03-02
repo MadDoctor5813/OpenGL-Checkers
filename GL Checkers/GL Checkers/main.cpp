@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Game.h"
+#include "ShaderProgram.h"
 
 //Entry point
 int main(int argc, char** argv) {

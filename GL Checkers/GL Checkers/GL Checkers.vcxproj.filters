@@ -49,10 +49,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\Frag\colorShading.frag">
+    <Text Include="Shaders\colorShading.frag">
       <Filter>Shaders</Filter>
     </Text>
-    <Text Include="Shaders\Vertex\colorShading.vert">
+    <Text Include="Shaders\colorShading.vert">
       <Filter>Shaders</Filter>
     </Text>
   </ItemGroup>

@@ -12,7 +12,7 @@ public:
 private:
 	void initBuffer();
 
-	int x, y, h, w;
+	float x, y, h, w;
 	GLuint bufferId;
 
 };

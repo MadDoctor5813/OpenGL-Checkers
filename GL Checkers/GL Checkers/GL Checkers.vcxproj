@@ -82,8 +82,8 @@
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\Frag\colorShading.frag" />
-    <Text Include="Shaders\Vertex\colorShading.vert" />
+    <Text Include="Shaders\colorShading.frag" />
+    <Text Include="Shaders\colorShading.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
