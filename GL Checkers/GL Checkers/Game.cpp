@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-Game::Game() {
+Game::Game()  { 
 	//Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 	//Init window
@@ -31,6 +31,9 @@ void Game::initOpenGL() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	//Set background
 	glClearColor(0, 0, 0, 0);
+	//Load program
+	ShaderProgram program("colorShading.vert", "colorShading.frag");
+	glUseProgram(program.getProgram());
 }
 
 

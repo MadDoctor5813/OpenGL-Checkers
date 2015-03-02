@@ -5,6 +5,7 @@
 
 #include "EventHandler.h"
 #include "Sprite.h"
+#include "ShaderProgram.h"
 
 class Game {
 
