@@ -33,6 +33,7 @@ void Game::initOpenGL() {
 	glClearColor(0, 0, 0, 0);
 	//Load program
 	ShaderProgram program("colorShading.vert", "colorShading.frag");
+	program.addAttr("vertPos");
 	glUseProgram(program.getProgram());
 }
 

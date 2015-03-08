@@ -54,7 +54,7 @@ void Sprite::draw() {
 	glBindBuffer(GL_ARRAY_BUFFER, bufferId);
 	//Enables first attrib array
 	glEnableVertexAttribArray(0);
-	//Sets buffer data attributes
+	//Sets metadata of zeroth vertex shader attribute
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	//Draws buffer
 	glDrawArrays(GL_TRIANGLES, 0, 6);

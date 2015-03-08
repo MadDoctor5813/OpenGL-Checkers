@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 
-ShaderProgram::ShaderProgram(std::string vertFile, std::string fragFile) {
+ShaderProgram::ShaderProgram(const std::string& vertFile, const std::string& fragFile) {
 	vertCode = loadFile(vertFile);
 	fragCode = loadFile(fragFile);
 	shaderProgram = linkShaders();
@@ -20,7 +20,7 @@ GLuint ShaderProgram::getProgram() {
 	return shaderProgram;
 }
 
-std::string ShaderProgram::loadFile(std::string filename) {
+std::string ShaderProgram::loadFile(const std::string& filename) {
 	std::string fullPath = "Shaders/" + filename;
 	std::ifstream fileStream(fullPath);
 	std::stringstream fileStrStream;
@@ -41,6 +41,8 @@ GLuint ShaderProgram::linkShaders() {
 	GLint vertStatus;
 	glGetShaderiv(vertShader, GL_COMPILE_STATUS, &vertStatus);
 	if (vertStatus == GL_FALSE) {
+		glDeleteShader(vertShader);
+		glDeleteShader(fragShader);
 		std::cout << "Vertex shader compile error. Undefined behavior may result." << std::endl;
 		GLint maxLength;
 		glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &maxLength);
@@ -55,6 +57,8 @@ GLuint ShaderProgram::linkShaders() {
 	GLint fragStatus;
 	glGetShaderiv(fragShader, GL_COMPILE_STATUS, &fragStatus);
 	if (fragStatus == GL_FALSE) {
+		glDeleteShader(vertShader);
+		glDeleteShader(fragShader);
 		std::cout << "Fragment shader compile error. Undefined behavior may result." << std::endl;
 		GLint maxLength;
 		glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &maxLength);
@@ -72,13 +76,23 @@ GLuint ShaderProgram::linkShaders() {
 	GLint linkStatus;
 	glGetProgramiv(program, GL_COMPILE_STATUS, &linkStatus);
 	if (linkStatus == GL_FALSE) {
+		glDetachShader(program, vertShader);
+		glDetachShader(program, fragShader);
+		glDeleteShader(vertShader);
+		glDeleteShader(fragShader);
+		glDeleteProgram(program);
 		std::cout << "Shader link error." << std::endl;
 		return 0;
 	}
-	//Cleanup
 	glDetachShader(program, vertShader);
 	glDetachShader(program, fragShader);
 	glDeleteShader(vertShader);
 	glDeleteShader(fragShader);
 	return program;
 }
+
+void ShaderProgram::addAttr(const std::string& attrName) {
+	glBindAttribLocation(shaderProgram, nextAttrIndex, attrName.c_str());
+	nextAttrIndex++;
+}
+
