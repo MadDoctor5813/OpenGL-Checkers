@@ -9,6 +9,7 @@ ShaderProgram::ShaderProgram(const std::string& vertFile, const std::string& fra
 	vertCode = loadFile(vertFile);
 	fragCode = loadFile(fragFile);
 	shaderProgram = linkShaders();
+	
 }
 
 
@@ -41,30 +42,31 @@ GLuint ShaderProgram::linkShaders() {
 	GLint vertStatus;
 	glGetShaderiv(vertShader, GL_COMPILE_STATUS, &vertStatus);
 	if (vertStatus == GL_FALSE) {
-		glDeleteShader(vertShader);
-		glDeleteShader(fragShader);
 		std::cout << "Vertex shader compile error. Undefined behavior may result." << std::endl;
 		GLint maxLength;
 		glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &maxLength);
 		GLchar * log = new GLchar[maxLength];
 		glGetShaderInfoLog(vertShader, maxLength, NULL, log);
 		std::cout << log << std::endl;
+		glDeleteShader(vertShader);
+		glDeleteShader(fragShader);
 		return 0;
 	}
 	//Compile frag shader
 	glCompileShader(fragShader);
+
 	//Check for errors
 	GLint fragStatus;
 	glGetShaderiv(fragShader, GL_COMPILE_STATUS, &fragStatus);
 	if (fragStatus == GL_FALSE) {
-		glDeleteShader(vertShader);
-		glDeleteShader(fragShader);
 		std::cout << "Fragment shader compile error. Undefined behavior may result." << std::endl;
 		GLint maxLength;
 		glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &maxLength);
 		GLchar * log = new GLchar[maxLength];
 		glGetShaderInfoLog(fragShader, maxLength, NULL, log);
 		std::cout << log << std::endl;
+		glDeleteShader(vertShader);
+		glDeleteShader(fragShader);
 		return 0;
 	}
 	//Attach shaders
@@ -74,7 +76,7 @@ GLuint ShaderProgram::linkShaders() {
 	//Link shaders
 	glLinkProgram(program);
 	GLint linkStatus;
-	glGetProgramiv(program, GL_COMPILE_STATUS, &linkStatus);
+	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
 	if (linkStatus == GL_FALSE) {
 		glDetachShader(program, vertShader);
 		glDetachShader(program, fragShader);
@@ -84,6 +86,7 @@ GLuint ShaderProgram::linkShaders() {
 		std::cout << "Shader link error." << std::endl;
 		return 0;
 	}
+
 	glDetachShader(program, vertShader);
 	glDetachShader(program, fragShader);
 	glDeleteShader(vertShader);
