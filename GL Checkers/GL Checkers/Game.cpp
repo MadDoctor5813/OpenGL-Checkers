@@ -8,7 +8,7 @@ Game::Game()  {
 	window = createWindow();
 	//Init event handler
 	handler = EventHandler();
-	//Init OpenGL
+	//Init openGL 
 	initOpenGL();
 }
 
@@ -34,7 +34,10 @@ void Game::initOpenGL() {
 	//Load program
 	ShaderProgram program("colorShading.vert", "colorShading.frag");
 	program.addAttr("vertPos");
+	program.addAttr("vertColor");
 	glUseProgram(program.getProgram());
+	
+
 }
 
 

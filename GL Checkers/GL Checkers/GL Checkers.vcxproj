@@ -80,6 +80,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag" />
