@@ -53,7 +53,7 @@ void Sprite::initBuffer() {
 	//Bind buffer
 	glBindBuffer(GL_ARRAY_BUFFER, bufferId);
 	//Copy vertData to buffer
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertData), &vertData[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertData.size(), vertData.data(), GL_STATIC_DRAW);
 	//Unbind buffer for cleanup
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
