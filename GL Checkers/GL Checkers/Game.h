@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <GL/glew.h>
 
-#include "EventHandler.h"
 #include "Sprite.h"
 #include "ShaderProgram.h"
 
@@ -21,7 +20,6 @@ private:
 	void cleanup();
 
 	SDL_Window * window;
-	EventHandler handler;
 
 	bool exit = false;
 	int screenWidth = 1024;

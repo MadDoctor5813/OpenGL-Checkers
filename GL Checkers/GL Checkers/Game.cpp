@@ -6,8 +6,6 @@ Game::Game()  {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	//Init window
 	window = createWindow();
-	//Init event handler
-	handler = EventHandler();
 	//Init openGL 
 	initOpenGL();
 }
