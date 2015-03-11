@@ -30,6 +30,9 @@
     <ClCompile Include="ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -44,12 +47,15 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\colorShading.frag">
+    <Text Include="Shaders\vert\colorShading.vert">
       <Filter>Shaders</Filter>
     </Text>
-    <Text Include="Shaders\colorShading.vert">
+    <Text Include="Shaders\frag\colorShading.frag">
       <Filter>Shaders</Filter>
     </Text>
   </ItemGroup>
