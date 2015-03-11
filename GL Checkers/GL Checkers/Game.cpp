@@ -2,18 +2,20 @@
 
 
 Game::Game()  { 
+
+}
+
+Game::~Game() {
+
+}
+
+void Game::init() {
 	//Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 	//Init window
 	window = createWindow();
 	//Init openGL 
 	initOpenGL();
-}
-
-
-
-Game::~Game() {
-
 }
 
 SDL_Window * Game::createWindow() {
@@ -47,9 +49,6 @@ void Game::runLoop() {
 		if (nextEvent.type == SDL_QUIT) {
 			cleanup();
 			exit = true;
-		}
-		else {
-			handler.processEvent(nextEvent);
 		}
 		testSprite.draw();
 		SDL_GL_SwapWindow(window);
