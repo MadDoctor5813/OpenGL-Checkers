@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "ShaderManager.h"
 
 Game::Game()  { 
 
@@ -16,6 +17,8 @@ void Game::init() {
 	window = createWindow();
 	//Init openGL 
 	initOpenGL();
+	//init managers
+	initManagers();
 }
 
 SDL_Window * Game::createWindow() {
@@ -31,13 +34,13 @@ void Game::initOpenGL() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	//Set background
 	glClearColor(0, 0, 0, 0);
-	//Load program
-	ShaderProgram program("colorShading.vert", "colorShading.frag");
-	program.addAttr("vertPos");
-	program.addAttr("vertColor");
-	glUseProgram(program.getProgram());
-	
+}
 
+void Game::initManagers() {
+	shaderManager.loadPrograms();
+	//Activate shader
+	ShaderProgram testProgram = shaderManager.getShader("colorShading");
+	glUseProgram(testProgram.getProgram());
 }
 
 

@@ -58,5 +58,11 @@
     <Text Include="Shaders\frag\colorShading.frag">
       <Filter>Shaders</Filter>
     </Text>
+    <Text Include="Shaders\frag\spriteShading.frag">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Shaders\vert\spriteShading.vert">
+      <Filter>Shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

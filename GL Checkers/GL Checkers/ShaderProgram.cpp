@@ -6,8 +6,8 @@
 #include <sstream>
 
 ShaderProgram::ShaderProgram(const std::string& vertFile, const std::string& fragFile) {
-	vertCode = loadFile(vertFile);
-	fragCode = loadFile(fragFile);
+	vertCode = loadFile("vert/" + vertFile + ".vert");
+	fragCode = loadFile("frag/" + fragFile + ".frag");
 	shaderProgram = linkShaders();
 	
 }

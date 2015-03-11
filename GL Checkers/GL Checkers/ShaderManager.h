@@ -4,6 +4,7 @@
 
 #include <map>
 #include <filesystem>
+#include <vector>
 
 namespace fs = std::tr2::sys;
 
@@ -14,6 +15,7 @@ public:
 	~ShaderManager();
 
 	void loadPrograms();
+	ShaderProgram getShader(const std::string& shaderName);
 
 private:
 	std::vector<std::string> getVertShaders();
@@ -22,7 +24,7 @@ private:
 
 	fs::path vertDir = "shaders/vert";
 	fs::path fragDir = "shaders/frag";
-	std::map<ShaderProgram, std::string> programs;
+	std::map<std::string, ShaderProgram> programs;
 };
 
 

@@ -85,6 +85,8 @@
   <ItemGroup>
     <Text Include="Shaders\frag\colorShading.frag" />
     <Text Include="Shaders\vert\colorShading.vert" />
+    <Text Include="Shaders\vert\spriteShading.vert" />
+    <Text Include="Shaders\frag\spriteShading.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

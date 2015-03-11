@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include "ShaderProgram.h"
+#include "ShaderManager.h"
 
 class Game {
 
@@ -17,10 +18,12 @@ public:
 private:
 	SDL_Window * createWindow();
 	void initOpenGL();
+	void initManagers();
 	void testDraw();
 	void cleanup();
 
 	SDL_Window * window;
+	ShaderManager shaderManager;
 
 	bool exit = false;
 	int screenWidth = 1024;
