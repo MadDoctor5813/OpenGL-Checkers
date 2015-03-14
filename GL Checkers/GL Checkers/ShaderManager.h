@@ -2,9 +2,8 @@
 
 #include "ShaderProgram.h"
 
-#include <map>
+#include <unordered_map>
 #include <filesystem>
-#include <vector>
 
 namespace fs = std::tr2::sys;
 
@@ -18,13 +17,10 @@ public:
 	ShaderProgram getShader(const std::string& shaderName);
 
 private:
-	std::vector<std::string> getVertShaders();
-	std::vector<std::string> getFragShaders();
+	std::string loadShaderData(const std::string& filename);
 
-
-	fs::path vertDir = "shaders/vert";
-	fs::path fragDir = "shaders/frag";
-	std::map<std::string, ShaderProgram> programs;
+	std::unordered_map<std::string, ShaderProgram> programs;
+	std::string shaderDir = "Shaders/";
 };
 
 
