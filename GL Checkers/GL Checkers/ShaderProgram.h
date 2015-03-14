@@ -8,7 +8,7 @@
 class ShaderProgram
 {
 public:
-	ShaderProgram(const std::string& vertFile, const std::string& fragFile);
+	ShaderProgram(const std::string& vertShader, const std::string& fragShader);
 	~ShaderProgram();
 
 	GLuint getProgram();
@@ -16,12 +16,9 @@ public:
 
 private:
 	std::string loadFile(const std::string& filename);
-	GLuint linkShaders();
+	GLuint linkShaders(const std::string& vertCode, const std::string& fragCode);
 
 	GLuint shaderProgram;
-
-	std::string vertCode;
-	std::string fragCode;
 
 	int nextAttrIndex = 0;
 

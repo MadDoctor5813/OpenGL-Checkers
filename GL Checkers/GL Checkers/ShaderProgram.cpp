@@ -5,10 +5,8 @@
 #include <fstream>
 #include <sstream>
 
-ShaderProgram::ShaderProgram(const std::string& vertFile, const std::string& fragFile) {
-	vertCode = loadFile("vert/" + vertFile + ".vert");
-	fragCode = loadFile("frag/" + fragFile + ".frag");
-	shaderProgram = linkShaders();
+ShaderProgram::ShaderProgram(const std::string& vertShader, const std::string& fragShader) {
+	shaderProgram = linkShaders(vertShader, fragShader);
 	
 }
 
@@ -21,15 +19,8 @@ GLuint ShaderProgram::getProgram() {
 	return shaderProgram;
 }
 
-std::string ShaderProgram::loadFile(const std::string& filename) {
-	std::string fullPath = "Shaders/" + filename;
-	std::ifstream fileStream(fullPath);
-	std::stringstream fileStrStream;
-	fileStrStream << fileStream.rdbuf();
-	return fileStrStream.str();
-}
 
-GLuint ShaderProgram::linkShaders() {
+GLuint ShaderProgram::linkShaders(const std::string& vertCode, const std::string& fragCode) {
 	GLuint vertShader = glCreateShader(GL_VERTEX_SHADER); //make shader objects
 	GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 	const char * vertCodePtr = vertCode.c_str(); //Get a pointer to the std::string's c_str, for some OpenGL reason. 
