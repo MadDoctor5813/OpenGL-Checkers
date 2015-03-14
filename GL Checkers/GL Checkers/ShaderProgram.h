@@ -11,7 +11,8 @@ public:
 	ShaderProgram(const std::string& vertShader, const std::string& fragShader);
 	~ShaderProgram();
 
-	GLuint getProgram();
+	void enable();
+	void disable();
 	void addAttr(const std::string& attrName);
 
 private:

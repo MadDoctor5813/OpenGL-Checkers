@@ -40,7 +40,7 @@ void Game::initManagers() {
 	shaderManager.loadPrograms();
 	//Activate shader
 	ShaderProgram testProgram = shaderManager.getShader("colorShading");
-	glUseProgram(testProgram.getProgram());
+	testProgram.enable();
 }
 
 

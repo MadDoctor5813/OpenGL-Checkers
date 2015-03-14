@@ -15,10 +15,19 @@ ShaderProgram::~ShaderProgram() {
 
 }
 
-GLuint ShaderProgram::getProgram() {
-	return shaderProgram;
+void ShaderProgram::enable() {
+	glUseProgram(shaderProgram); //Enable shader
+	for (int i = 0; i < nextAttrIndex; i++) {
+		glEnableVertexAttribArray(i); //Enable all relevant vertex arrays
+	}
 }
 
+void ShaderProgram::disable() {
+	glUseProgram(0); //Disable shader
+	for (int i = 0; i < nextAttrIndex; i++) {
+		glDisableVertexAttribArray(i); //Disable all relevant vertex arrays
+	}
+}
 
 GLuint ShaderProgram::linkShaders(const std::string& vertCode, const std::string& fragCode) {
 	GLuint vertShader = glCreateShader(GL_VERTEX_SHADER); //make shader objects
