@@ -1,5 +1,4 @@
 #include "Game.h"
-
 #include "ShaderManager.h"
 
 Game::Game()  { 
@@ -41,6 +40,8 @@ void Game::initManagers() {
 	//Activate shader
 	ShaderProgram testProgram = shaderManager.getShader("colorShading");
 	testProgram.enable();
+	textureManager.loadTextures();
+
 }
 
 

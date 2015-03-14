@@ -4,8 +4,8 @@
 #include <GL/glew.h>
 
 #include "Sprite.h"
-#include "ShaderProgram.h"
 #include "ShaderManager.h"
+#include "TextureManager.h"
 
 class Game {
 
@@ -24,6 +24,7 @@ private:
 
 	SDL_Window * window;
 	ShaderManager shaderManager;
+	TextureManager textureManager;
 
 	bool exit = false;
 	int screenWidth = 1024;
