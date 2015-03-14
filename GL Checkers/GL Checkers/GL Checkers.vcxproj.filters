@@ -52,16 +52,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\vert\colorShading.vert">
+    <Text Include="Shaders\colorShading.frag">
       <Filter>Shaders</Filter>
     </Text>
-    <Text Include="Shaders\frag\colorShading.frag">
+    <Text Include="Shaders\spriteShading.frag">
       <Filter>Shaders</Filter>
     </Text>
-    <Text Include="Shaders\frag\spriteShading.frag">
+    <Text Include="Shaders\colorShading.vert">
       <Filter>Shaders</Filter>
     </Text>
-    <Text Include="Shaders\vert\spriteShading.vert">
+    <Text Include="Shaders\spriteShading.vert">
       <Filter>Shaders</Filter>
     </Text>
   </ItemGroup>
