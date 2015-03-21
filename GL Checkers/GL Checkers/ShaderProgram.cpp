@@ -5,14 +5,17 @@
 #include <fstream>
 #include <sstream>
 
-ShaderProgram::ShaderProgram(const std::string& vertShader, const std::string& fragShader) {
-	shaderProgram = linkShaders(vertShader, fragShader);
+ShaderProgram::ShaderProgram() {
 	
 }
 
 
 ShaderProgram::~ShaderProgram() {
 
+}
+
+void ShaderProgram::loadProgram(const std::string& vertShader, const std::string& fragShader) {
+	shaderProgram = compileShaders(vertShader, fragShader);
 }
 
 void ShaderProgram::enable() {
@@ -29,7 +32,11 @@ void ShaderProgram::disable() {
 	}
 }
 
-GLuint ShaderProgram::linkShaders(const std::string& vertCode, const std::string& fragCode) {
+GLuint ShaderProgram::getProgram() {
+	return shaderProgram;
+}
+
+GLuint ShaderProgram::compileShaders(const std::string& vertCode, const std::string& fragCode) {
 	GLuint vertShader = glCreateShader(GL_VERTEX_SHADER); //make shader objects
 	GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 	const char * vertCodePtr = vertCode.c_str(); //Get a pointer to the std::string's c_str, for some OpenGL reason. 
