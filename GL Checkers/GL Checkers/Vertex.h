@@ -2,15 +2,27 @@
 
 #include <GL\glew.h>
 
+
+struct Position {
+	float x;
+	float y;
+};
+
+struct Color {
+	GLubyte r;
+	GLubyte g;
+	GLubyte b;
+	GLubyte a;
+};
+
+struct TexCoord {
+	float u;
+	float v;
+};
+
 struct Vertex {
-	struct Position {
-		float x;
-		float y;
-	} pos;
-	struct Color {
-		GLubyte r;
-		GLubyte g;
-		GLubyte b;
-		GLubyte a;
-	} color;
+	Position pos;
+	Color color;
+	TexCoord texCoord;
+
 };
