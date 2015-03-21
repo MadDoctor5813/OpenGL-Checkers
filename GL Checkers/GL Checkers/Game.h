@@ -12,8 +12,12 @@ class Game {
 public:
 	Game();
 	~Game();
+
 	void init();
 	void runLoop();
+
+	GLuint getCurrentProgram();
+	TextureManager& getTextureManager();
 
 private:
 	SDL_Window * createWindow();
@@ -25,6 +29,9 @@ private:
 	SDL_Window * window;
 	ShaderManager shaderManager;
 	TextureManager textureManager;
+
+	ShaderProgram currentProgram;
+
 
 	bool exit = false;
 	int screenWidth = 1024;

@@ -7,6 +7,7 @@
 namespace fs = std::tr2::sys;
 
 TextureManager::TextureManager() {
+
 }
 
 
@@ -21,7 +22,6 @@ void TextureManager::loadTextures() {
 	fs::directory_iterator dirIter(imageDir);
 	fs::directory_iterator empty;
 	for (; dirIter != empty; dirIter++) {
-		std::cout << dirIter->path() << std::endl;
 		GLuint currentTexture = loadTextureFromFile(dirIter->path());
 		textureMap.emplace(dirIter->path().basename(), currentTexture);
 	}
@@ -35,7 +35,7 @@ GLuint TextureManager::loadTextureFromFile(const std::string& filename) {
 		return 0;
 	}
 	else {
-		std::cout << "Texture " << filename <<  " loaded";
+		std::cout << "Texture " << filename << " loaded" << std::endl;
 		return returnTexture;
 	}
 }
