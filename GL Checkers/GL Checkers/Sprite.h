@@ -9,6 +9,7 @@ class Sprite {
 public:
 	Sprite(float x, float y, float w, float h, Game& game);
 	~Sprite();
+
 	void draw();
 
 private:

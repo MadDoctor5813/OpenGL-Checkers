@@ -69,6 +69,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ShaderManager.h" />

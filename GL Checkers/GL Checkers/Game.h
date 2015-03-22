@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
+#include "Camera2D.h"
 
 class Game {
 
@@ -18,17 +19,19 @@ public:
 
 	GLuint getCurrentProgram();
 	TextureManager& getTextureManager();
+	Camera2D& getCamera();
 
 private:
 	SDL_Window * createWindow();
 	void initOpenGL();
-	void initManagers();
+	void initSystems();
 	void testDraw();
 	void cleanup();
 
 	SDL_Window * window;
 	ShaderManager shaderManager;
 	TextureManager textureManager;
+	Camera2D camera;
 
 	ShaderProgram currentProgram;
 

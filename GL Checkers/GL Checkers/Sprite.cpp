@@ -17,6 +17,7 @@ Sprite::~Sprite() {
 	}
 }
 
+
 void Sprite::initBuffer() {
 	//Create vertex buffer
 	if (bufferId == 0) {
@@ -77,11 +78,13 @@ void Sprite::draw() {
 	//Set color attrib pointer
 	glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 	//Set texture
-
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glActiveTexture(GL_TEXTURE0);
 	GLint textureLoc = glGetUniformLocation(gameRef.getCurrentProgram(), "spriteTexture");
 	glUniform1i(textureLoc, 0);
+	//Set camera transform
+	GLint transformLoc = glGetUniformLocation(gameRef.getCurrentProgram(), "camTransform");
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &(gameRef.getCamera().getMatrix()[0][0]));
 	//Draw buffer
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	//Unbind buffer
