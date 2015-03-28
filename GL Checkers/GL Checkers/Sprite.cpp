@@ -5,9 +5,8 @@
 #include <vector>
 
 
-Sprite::Sprite(float x, float y, float w, float h, Game& game) : x(x), y(y), w(w), h(h), bufferId(0), gameRef(game) {
+Sprite::Sprite(float x, float y, float w, float h, GLuint texture, Game& game) : x(x), y(y), w(w), h(h), bufferId(0), gameRef(game), texId(texture) {
 	initBuffer();
-	texId = gameRef.getTextureManager().getTexture("taco");
 }
 
 

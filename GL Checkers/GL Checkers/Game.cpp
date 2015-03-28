@@ -73,7 +73,7 @@ void Game::runLoop() {
 	float const CAMERA_SPEED = 10.0f;
 	float const ZOOM_SPEED = 0.1f;
 
-	Sprite testSprite = Sprite(0.0f, 0.0f, 64.0f, 64.0f, *this);
+	Sprite testSprite = Sprite(0.0f, 0.0f, 64.0f, 64.0f, textureManager.getTexture("taco"), *this);
 	SDL_Event nextEvent;
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);

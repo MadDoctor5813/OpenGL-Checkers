@@ -7,7 +7,7 @@ class Game;
 class Sprite {
 
 public:
-	Sprite(float x, float y, float w, float h, Game& game);
+	Sprite(float x, float y, float w, float h, GLuint texture, Game& game);
 	~Sprite();
 
 	void draw();
