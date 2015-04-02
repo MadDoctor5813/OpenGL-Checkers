@@ -6,7 +6,7 @@
 
 //Entry point
 int main(int argc, char** argv) {
-	Game game = Game();
+	App game = App();
 	game.init();
 	game.runLoop();
 	return 0;

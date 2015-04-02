@@ -9,11 +9,11 @@
 #include "Camera2D.h"
 #include "SpriteBatch.h"
 
-class Game {
+class App {
 
 public:
-	Game();
-	~Game();
+	App();
+	~App();
 
 	void init();
 	void runLoop();

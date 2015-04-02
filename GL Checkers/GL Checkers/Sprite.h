@@ -2,12 +2,12 @@
 
 #include <GL/glew.h>
 
-class Game; 
+class App; 
 
 class Sprite {
 
 public:
-	Sprite(float x, float y, float w, float h, GLuint texture, Game& game);
+	Sprite(float x, float y, float w, float h, GLuint texture, App& game);
 	~Sprite();
 
 	void draw();
@@ -18,7 +18,7 @@ private:
 	GLuint texId;
 	float x, y, h, w;
 	GLuint bufferId;
-	Game& gameRef;
+	App& appRef;
 
 };
 

@@ -5,7 +5,7 @@
 #include <vector>
 
 
-Sprite::Sprite(float x, float y, float w, float h, GLuint texture, Game& game) : x(x), y(y), w(w), h(h), bufferId(0), gameRef(game), texId(texture) {
+Sprite::Sprite(float x, float y, float w, float h, GLuint texture, App& game) : x(x), y(y), w(w), h(h), bufferId(0), appRef(game), texId(texture) {
 	initBuffer();
 }
 
@@ -79,11 +79,11 @@ void Sprite::draw() {
 	//Set texture
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glActiveTexture(GL_TEXTURE0);
-	GLint textureLoc = glGetUniformLocation(gameRef.getCurrentProgram(), "spriteTexture");
+	GLint textureLoc = glGetUniformLocation(appRef.getCurrentProgram(), "spriteTexture");
 	glUniform1i(textureLoc, 0);
 	//Set camera transform
-	GLint transformLoc = glGetUniformLocation(gameRef.getCurrentProgram(), "camTransform");
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &(gameRef.getCamera().getMatrix()[0][0]));
+	GLint transformLoc = glGetUniformLocation(appRef.getCurrentProgram(), "camTransform");
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &(appRef.getCamera().getMatrix()[0][0]));
 	//Draw buffer
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	//Unbind buffer
