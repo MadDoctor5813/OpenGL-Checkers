@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -69,26 +69,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Engine\Camera2D.cpp" />
+    <ClCompile Include="Engine\App.cpp" />
     <ClCompile Include="Piece.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Engine\SpriteBatch.cpp" />
+    <ClCompile Include="Engine\TextureManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Engine\ShaderManager.cpp" />
+    <ClCompile Include="Engine\ShaderProgram.cpp" />
+    <ClCompile Include="Engine\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="App.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Engine\Camera2D.h" />
+    <ClInclude Include="Engine\App.h" />
     <ClInclude Include="Piece.h" />
-    <ClInclude Include="SpriteBatch.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Engine\SpriteBatch.h" />
+    <ClInclude Include="Engine\TextureManager.h" />
+    <ClInclude Include="Engine\ShaderManager.h" />
+    <ClInclude Include="Engine\ShaderProgram.h" />
+    <ClInclude Include="Engine\Sprite.h" />
+    <ClInclude Include="Engine\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag" />
