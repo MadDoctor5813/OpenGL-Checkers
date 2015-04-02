@@ -39,9 +39,12 @@
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -68,9 +71,12 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Piece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
     <ClInclude Include="App.h">
       <Filter>Header Files</Filter>
     </ClInclude>

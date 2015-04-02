@@ -71,7 +71,10 @@
   <ItemGroup>
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="App.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Piece.cpp" />
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -82,7 +85,10 @@
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="App.h" />
+<<<<<<< HEAD
     <ClInclude Include="Piece.h" />
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ShaderManager.h" />
