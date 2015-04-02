@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 
-#include "Game.h"
+#include "App.h"
 #include "ShaderProgram.h"
 
 //Entry point

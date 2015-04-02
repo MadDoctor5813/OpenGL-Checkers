@@ -1,6 +1,6 @@
 #include <glm/glm.hpp>
 
-#include "Game.h"
+#include "App.h"
 #include "ShaderManager.h"
 
 App::App() { 
@@ -54,6 +54,7 @@ void App::initSystems() {
 
 
 void App::runLoop() {
+	testPiece = new Piece(0, 0, *this);
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
@@ -72,27 +73,7 @@ void App::procInput() {
 		cleanup();
 		exit = true;
 	}
-	if (nextEvent.type == SDL_KEYDOWN) {
-		switch (nextEvent.key.keysym.sym) {
-		case SDLK_w:
-			camera.translate(glm::vec2(0.0f, CAMERA_SPEED));
-			break;
-		case SDLK_s:
-			camera.translate(glm::vec2(0.0f, -CAMERA_SPEED));
-			break;
-		case SDLK_a:
-			camera.translate(glm::vec2(CAMERA_SPEED, 0.0f));
-			break;
-		case SDLK_d:
-			camera.translate(glm::vec2(-CAMERA_SPEED, 0.0f));
-			break;
-		case SDLK_q:
-			camera.zoom(-ZOOM_SPEED);
-			break;
-		case SDLK_e:
-			camera.zoom(ZOOM_SPEED);
-		}
-	}
+	testPiece->handleEvent(nextEvent);
 }
 
 void App::render() {
@@ -109,13 +90,7 @@ void App::render() {
 	batch.init();
 	batch.begin();
 
-	glm::vec4 testPos(0.0, 0.0f, 64.0f, 64.0f);
-	glm::vec4 testUv(0.0f, 0.0f, 1.0f, 1.0f);
-	glm::vec4 testPos2(0.0, 64.0, 64.0f, 64.0f);
-	glm::vec4 testUv2(0.0f, 0.0f, 1.0f, 1.0f);
-
-	batch.draw(testPos, testUv, tacoTex, 0, Color{ 255, 255, 255, 255 });
-	batch.draw(testPos2, testUv2, nachoTex, 1, Color{ 255, 255, 255, 255 });
+	testPiece->render();
 
 	batch.end();
 

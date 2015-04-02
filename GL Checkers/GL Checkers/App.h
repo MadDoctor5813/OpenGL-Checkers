@@ -8,6 +8,7 @@
 #include "TextureManager.h"
 #include "Camera2D.h"
 #include "SpriteBatch.h"
+#include "Piece.h"
 
 class App {
 
@@ -22,6 +23,7 @@ public:
 	ShaderManager& getShaderManager() { return shaderManager; }
 	TextureManager& getTextureManager() { return textureManager; }
 	Camera2D& getCamera() { return camera; }
+	SpriteBatch& getBatch() { return batch; }
 
 private:
 	SDL_Window * createWindow();
@@ -38,6 +40,8 @@ private:
 	SpriteBatch batch;
 
 	ShaderProgram currentProgram;
+
+	Piece * testPiece;
 
 
 	bool exit = false;
