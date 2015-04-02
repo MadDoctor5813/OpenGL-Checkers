@@ -1,33 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Engine\App.cpp" />
-    <ClCompile Include="Engine\Camera2D.cpp" />
-    <ClCompile Include="Engine\ShaderManager.cpp" />
-    <ClCompile Include="Engine\ShaderProgram.cpp" />
-    <ClCompile Include="Engine\Sprite.cpp" />
-    <ClCompile Include="Engine\SpriteBatch.cpp" />
-    <ClCompile Include="Engine\TextureManager.cpp" />
-    <ClCompile Include="Piece.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Board.cpp" />
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{4de1eec9-491f-403f-ab16-384b093739ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\App.h" />
-    <ClInclude Include="Engine\Camera2D.h" />
-    <ClInclude Include="Engine\ShaderManager.h" />
-    <ClInclude Include="Engine\ShaderProgram.h" />
-    <ClInclude Include="Engine\Sprite.h" />
-    <ClInclude Include="Engine\SpriteBatch.h" />
-    <ClInclude Include="Engine\TextureManager.h" />
-    <ClInclude Include="Engine\Vertex.h" />
-    <ClInclude Include="Piece.h" />
-    <ClInclude Include="Board.h" />
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Piece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
+    <ClCompile Include="App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\colorShading.frag" />
-    <Text Include="Shaders\colorShading.vert" />
-    <Text Include="Shaders\spriteShading.vert" />
-    <Text Include="Shaders\spriteShading.frag" />
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteBatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Piece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+=======
+>>>>>>> 47c9eab95ab08cb59bf26852fc7740a9e0b2459d
+    <ClInclude Include="App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\colorShading.frag">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Shaders\spriteShading.frag">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Shaders\colorShading.vert">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Shaders\spriteShading.vert">
+      <Filter>Shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

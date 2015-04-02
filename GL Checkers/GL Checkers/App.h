@@ -8,7 +8,7 @@
 #include "TextureManager.h"
 #include "Camera2D.h"
 #include "SpriteBatch.h"
-#include "../Piece.h" //This is a hack to test the piece object, it will be removed later
+#include "Piece.h"
 
 class App {
 

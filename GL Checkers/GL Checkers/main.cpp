@@ -1,8 +1,8 @@
 #include <SDL.h>
 #include <iostream>
 
-#include "Engine/App.h"
-#include "Engine/ShaderProgram.h"
+#include "App.h"
+#include "ShaderProgram.h"
 
 //Entry point
 int main(int argc, char** argv) {
