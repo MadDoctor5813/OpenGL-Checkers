@@ -25,7 +25,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="SaveFileManager.cpp" />
+    <ClCompile Include="SaveFileManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -54,7 +56,12 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Board.h" />
-    <ClInclude Include="SaveFileManager.h" />
+    <ClInclude Include="SaveFileManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorEnum.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
