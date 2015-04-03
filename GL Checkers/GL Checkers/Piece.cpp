@@ -3,8 +3,16 @@
 #include "App.h"
 
 
-Piece::Piece(float x, float y, App& app) : x(x), y(y), appRef(app) {
-	texture = appRef.getTextureManager().getTexture("taco");
+Piece::Piece(float x, float y, PieceTypes type, App& app) : x(x), y(y), appRef(app) {
+	if (type > 2) { //This means the piece is a king
+		king = true;
+	}
+	if (type == WHITE || WHITE_KING) {
+		color = WHITE;
+	}
+	if (type == BLACK || BLACK_KING) {
+		color = BLACK;
+	}
 }
 
 
