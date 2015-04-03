@@ -4,15 +4,16 @@
 
 
 Piece::Piece(float x, float y, PieceTypes type, App& app) : x(x), y(y), appRef(app) {
-	if (type > 2) { //This means the piece is a king
+	if ((int)type > 2) { //This means the piece is a king
 		king = true;
 	}
-	if (type == WHITE || WHITE_KING) {
-		color = WHITE;
+	if (type == PieceTypes::WHITE || type == PieceTypes::WHITE_KING) {
+		color = PieceColors::WHITE;
 	}
-	if (type == BLACK || BLACK_KING) {
-		color = BLACK;
+	if (type == PieceTypes::BLACK || type == PieceTypes::BLACK_KING) {
+		color = PieceColors::BLACK;
 	}
+	loadTexture();
 }
 
 
@@ -39,9 +40,29 @@ void Piece::handleEvent(SDL_Event& event) {
 }
 
 void Piece::update() {
-	std::cout << "Piece updated" << std::endl;
+
 }
 
 void Piece::render() {
 	appRef.getBatch().draw(glm::vec4(x, y, PIECE_SIZE, PIECE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+}
+
+void Piece::loadTexture() {
+	TextureManager& manager = appRef.getTextureManager();
+	if (color == PieceColors::WHITE) {
+		if (king == false) {
+			texture = manager.getTexture("pieceWhite");
+		}
+		else {
+			texture = manager.getTexture("pieceWhiteKing");
+		}
+	}
+	else if (color == PieceColors::BLACK) {
+		if (king == false) {
+			texture = manager.getTexture("pieceBlack");
+		}
+		else {
+			texture = manager.getTexture("pieceBlackKing");
+		}
+	}
 }

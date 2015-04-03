@@ -5,7 +5,7 @@
 
 class App;
 
-enum PieceTypes { //Should only be used on instantiation
+enum class PieceTypes { //Should only be used on instantiation
 	NONE = 0,
 	WHITE = 1,
 	BLACK = 2,
@@ -13,7 +13,7 @@ enum PieceTypes { //Should only be used on instantiation
 	BLACK_KING = 4
 };
 
-enum PieceColors {
+enum class PieceColors {
 	WHITE,
 	BLACK
 };
@@ -31,6 +31,8 @@ public:
 	void render();
 
 private:
+	void loadTexture();
+
 	App& appRef;
 	GLuint texture;
 

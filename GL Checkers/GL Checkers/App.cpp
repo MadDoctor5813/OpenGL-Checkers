@@ -41,6 +41,9 @@ void App::initOpenGL() {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	//Enable texturing
 	glEnable(GL_TEXTURE_2D);
+	//Enable transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void App::initSystems() {
@@ -55,7 +58,7 @@ void App::initSystems() {
 
 
 void App::runLoop() {
-	testPiece = new Piece(0, 0, *this);
+	testPiece = new Piece(0, 0, PieceTypes::WHITE, *this);
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
@@ -81,8 +84,6 @@ void App::render() {
 	glActiveTexture(GL_TEXTURE0);
 	ShaderProgram& shader = getShaderManager().getShader("spriteShading");
 	shader.enable();
-	GLuint tacoTex = getTextureManager().getTexture("taco");
-	GLuint nachoTex = getTextureManager().getTexture("nachos");
 	GLint camTransformLoc = glGetUniformLocation(shader.getProgram(), "camTransform");
 	GLint textureLoc = glGetUniformLocation(shader.getProgram(), "spriteTexture");
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(camera.getMatrix()[0][0]));
