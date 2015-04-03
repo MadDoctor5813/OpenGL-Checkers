@@ -24,6 +24,8 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="SaveFileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -51,6 +53,8 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="SaveFileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">

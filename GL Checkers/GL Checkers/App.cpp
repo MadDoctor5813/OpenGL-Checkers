@@ -46,6 +46,7 @@ void App::initOpenGL() {
 void App::initSystems() {
 	shaderManager.loadPrograms();
 	textureManager.loadTextures();
+	saveManager.loadSaves();
 	//Init the camera
 	camera.init(screenWidth, screenHeight);
 	camera.setScale(1.0f);

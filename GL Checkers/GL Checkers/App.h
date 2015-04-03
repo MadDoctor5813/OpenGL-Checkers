@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
+#include "SaveFileManager.h"
 #include "Camera2D.h"
 #include "SpriteBatch.h"
 #include "Piece.h"
@@ -37,6 +38,7 @@ private:
 	ShaderManager shaderManager;
 	TextureManager textureManager;
 	Camera2D camera;
+	SaveFileManager saveManager;
 	SpriteBatch batch;
 
 	ShaderProgram currentProgram;
