@@ -15,9 +15,6 @@
     <ClCompile Include="ShaderProgram.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
