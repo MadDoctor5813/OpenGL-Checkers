@@ -3,8 +3,11 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <bitset>
 
-class SaveFileManager {
+#include "Square.h"
+
+class SaveFileManager { //Serializes and deserializes Square structs
 
 public:
 	SaveFileManager();
@@ -15,8 +18,7 @@ public:
 private:
 	std::string saveDir = "Saves/";
 
-	std::map <std::string, std::vector < std::vector <int> > > saves;
-
-	void loadFile(const std::string& name);
+	std::map <std::string, std::vector<Square *> >saves;
 };
+
 

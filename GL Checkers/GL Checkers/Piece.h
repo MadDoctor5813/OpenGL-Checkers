@@ -3,27 +3,18 @@
 #include <SDL.h>
 #include <glm\glm.hpp>
 
+#include "PieceColor.h"
+#include "Board.h"
+
+
 class App;
 
-enum class PieceTypes { //Should only be used on instantiation
-	NONE = 0,
-	WHITE = 1,
-	BLACK = 2,
-	WHITE_KING = 3,
-	BLACK_KING = 4
-};
 
-enum class PieceColors {
-	WHITE,
-	BLACK
-};
-
-const int PIECE_SIZE = 64;
 
 class Piece {
 
 public:
-	Piece(float x, float y, PieceTypes type, App& app);
+	Piece(float x, float y, PieceColor color, bool king, Board& board, App& app);
 	~Piece();
 
 	void handleEvent(SDL_Event& event);
@@ -34,9 +25,10 @@ private:
 	void loadTexture();
 
 	App& appRef;
+	Board& boardRef;
 	GLuint texture;
 
-	PieceColors color;
+	PieceColor color;
 	bool king = false;
 
 	float x;
