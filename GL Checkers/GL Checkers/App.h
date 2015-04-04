@@ -41,11 +41,6 @@ private:
 	SaveFileManager saveManager;
 	SpriteBatch batch;
 
-	ShaderProgram currentProgram;
-
-	Piece * testPiece;
-
-
 	bool exit = false;
 	int screenWidth = 1024;
 	int screenHeight = 720;

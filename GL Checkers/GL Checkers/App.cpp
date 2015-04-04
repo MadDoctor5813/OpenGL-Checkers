@@ -11,10 +11,6 @@ App::~App() {
 
 }
 
-GLuint App::getCurrentProgram() {
-	return currentProgram.getProgram();
-}
-
 void App::init() {
 	//Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -58,7 +54,6 @@ void App::initSystems() {
 
 
 void App::runLoop() {
-	testPiece = new Piece(0, 0, PieceTypes::WHITE, *this);
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
@@ -77,7 +72,6 @@ void App::procInput() {
 		cleanup();
 		exit = true;
 	}
-	testPiece->handleEvent(nextEvent);
 }
 
 void App::render() {
@@ -91,9 +85,6 @@ void App::render() {
 
 	batch.init();
 	batch.begin();
-
-	testPiece->render();
-
 	batch.end();
 
 	batch.render();
