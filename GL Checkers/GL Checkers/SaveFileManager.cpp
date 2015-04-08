@@ -3,7 +3,8 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
-#include <sstream>
+#include <cereal\cereal.hpp>
+#include <cereal\archives\binary.hpp>
 
 namespace fs = std::tr2::sys;
 
@@ -22,4 +23,8 @@ void SaveFileManager::loadSaves() {
 	for (fs::directory_iterator iter(saveDir); iter != empty; iter++) {
 
 	}
+}
+
+void SaveFileManager::loadSave(const std::string& name) {
+	
 }

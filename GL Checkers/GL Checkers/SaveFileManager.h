@@ -3,7 +3,6 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <bitset>
 
 #include "Square.h"
 
@@ -13,12 +12,14 @@ public:
 	SaveFileManager();
 	~SaveFileManager();
 
-	void loadSaves();
+	std::vector <std::vector<Square *> >& getSave(const std::string& name);
+	void save(const std::string& name, std::vector <std::vector<Square *> >& data);
 
 private:
 	std::string saveDir = "Saves/";
-
 	std::map <std::string, std::vector<Square *> >saves;
+
+
 };
 
 
