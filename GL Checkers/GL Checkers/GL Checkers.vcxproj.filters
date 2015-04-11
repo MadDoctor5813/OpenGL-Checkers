@@ -78,5 +78,25 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{1744b01d-ddbc-41a8-b5b5-7e59358d4ecf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{d39853bf-674c-44f7-8cc2-380b30a65414}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\darkSquare.png">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="Images\lightSquare.png">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="Images\pieceBlack.png">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="Images\pieceWhite.png">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="Images\pieceWhiteKing.png">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

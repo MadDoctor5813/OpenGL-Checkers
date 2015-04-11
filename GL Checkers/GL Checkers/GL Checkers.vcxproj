@@ -99,6 +99,13 @@
     <Text Include="Shaders\spriteShading.vert" />
     <Text Include="Shaders\spriteShading.frag" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\darkSquare.png" />
+    <Image Include="Images\lightSquare.png" />
+    <Image Include="Images\pieceBlack.png" />
+    <Image Include="Images\pieceWhite.png" />
+    <Image Include="Images\pieceWhiteKing.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
