@@ -21,7 +21,7 @@ void Piece::update() {
 }
 
 void Piece::render() {
-	appRef.getBatch().draw(glm::vec4(x, y, SQUARE_SIZE, SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+	appRef.getBatch().draw(glm::vec4(x, y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
 }
 
 void Piece::loadTexture() {
