@@ -26,7 +26,12 @@ public:
 	Camera2D& getCamera() { return camera; }
 	SpriteBatch& getBatch() { return batch; }
 
+	const int SQUARE_SIZE = 64;
+	int screenWidth = 1024;
+	int screenHeight = 720;
+
 private:
+
 	SDL_Window * createWindow();
 	void initOpenGL();
 	void initSystems();
@@ -41,8 +46,8 @@ private:
 	SaveFileManager saveManager;
 	SpriteBatch batch;
 
+	Board * testBoard;
+
 	bool exit = false;
-	int screenWidth = 1024;
-	int screenHeight = 720;
 };
 

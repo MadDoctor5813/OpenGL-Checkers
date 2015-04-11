@@ -45,7 +45,6 @@ void App::initOpenGL() {
 void App::initSystems() {
 	shaderManager.loadPrograms();
 	textureManager.loadTextures();
-	saveManager.loadSaves();
 	//Init the camera
 	camera.init(screenWidth, screenHeight);
 	camera.setScale(1.0f);
@@ -54,6 +53,7 @@ void App::initSystems() {
 
 
 void App::runLoop() {
+	testBoard = new Board(*this);
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
@@ -85,6 +85,7 @@ void App::render() {
 
 	batch.init();
 	batch.begin();
+	testBoard->render(batch);
 	batch.end();
 
 	batch.render();
