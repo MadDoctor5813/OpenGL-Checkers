@@ -84,8 +84,8 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="App.h" />
-    <ClInclude Include="ColorEnum.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="PieceColor.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SaveFileManager.h" />
     <ClInclude Include="TextureManager.h" />

@@ -53,9 +53,7 @@
     <ClInclude Include="SaveFileManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="ColorEnum.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
+    <ClInclude Include="PieceColor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
