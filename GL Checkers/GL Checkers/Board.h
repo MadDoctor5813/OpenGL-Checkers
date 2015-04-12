@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <glm/glm.hpp>
 #include <GL\glew.h>
+#include <iostream>
 
 #include "SpriteBatch.h"
 
@@ -39,13 +40,7 @@ private:
 	void populatePieces();
 	void renderBackground(SpriteBatch& batch);
 
-	//utility functions
-	glm::vec2 screenToBoard(glm::vec2 coords) {
-		glm::vec2 boardSpace = coords - glm::vec2(boardX, boardY); //convert coords into board space based on board location
-		float returnX = glm::floor(boardSpace.x / SQUARE_SIZE);
-		float returnY = glm::floor(boardSpace.y / SQUARE_SIZE);
-		return glm::vec2(returnX, returnY);
-	}
+	glm::vec2 mouseToBoard(glm::vec2 coords);
 };
 
 

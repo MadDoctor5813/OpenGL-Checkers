@@ -72,6 +72,9 @@ void App::procInput() {
 		cleanup();
 		exit = true;
 	}
+	else {
+		testBoard->handleInput(nextEvent);
+	}
 }
 
 void App::render() {

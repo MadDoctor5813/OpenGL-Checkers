@@ -22,6 +22,18 @@ void Board::update() {
 
 }
 
+void Board::handleInput(SDL_Event& event) {
+	if (event.type == SDL_MOUSEMOTION) {
+		glm::vec2 boardPos = mouseToBoard(glm::vec2(event.motion.x, event.motion.y));
+		if (boardPos == glm::vec2(-1, -1)) {
+			std::cout << "Not in board" << std::endl;
+		}
+		else {
+			std::cout << "Row: " << boardPos.x << " Col: " << boardPos.y << std::endl;
+		}
+	}
+}
+
 void Board::render(SpriteBatch& batch) {
 	renderBackground(batch);
 }
@@ -47,4 +59,23 @@ void Board::renderBackground(SpriteBatch& batch) {
 			nextTex = lightSquareTex;
 		}
 	}
+}
+
+//utility functions
+glm::vec2 Board::mouseToBoard(glm::vec2 coords) { //converts mouse coords to board row and column coords, returns -1, -1, if point is outside of board
+	glm::vec2 error(-1, -1); //this is the error vector
+	coords.x = coords.x - (appRef.screenWidth / 2);
+	coords.y = coords.y - (appRef.screenHeight / 2); //convert to opengl coords
+	glm::vec2 boardSpace(coords.x - boardX, -(coords.y + boardY)); //transform to board space
+	glm::vec2 finalCoords(glm::floor(boardSpace.x / SQUARE_SIZE), glm::floor(boardSpace.y / SQUARE_SIZE)); //divide by square size to get row and column
+	if (finalCoords.y > boardData.size() - 1) {
+		return error;
+	}
+	else if (finalCoords.x > boardData[finalCoords.y].size() - 1){ //y is fine, check row/x
+		return error;
+	}
+	else if (finalCoords.x < 0 || finalCoords.y < 0) { //negative coords also mean out of board
+		return error;
+	}
+	return finalCoords; //checks have all passed
 }
