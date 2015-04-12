@@ -19,7 +19,7 @@ public:
 
 	void handleEvent(SDL_Event& event);
 	void update();
-	void render();
+	void render(SpriteBatch& batch);
 
 private:
 	void loadTexture();

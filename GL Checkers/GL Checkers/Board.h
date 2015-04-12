@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "SpriteBatch.h"
+#include "PieceColor.h"
 
 class Piece;
 
@@ -37,10 +38,13 @@ private:
 
 	std::vector< std::vector <Piece *> > boardData; //Stores all pointers to all the pieces in the board, and nullptr for empty spaces;
 
-	void populatePieces();
+	void addPiece(glm::vec2 coords, PieceColor color, bool king);
+
 	void renderBackground(SpriteBatch& batch);
+	void renderPieces(SpriteBatch& batch);
 
 	glm::vec2 mouseToBoard(glm::vec2 coords);
+	glm::vec2 boardToScreen(glm::vec2 coords);
 };
 
 

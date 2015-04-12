@@ -14,28 +14,37 @@ Board::~Board() {
 
 }
 
-void Board::populatePieces() {
-
-}
-
 void Board::update() {
 
 }
 
 void Board::handleInput(SDL_Event& event) {
-	if (event.type == SDL_MOUSEMOTION) {
-		glm::vec2 boardPos = mouseToBoard(glm::vec2(event.motion.x, event.motion.y));
-		if (boardPos == glm::vec2(-1, -1)) {
-			std::cout << "Not in board" << std::endl;
-		}
-		else {
-			std::cout << "Row: " << boardPos.x << " Col: " << boardPos.y << std::endl;
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		int x, y;
+		SDL_GetMouseState(&x, &y);
+		glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
+		if (boardCoords != glm::vec2(-1, -1)) {
+			switch (event.button.button) {
+			case SDL_BUTTON_LEFT:
+				addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::WHITE, false);
+				break;
+			case SDL_BUTTON_RIGHT:
+				addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::BLACK, false);
+				break;
+			}
 		}
 	}
 }
 
+void Board::addPiece(glm::vec2 coords, PieceColor color, bool king) {
+	glm::vec2 renderCoords = boardToScreen(glm::vec2(coords.x, coords.y));
+	Piece * newPiece = new Piece(renderCoords.x, renderCoords.y, color, king, *this, appRef);
+	boardData[(int)coords.x][(int)coords.y] = newPiece;
+}
+
 void Board::render(SpriteBatch& batch) {
 	renderBackground(batch);
+	renderPieces(batch);
 }
 
 void Board::renderBackground(SpriteBatch& batch) {
@@ -44,7 +53,7 @@ void Board::renderBackground(SpriteBatch& batch) {
 		for (int col = 0; col < boardData[row].size(); col++) {
 			float x = (col * 64) + boardX;
 			float y = (row * 64) + boardY;
-			batch.draw(glm::vec4(x, y, SQUARE_SIZE, SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), nextTex, 1, Color{ 255, 255, 255, 255 });
+			batch.draw(glm::vec4(x, y, SQUARE_SIZE, SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), nextTex, 0, Color{ 255, 255, 255, 255 });
 			if (nextTex == lightSquareTex) {
 				nextTex = darkSquareTex;
 			}
@@ -57,6 +66,17 @@ void Board::renderBackground(SpriteBatch& batch) {
 		}
 		else {
 			nextTex = lightSquareTex;
+		}
+	}
+}
+
+void Board::renderPieces(SpriteBatch& batch) {
+	for (int row = 0; row < boardData.size(); row++) {
+		for (int col = 0; col < boardData[row].size(); col++) {
+			Piece * next = boardData[row][col];
+			if (next != nullptr) {
+				next->render(batch);
+			}
 		}
 	}
 }
@@ -78,4 +98,10 @@ glm::vec2 Board::mouseToBoard(glm::vec2 coords) { //converts mouse coords to boa
 		return error;
 	}
 	return finalCoords; //checks have all passed
+}
+
+glm::vec2 Board::boardToScreen(glm::vec2 coords) { //convert board row and columns coords to sprite origin coords for drawing
+	float x = (coords.x * SQUARE_SIZE) + boardX;
+	float y = (coords.y * SQUARE_SIZE) + boardY;
+	return glm::vec2(x, y);
 }
