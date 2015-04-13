@@ -3,7 +3,7 @@
 #include "App.h"
 #include "PieceColor.h"
 
-Piece::Piece(float x, float y, PieceColor color, bool king, Board& board, App& app) : x(x), y(y), color(color), king(king), boardRef(board), appRef(app) {
+Piece::Piece(int row, int col, PieceColor color, bool king, Board& board, App& app) : row(row), col(col), color(color), king(king), boardRef(board), appRef(app) {
 
 	loadTexture();
 }
@@ -21,7 +21,8 @@ void Piece::update() {
 }
 
 void Piece::render(SpriteBatch& batch) {
-	batch.draw(glm::vec4(x, y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+	glm::vec2 coords = boardRef.boardToScreen(glm::vec2(row, col));
+	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
 }
 
 void Piece::loadTexture() {
