@@ -30,7 +30,16 @@ void SaveManager::save(const std::string& name, std::vector<std::vector<SavedSqu
 	}
 	cereal::JSONOutputArchive outputAr(file);
 	outputAr(data);
-	file << fflush;
+	file << std::endl << "}"; //this is a hack to fix a missing brace not added by cereal
 	std::cout << "Save complete." << std::endl;
 	file.close();
+}
+
+std::vector<std::vector<SavedSquare>> SaveManager::load(const std::string& name) {
+	std::ifstream file;
+	file.open(saveDir + name);
+	std::vector<std::vector<SavedSquare>> returnData;
+	cereal::JSONInputArchive inputAr(file);
+	inputAr(returnData);
+	return returnData;
 }

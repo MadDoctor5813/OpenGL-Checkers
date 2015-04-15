@@ -25,7 +25,22 @@ void Board::save(const std::string& name) {
 			saveData[row][col] = pieceToSquare(boardData[row][col]);
 		}
 	}
-	appRef.getSaveManager().save("default.sav", saveData);
+	appRef.getSaveManager().save(name, saveData);
+}
+
+void Board::load(const std::string& name) {
+	auto data = appRef.getSaveManager().load(name);
+	for (int row = 0; row < data.size(); row++) {
+		for (int col = 0; col < data[row].size(); col++) {
+			SavedSquare nextSquare = data[row][col];
+			if (nextSquare.hasPiece == false) {
+				boardData[row][col] = nullptr;
+			}
+			else {
+				addPiece(glm::vec2(col, row), nextSquare.color, nextSquare.king);
+			}
+		}
+	}
 }
 
 SavedSquare Board::pieceToSquare(Piece * piece) {
@@ -47,9 +62,9 @@ void Board::update() {
 }
 
 void Board::handleInput(SDL_Event& event) {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		int x, y;
-		SDL_GetMouseState(&x, &y);
 		glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
 		if (boardCoords != glm::vec2(-1, -1)) {
 			switch (event.button.button) {
@@ -66,6 +81,9 @@ void Board::handleInput(SDL_Event& event) {
 		switch (event.key.keysym.sym) {
 		case SDLK_s:
 			save("default.sav");
+			break;
+		case SDLK_l:
+			load("default.sav");
 			break;
 		}
 	}
