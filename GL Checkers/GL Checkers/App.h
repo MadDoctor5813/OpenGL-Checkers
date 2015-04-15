@@ -6,7 +6,7 @@
 #include "Sprite.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
-#include "SaveFileManager.h"
+#include "SaveManager.h"
 #include "Camera2D.h"
 #include "SpriteBatch.h"
 #include "Piece.h"
@@ -23,6 +23,7 @@ public:
 	GLuint getCurrentProgram();
 	ShaderManager& getShaderManager() { return shaderManager; }
 	TextureManager& getTextureManager() { return textureManager; }
+	SaveManager& getSaveManager() { return saveManager; }
 	Camera2D& getCamera() { return camera; }
 	SpriteBatch& getBatch() { return batch; }
 
@@ -43,7 +44,7 @@ private:
 	ShaderManager shaderManager;
 	TextureManager textureManager;
 	Camera2D camera;
-	SaveFileManager saveManager;
+	SaveManager saveManager;
 	SpriteBatch batch;
 
 	Board * testBoard;
