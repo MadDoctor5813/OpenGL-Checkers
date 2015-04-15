@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "App.h"
+#include "SavedSquare.h"
 
 
 Board::Board(App& app) : appRef(app), boardData(BOARD_SIZE, std::vector<Piece *>(BOARD_SIZE, nullptr)) {
@@ -12,6 +13,33 @@ Board::Board(App& app) : appRef(app), boardData(BOARD_SIZE, std::vector<Piece *>
 
 Board::~Board() {
 
+}
+
+void Board::save(const std::string& name) {
+	std::vector<std::vector<SavedSquare>> saveData(boardData.size());
+	for (int row = 0; row < boardData.size(); row++) {
+		saveData[row].resize(boardData[row].size());
+	}
+	for (int row = 0; row < boardData.size(); row++) {
+		for (int col = 0; col < boardData[row].size(); col++) {
+			saveData[row][col] = pieceToSquare(boardData[row][col]);
+		}
+	}
+	appRef.getSaveManager().save("default.sav", saveData);
+}
+
+SavedSquare Board::pieceToSquare(Piece * piece) {
+	SavedSquare returnSquare;
+	if (piece == nullptr) {
+		returnSquare.hasPiece = false;
+		return returnSquare;
+	}
+	else {
+		returnSquare.hasPiece = true;
+		returnSquare.color = piece->getColor();
+		returnSquare.king = piece->getKing();
+		return returnSquare;
+	}
 }
 
 void Board::update() {
@@ -34,12 +62,18 @@ void Board::handleInput(SDL_Event& event) {
 			}
 		}
 	}
+	else if (event.type == SDL_KEYDOWN) {
+		switch (event.key.keysym.sym) {
+		case SDLK_s:
+			save("default.sav");
+			break;
+		}
+	}
 }
 
 void Board::addPiece(glm::vec2 coords, PieceColor color, bool king) {
-	glm::vec2 renderCoords = boardToScreen(glm::vec2(coords.x, coords.y));
-	Piece * newPiece = new Piece(renderCoords.x, renderCoords.y, color, king, *this, appRef);
-	boardData[(int)coords.x][(int)coords.y] = newPiece;
+	Piece * newPiece = new Piece(coords.x, coords.y, color, king, *this, appRef);
+	boardData[(int)coords.y][(int)coords.x] = newPiece;
 }
 
 void Board::render(SpriteBatch& batch) {
