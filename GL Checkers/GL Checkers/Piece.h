@@ -20,6 +20,8 @@ public:
 	void handleEvent(SDL_Event& event);
 	void update();
 	void render(SpriteBatch& batch);
+	PieceColor getColor() { return color; }
+	bool getKing() { return king; }
 
 private:
 	void loadTexture();
