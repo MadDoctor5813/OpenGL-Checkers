@@ -85,13 +85,22 @@ void Board::handleInput(SDL_Event& event) {
 		case SDLK_l:
 			load("default.sav");
 			break;
+		case SDLK_DELETE:
+			glm::vec2 coords = mouseToBoard(glm::vec2(x, y));
+			deletePiece(coords.y, coords.x);
 		}
+
 	}
 }
 
 void Board::addPiece(glm::vec2 coords, PieceColor color, bool king) {
 	Piece * newPiece = new Piece(coords.x, coords.y, color, king, *this, appRef);
 	boardData[(int)coords.y][(int)coords.x] = newPiece;
+}
+
+void Board::deletePiece(int row, int col) {
+	delete boardData[row][col];
+	boardData[row][col] = nullptr;
 }
 
 void Board::render(SpriteBatch& batch) {

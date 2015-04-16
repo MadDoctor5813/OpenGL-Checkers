@@ -27,6 +27,7 @@ public:
 	void save(const std::string& name);
 
 	void getPieceAt(int row, int col);
+	void deletePiece(int row, int col);
 
 	glm::vec2 mouseToBoard(glm::vec2 coords);
 	glm::vec2 boardToScreen(glm::vec2 coords);
