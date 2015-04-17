@@ -87,7 +87,9 @@ void Board::handleInput(SDL_Event& event) {
 			break;
 		case SDLK_DELETE:
 			glm::vec2 coords = mouseToBoard(glm::vec2(x, y));
-			deletePiece(coords.y, coords.x);
+			if (coords != glm::vec2(-1, -1)) {
+				deletePiece(coords.y, coords.x);
+			}
 		}
 
 	}
