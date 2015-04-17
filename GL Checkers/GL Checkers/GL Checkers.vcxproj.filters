@@ -97,5 +97,7 @@
     <Image Include="Images\pieceWhiteKing.png">
       <Filter>Sprites</Filter>
     </Image>
+    <Image Include="Images\pieceBlackKing.png" />
+    <Image Include="Images\selection.png" />
   </ItemGroup>
 </Project>

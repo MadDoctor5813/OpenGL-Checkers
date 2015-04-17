@@ -104,8 +104,10 @@
     <Image Include="Images\darkSquare.png" />
     <Image Include="Images\lightSquare.png" />
     <Image Include="Images\pieceBlack.png" />
+    <Image Include="Images\pieceBlackKing.png" />
     <Image Include="Images\pieceWhite.png" />
     <Image Include="Images\pieceWhiteKing.png" />
+    <Image Include="Images\selection.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
