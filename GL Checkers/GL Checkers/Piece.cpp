@@ -5,7 +5,7 @@
 
 Piece::Piece(int row, int col, PieceColor color, bool king, Board& board, App& app) : row(row), col(col), color(color), king(king), boardRef(board), appRef(app) {
 
-	loadTexture();
+	loadTextures();
 }
 
 
@@ -23,10 +23,14 @@ void Piece::update() {
 void Piece::render(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(glm::vec2(row, col));
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+	if (selected) {
+		batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+	}
 }
 
-void Piece::loadTexture() {
+void Piece::loadTextures() {
 	TextureManager& manager = appRef.getTextureManager();
+	selectedTexture = manager.getTexture("selection");
 	if (color == PieceColor::WHITE) {
 		if (king == false) {
 			texture = manager.getTexture("pieceWhite");

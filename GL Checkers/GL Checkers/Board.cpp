@@ -57,6 +57,10 @@ SavedSquare Board::pieceToSquare(Piece * piece) {
 	}
 }
 
+Piece * Board::getPieceAt(int row, int col) {
+	return boardData[row][col];
+}
+
 void Board::update() {
 
 }
@@ -65,33 +69,65 @@ void Board::handleInput(SDL_Event& event) {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
-		if (boardCoords != glm::vec2(-1, -1)) {
-			switch (event.button.button) {
-			case SDL_BUTTON_LEFT:
-				addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::WHITE, false);
-				break;
-			case SDL_BUTTON_RIGHT:
-				addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::BLACK, false);
-				break;
-			}
+		if (devMode) {
+			handleMouseDev(x, y, event.button.button);
+		}
+		else {
+			handleMouse(x, y, event.button.button);
 		}
 	}
 	else if (event.type == SDL_KEYDOWN) {
-		switch (event.key.keysym.sym) {
-		case SDLK_s:
-			save("default.sav");
+		handleKeys(event.key.keysym.sym);
+	}
+}
+
+void Board::handleMouse(int x, int y, int button) {
+	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
+	Piece * clicked = getPieceAt(boardCoords.y, boardCoords.x);
+	if (clicked != nullptr) {
+		switch (button) {
+		case SDL_BUTTON_LEFT:
+			clicked->setSelected(!clicked->getSelected());
 			break;
-		case SDLK_l:
-			load("default.sav");
+		}
+	}
+}
+
+void Board::handleMouseDev(int x, int y, int button) {
+	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
+	if (boardCoords != glm::vec2(-1, -1)) {
+		switch (button) {
+		case SDL_BUTTON_LEFT:
+			addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::WHITE, false);
 			break;
-		case SDLK_DELETE:
+		case SDL_BUTTON_RIGHT:
+			addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::BLACK, false);
+			break;
+		}
+	}
+}
+
+void Board::handleKeys(SDL_Keycode key) {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	switch (key) {
+	case SDLK_d:
+		std::cout << "Developer mode: " << std::boolalpha << !devMode << std::endl;
+		devMode = !devMode;
+		break;
+	case SDLK_s:
+		save("default.sav");
+		break;
+	case SDLK_l:
+		load("default.sav");
+		break;
+	case SDLK_DELETE:
+		if (devMode) {
 			glm::vec2 coords = mouseToBoard(glm::vec2(x, y));
 			if (coords != glm::vec2(-1, -1)) {
 				deletePiece(coords.y, coords.x);
 			}
 		}
-
 	}
 }
 

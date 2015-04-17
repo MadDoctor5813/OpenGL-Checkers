@@ -22,16 +22,20 @@ public:
 	void render(SpriteBatch& batch);
 	PieceColor getColor() { return color; }
 	bool getKing() { return king; }
+	void setSelected(bool value) { selected = value; }
+	bool getSelected() { return selected; }
 
 private:
-	void loadTexture();
+	void loadTextures();
 
 	App& appRef;
 	Board& boardRef;
 	GLuint texture;
+	GLuint selectedTexture;
 
 	PieceColor color;
 	bool king = false;
+	bool selected = false;
 
 	int row;
 	int col;

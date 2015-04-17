@@ -26,7 +26,7 @@ public:
 	void load(const std::string& name);
 	void save(const std::string& name);
 
-	void getPieceAt(int row, int col);
+	Piece * getPieceAt(int row, int col);
 	void deletePiece(int row, int col);
 
 	glm::vec2 mouseToBoard(glm::vec2 coords);
@@ -38,12 +38,18 @@ private:
 	float boardX;
 	float boardY;
 
+	bool devMode = false;
+
 	GLuint darkSquareTex;
 	GLuint lightSquareTex;
 
 	App& appRef;
 
 	std::vector< std::vector <Piece *> > boardData; //Stores all pointers to all the pieces in the board, and nullptr for empty spaces;
+
+	void handleMouse(int x, int y, int button);
+	void handleMouseDev(int x, int y, int button);
+	void handleKeys(SDL_Keycode key);
 
 	SavedSquare pieceToSquare(Piece * piece);
 	void addPiece(glm::vec2 coords, PieceColor color, bool king);
