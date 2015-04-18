@@ -43,6 +43,8 @@ private:
 	GLuint darkSquareTex;
 	GLuint lightSquareTex;
 
+	Piece * selectedPiece = nullptr;
+
 	App& appRef;
 
 	std::vector< std::vector <Piece *> > boardData; //Stores all pointers to all the pieces in the board, and nullptr for empty spaces;
@@ -50,6 +52,9 @@ private:
 	void handleMouse(int x, int y, int button);
 	void handleMouseDev(int x, int y, int button);
 	void handleKeys(SDL_Keycode key);
+
+	void selectPiece(Piece * piece);
+	void deselectPiece(Piece * piece);
 
 	SavedSquare pieceToSquare(Piece * piece);
 	void addPiece(glm::vec2 coords, PieceColor color, bool king);

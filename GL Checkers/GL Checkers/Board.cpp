@@ -84,14 +84,17 @@ void Board::handleInput(SDL_Event& event) {
 void Board::handleMouse(int x, int y, int button) {
 	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
 	Piece * clicked = getPieceAt(boardCoords.y, boardCoords.x);
-	if (clicked != nullptr) {
-		switch (button) {
-		case SDL_BUTTON_LEFT:
-			clicked->setSelected(!clicked->getSelected());
-			break;
-		}
+	if (clicked == nullptr) { //if clicked on empty square or outside of board
+		selectedPiece = nullptr; //deselect current piece
+	}
+	else if (clicked == selectedPiece) { //if clicked on selected piece
+		selectedPiece = nullptr; //deselect current piece
+	}
+	else { //clicked on an unselected piece
+		selectedPiece = clicked; //select clicked piece
 	}
 }
+
 
 void Board::handleMouseDev(int x, int y, int button) {
 	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
@@ -144,6 +147,9 @@ void Board::deletePiece(int row, int col) {
 void Board::render(SpriteBatch& batch) {
 	renderBackground(batch);
 	renderPieces(batch);
+	if (selectedPiece != nullptr) {
+		selectedPiece->renderSelection(batch);
+	}
 }
 
 void Board::renderBackground(SpriteBatch& batch) {

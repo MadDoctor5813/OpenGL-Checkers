@@ -20,10 +20,9 @@ public:
 	void handleEvent(SDL_Event& event);
 	void update();
 	void render(SpriteBatch& batch);
+	void renderSelection(SpriteBatch& batch);
 	PieceColor getColor() { return color; }
 	bool getKing() { return king; }
-	void setSelected(bool value) { selected = value; }
-	bool getSelected() { return selected; }
 
 private:
 	void loadTextures();
@@ -35,7 +34,6 @@ private:
 
 	PieceColor color;
 	bool king = false;
-	bool selected = false;
 
 	int row;
 	int col;
