@@ -17,7 +17,8 @@ void Piece::handleEvent(SDL_Event& event) {
 }
 
 void Piece::update() {
-
+	moves.erase(moves.begin(), moves.end());
+	genMoves();
 }
 
 void Piece::render(SpriteBatch& batch) {
@@ -28,6 +29,41 @@ void Piece::render(SpriteBatch& batch) {
 void Piece::renderSelection(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(glm::vec2(row, col));
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+	for (auto move : moves) {
+		glm::vec2 moveCoords = boardRef.boardToScreen(glm::vec2(move.newRow, move.newCol));
+		batch.draw(glm::vec4(moveCoords.x, moveCoords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+	}
+}
+
+void Piece::genMoves() {
+	if (king) {
+		genMovesWhite();
+		genMovesBlack();
+	}
+	else if (color == PieceColor::WHITE) {
+		genMovesWhite();
+	}
+	else {
+		genMovesBlack();
+	}
+}
+
+void Piece::genMovesWhite() {
+	if (row == boardRef.BOARD_SIZE - 1) {
+		return; //White is at the very top of the board, and can't move
+	}
+	else {
+		if (col != 0) { //piece can move left
+			Piece * topLeft = boardRef.getPieceAt(row + 1, col - 1);
+			if (topLeft == nullptr) {
+				moves.emplace_back(row, col, row + 1, col - 1);
+			}
+		}
+	}
+}
+
+void Piece::genMovesBlack() {
+
 }
 
 void Piece::loadTextures() {

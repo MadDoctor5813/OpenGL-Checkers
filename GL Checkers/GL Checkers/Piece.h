@@ -2,8 +2,10 @@
 #include <GL\glew.h>
 #include <SDL.h>
 #include <glm\glm.hpp>
+#include <vector>
 
 #include "PieceColor.h"
+#include "Move.h"
 #include "Board.h"
 
 
@@ -26,6 +28,12 @@ public:
 
 private:
 	void loadTextures();
+
+	void genMoves();
+	void genMovesWhite();
+	void genMovesBlack();
+
+	std::vector<Move> moves;
 
 	App& appRef;
 	Board& boardRef;

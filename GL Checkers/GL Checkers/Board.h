@@ -31,9 +31,10 @@ public:
 
 	glm::vec2 mouseToBoard(glm::vec2 coords);
 	glm::vec2 boardToScreen(glm::vec2 coords);
+
+	const int BOARD_SIZE = 8; 
 private:
 	const int SQUARE_SIZE = 64;
-	const int BOARD_SIZE = 8; //This really should only be used with no save files
 
 	float boardX;
 	float boardY;

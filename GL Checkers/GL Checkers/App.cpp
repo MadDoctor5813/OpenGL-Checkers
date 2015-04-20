@@ -68,6 +68,7 @@ void App::procInput() {
 	float const ZOOM_SPEED = 0.1f;
 	SDL_Event nextEvent;
 	SDL_PollEvent(&nextEvent);
+	testBoard->update();
 	if (nextEvent.type == SDL_QUIT) {
 		cleanup();
 		exit = true;

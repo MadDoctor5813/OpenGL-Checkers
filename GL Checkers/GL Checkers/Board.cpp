@@ -62,7 +62,13 @@ Piece * Board::getPieceAt(int row, int col) {
 }
 
 void Board::update() {
-
+	for (auto row : boardData) {
+		for (auto piece : row) {
+			if (piece != nullptr) {
+				piece->update();
+			}
+		}
+	}
 }
 
 void Board::handleInput(SDL_Event& event) {
@@ -83,7 +89,10 @@ void Board::handleInput(SDL_Event& event) {
 
 void Board::handleMouse(int x, int y, int button) {
 	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
-	Piece * clicked = getPieceAt(boardCoords.y, boardCoords.x);
+	Piece * clicked = nullptr;
+	if (boardCoords != glm::vec2(-1, -1)) {
+		clicked = getPieceAt(boardCoords.y, boardCoords.x);
+	}
 	if (clicked == nullptr) { //if clicked on empty square or outside of board
 		selectedPiece = nullptr; //deselect current piece
 	}
@@ -98,6 +107,7 @@ void Board::handleMouse(int x, int y, int button) {
 
 void Board::handleMouseDev(int x, int y, int button) {
 	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
+	std::cout << "Row: " << boardCoords.y << " Col: " << boardCoords.x << std::endl;
 	if (boardCoords != glm::vec2(-1, -1)) {
 		switch (button) {
 		case SDL_BUTTON_LEFT:
