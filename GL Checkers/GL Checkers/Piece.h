@@ -16,7 +16,7 @@ class App;
 class Piece {
 
 public:
-	Piece(int row, int col, PieceColor color, bool king, Board& board, App& app);
+	Piece(BoardPos pos, PieceColor color, bool king, Board& board, App& app);
 	~Piece();
 
 	void handleEvent(SDL_Event& event);
@@ -43,7 +43,6 @@ private:
 	PieceColor color;
 	bool king = false;
 
-	int row;
-	int col;
+	BoardPos pos;
 };
 

@@ -9,6 +9,7 @@
 #include "SpriteBatch.h"
 #include "PieceColor.h"
 #include "SavedSquare.h"
+#include "BoardPos.h"
 
 class Piece;
 
@@ -26,11 +27,11 @@ public:
 	void load(const std::string& name);
 	void save(const std::string& name);
 
-	Piece * getPieceAt(int row, int col);
-	void deletePiece(int row, int col);
+	Piece * getPieceAt(BoardPos pos);
+	void deletePiece(BoardPos pos);
 
-	glm::vec2 mouseToBoard(glm::vec2 coords);
-	glm::vec2 boardToScreen(glm::vec2 coords);
+	BoardPos mouseToBoard(glm::vec2 coords);
+	glm::vec2 boardToScreen(BoardPos pos);
 
 	const int BOARD_SIZE = 8; 
 private:
@@ -58,7 +59,7 @@ private:
 	void deselectPiece(Piece * piece);
 
 	SavedSquare pieceToSquare(Piece * piece);
-	void addPiece(glm::vec2 coords, PieceColor color, bool king);
+	void addPiece(BoardPos pos, PieceColor color, bool king);
 
 	void renderBackground(SpriteBatch& batch);
 	void renderPieces(SpriteBatch& batch);

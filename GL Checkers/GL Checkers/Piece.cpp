@@ -3,7 +3,7 @@
 #include "App.h"
 #include "PieceColor.h"
 
-Piece::Piece(int row, int col, PieceColor color, bool king, Board& board, App& app) : row(row), col(col), color(color), king(king), boardRef(board), appRef(app) {
+Piece::Piece(BoardPos pos, PieceColor color, bool king, Board& board, App& app) : pos(pos), color(color), king(king), boardRef(board), appRef(app) {
 
 	loadTextures();
 }
@@ -22,15 +22,15 @@ void Piece::update() {
 }
 
 void Piece::render(SpriteBatch& batch) {
-	glm::vec2 coords = boardRef.boardToScreen(glm::vec2(row, col));
+	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
 }
 
 void Piece::renderSelection(SpriteBatch& batch) {
-	glm::vec2 coords = boardRef.boardToScreen(glm::vec2(row, col));
+	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
 	for (auto move : moves) {
-		glm::vec2 moveCoords = boardRef.boardToScreen(glm::vec2(move.newRow, move.newCol));
+		glm::vec2 moveCoords = boardRef.boardToScreen(move.newPos);
 		batch.draw(glm::vec4(moveCoords.x, moveCoords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
 	}
 }
@@ -49,14 +49,19 @@ void Piece::genMoves() {
 }
 
 void Piece::genMovesWhite() {
-	if (row == boardRef.BOARD_SIZE - 1) {
+	if (pos.row == boardRef.BOARD_SIZE - 1) {
 		return; //White is at the very top of the board, and can't move
 	}
 	else {
-		if (col != 0) { //piece can move left
-			Piece * topLeft = boardRef.getPieceAt(row + 1, col - 1);
+		if (pos.col != 0) { //piece can move left
+			Piece * topLeft = boardRef.getPieceAt(BoardPos{ pos.row + 1, pos.col - 1 });
 			if (topLeft == nullptr) {
-				moves.emplace_back(row, col, row + 1, col - 1);
+				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col - 1 });
+			}
+			else if (pos.col > 1 && topLeft->getColor() != color) { //there is room to capture and a piece to capture
+				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col - 2 }) == nullptr) { //and the end space is open
+					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 });
+				}
 			}
 		}
 	}

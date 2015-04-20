@@ -1,10 +1,10 @@
 #pragma once
 
-struct Move {
-	int oldRow;
-	int oldCol;
-	int newRow;
-	int newCol;
+#include "BoardPos.h"
 
-	Move(int oldRow, int oldCol, int newRow, int newCol) : oldRow(oldRow), oldCol(oldCol), newRow(newRow), newCol(newCol) {}
+struct Move {
+	BoardPos oldPos;
+	BoardPos newPos;
+
+	Move(BoardPos oldPos, BoardPos newPos) : oldPos(oldPos), newPos(newPos) {}
 };

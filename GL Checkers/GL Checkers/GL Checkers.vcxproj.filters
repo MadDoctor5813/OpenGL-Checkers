@@ -56,6 +56,7 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Move.h" />
+    <ClInclude Include="BoardPos.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">

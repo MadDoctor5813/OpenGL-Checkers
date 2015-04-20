@@ -37,7 +37,7 @@ void Board::load(const std::string& name) {
 				boardData[row][col] = nullptr;
 			}
 			else {
-				addPiece(glm::vec2(col, row), nextSquare.color, nextSquare.king);
+				addPiece(BoardPos{ row, col }, nextSquare.color, nextSquare.king);
 			}
 		}
 	}
@@ -57,8 +57,8 @@ SavedSquare Board::pieceToSquare(Piece * piece) {
 	}
 }
 
-Piece * Board::getPieceAt(int row, int col) {
-	return boardData[row][col];
+Piece * Board::getPieceAt(BoardPos pos) {
+	return boardData[pos.row][pos.col];
 }
 
 void Board::update() {
@@ -88,10 +88,10 @@ void Board::handleInput(SDL_Event& event) {
 }
 
 void Board::handleMouse(int x, int y, int button) {
-	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
+	BoardPos boardCoords = mouseToBoard(glm::vec2(x, y));
 	Piece * clicked = nullptr;
-	if (boardCoords != glm::vec2(-1, -1)) {
-		clicked = getPieceAt(boardCoords.y, boardCoords.x);
+	if (boardCoords != BoardPos{ -1, -1 }) {
+		clicked = getPieceAt(boardCoords);
 	}
 	if (clicked == nullptr) { //if clicked on empty square or outside of board
 		selectedPiece = nullptr; //deselect current piece
@@ -106,15 +106,15 @@ void Board::handleMouse(int x, int y, int button) {
 
 
 void Board::handleMouseDev(int x, int y, int button) {
-	glm::vec2 boardCoords = mouseToBoard(glm::vec2(x, y));
-	std::cout << "Row: " << boardCoords.y << " Col: " << boardCoords.x << std::endl;
-	if (boardCoords != glm::vec2(-1, -1)) {
+	BoardPos boardCoords = mouseToBoard(glm::vec2(x, y));
+	std::cout << "Row: " << boardCoords.row << " Col: " << boardCoords.col << std::endl;
+	if (boardCoords != BoardPos{ -1, -1 }) {
 		switch (button) {
 		case SDL_BUTTON_LEFT:
-			addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::WHITE, false);
+			addPiece(boardCoords, PieceColor::WHITE, false);
 			break;
 		case SDL_BUTTON_RIGHT:
-			addPiece(glm::vec2(boardCoords.x, boardCoords.y), PieceColor::BLACK, false);
+			addPiece(boardCoords, PieceColor::BLACK, false);
 			break;
 		}
 	}
@@ -136,22 +136,22 @@ void Board::handleKeys(SDL_Keycode key) {
 		break;
 	case SDLK_DELETE:
 		if (devMode) {
-			glm::vec2 coords = mouseToBoard(glm::vec2(x, y));
-			if (coords != glm::vec2(-1, -1)) {
-				deletePiece(coords.y, coords.x);
+			BoardPos coords = mouseToBoard(glm::vec2(x, y));
+			if (coords != BoardPos{ -1, -1 }) {
+				deletePiece(coords);
 			}
 		}
 	}
 }
 
-void Board::addPiece(glm::vec2 coords, PieceColor color, bool king) {
-	Piece * newPiece = new Piece(coords.x, coords.y, color, king, *this, appRef);
-	boardData[(int)coords.y][(int)coords.x] = newPiece;
+void Board::addPiece(BoardPos pos, PieceColor color, bool king) {
+	Piece * newPiece = new Piece(pos, color, king, *this, appRef);
+	boardData[pos.row][pos.col] = newPiece;
 }
 
-void Board::deletePiece(int row, int col) {
-	delete boardData[row][col];
-	boardData[row][col] = nullptr;
+void Board::deletePiece(BoardPos pos) {
+	delete boardData[pos.row][pos.col];
+	boardData[pos.row][pos.col] = nullptr;
 }
 
 void Board::render(SpriteBatch& batch) {
@@ -197,26 +197,26 @@ void Board::renderPieces(SpriteBatch& batch) {
 }
 
 //utility functions
-glm::vec2 Board::mouseToBoard(glm::vec2 coords) { //converts mouse coords to board row and column coords, returns -1, -1, if point is outside of board
-	glm::vec2 error(-1, -1); //this is the error vector
+BoardPos Board::mouseToBoard(glm::vec2 coords) { //converts mouse coords to board row and column coords, returns -1, -1, if point is outside of board
+	BoardPos error{ -1, -1 }; //this is the error vector
 	coords.x = coords.x - (appRef.screenWidth / 2);
 	coords.y = coords.y - (appRef.screenHeight / 2); //convert to opengl coords
 	glm::vec2 boardSpace(coords.x - boardX, -(coords.y + boardY)); //transform to board space
-	glm::vec2 finalCoords(glm::floor(boardSpace.x / SQUARE_SIZE), glm::floor(boardSpace.y / SQUARE_SIZE)); //divide by square size to get row and column
-	if (finalCoords.y > boardData.size() - 1) {
+	BoardPos finalCoords{ glm::floor(boardSpace.y / SQUARE_SIZE), glm::floor(boardSpace.x / SQUARE_SIZE) }; //divide by square size to get row and column
+	if (finalCoords.row > boardData.size() - 1) {
 		return error;
 	}
-	else if (finalCoords.x > boardData[finalCoords.y].size() - 1){ //y is fine, check row/x
+	else if (finalCoords.col > boardData[finalCoords.row].size() - 1){ //y is fine, check row/x
 		return error;
 	}
-	else if (finalCoords.x < 0 || finalCoords.y < 0) { //negative coords also mean out of board
+	else if (finalCoords.col < 0 || finalCoords.row < 0) { //negative coords also mean out of board
 		return error;
 	}
 	return finalCoords; //checks have all passed
 }
 
-glm::vec2 Board::boardToScreen(glm::vec2 coords) { //convert board row and columns coords to sprite origin coords for drawing
-	float x = (coords.x * SQUARE_SIZE) + boardX;
-	float y = (coords.y * SQUARE_SIZE) + boardY;
+glm::vec2 Board::boardToScreen(BoardPos pos) { //convert board row and columns coords to sprite origin coords for drawing
+	float x = (pos.col * SQUARE_SIZE) + boardX;
+	float y = (pos.row * SQUARE_SIZE) + boardY;
 	return glm::vec2(x, y);
 }
