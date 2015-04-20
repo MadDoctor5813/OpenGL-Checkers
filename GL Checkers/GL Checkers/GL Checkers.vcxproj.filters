@@ -55,6 +55,7 @@
     <ClInclude Include="SaveManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Move.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
@@ -97,7 +98,11 @@
     <Image Include="Images\pieceWhiteKing.png">
       <Filter>Sprites</Filter>
     </Image>
-    <Image Include="Images\pieceBlackKing.png" />
-    <Image Include="Images\selection.png" />
+    <Image Include="Images\selection.png">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="Images\pieceBlackKing.png">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
