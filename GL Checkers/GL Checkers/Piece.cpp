@@ -64,11 +64,48 @@ void Piece::genMovesWhite() {
 				}
 			}
 		}
+		if (pos.col != boardRef.BOARD_SIZE - 1) { //piece can move right
+			Piece * topRight = boardRef.getPieceAt(BoardPos{ pos.row + 1, pos.col + 1 });
+			if (topRight == nullptr) {
+				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col + 1 });
+			}
+			else if (pos.col > 1 && topRight->getColor() != color) { //there is room to capture and a piece to capture
+				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col + 2 }) == nullptr) { //and the end space is open
+					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 });
+				}
+			}
+		}
 	}
 }
 
 void Piece::genMovesBlack() {
-
+	if (pos.row == 0) {
+		return; //Black is at the very top of the board, and can't move
+	}
+	else {
+		if (pos.col != 0) { //piece can move left
+			Piece * bottomLeft = boardRef.getPieceAt(BoardPos{ pos.row - 1, pos.col - 1 });
+			if (bottomLeft == nullptr) {
+				moves.emplace_back(pos, BoardPos{ pos.row - 1, pos.col - 1 });
+			}
+			else if (pos.col > 1 && bottomLeft->getColor() != color) { //there is room to capture and a piece to capture
+				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col - 2 }) == nullptr) { //and the end space is open
+					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col - 2 });
+				}
+			}
+		}
+		if (pos.col != boardRef.BOARD_SIZE - 1) { //piece can move right
+			Piece * bottomRight = boardRef.getPieceAt(BoardPos{ pos.row - 1, pos.col + 1 });
+			if (bottomRight == nullptr) {
+				moves.emplace_back(pos, BoardPos{ pos.row - 1, pos.col + 1 });
+			}
+			else if (pos.col > 1 && bottomRight->getColor() != color) { //there is room to capture and a piece to capture
+				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col + 2 }) == nullptr) { //and the end space is open
+					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col + 2 });
+				}
+			}
+		}
+	}
 }
 
 void Piece::loadTextures() {
