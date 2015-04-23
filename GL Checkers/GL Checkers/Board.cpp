@@ -141,6 +141,15 @@ void Board::handleKeys(SDL_Keycode key) {
 				deletePiece(coords);
 			}
 		}
+		break;
+	case SDLK_k:
+		if (devMode) {
+			BoardPos coords = mouseToBoard(glm::vec2(x, y));
+			if (coords != BoardPos{ -1, -1 }) {
+				Piece * picked = getPieceAt(coords);
+				picked->setKing(!picked->getKing());
+			}
+		}
 	}
 }
 

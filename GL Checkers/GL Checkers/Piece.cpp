@@ -12,11 +12,20 @@ Piece::Piece(BoardPos pos, PieceColor color, bool king, Board& board, App& app) 
 Piece::~Piece() {
 }
 
+void Piece::setKing(bool kingValue) {
+	king = kingValue;
+	updateTexture = true;
+}
+
 void Piece::handleEvent(SDL_Event& event) {
 
 }
 
 void Piece::update() {
+	if (updateTexture) {
+		loadTextures();
+		updateTexture = false;
+	}
 	moves.erase(moves.begin(), moves.end());
 	genMoves();
 }

@@ -25,6 +25,7 @@ public:
 	void renderSelection(SpriteBatch& batch);
 	PieceColor getColor() { return color; }
 	bool getKing() { return king; }
+	void setKing(bool kingValue);
 
 private:
 	void loadTextures();
@@ -34,6 +35,8 @@ private:
 	void genMovesBlack();
 
 	std::vector<Move> moves;
+
+	bool updateTexture = true;
 
 	App& appRef;
 	Board& boardRef;
