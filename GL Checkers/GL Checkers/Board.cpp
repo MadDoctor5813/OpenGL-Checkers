@@ -3,6 +3,7 @@
 #include "SavedSquare.h"
 
 
+
 Board::Board(App& app) : appRef(app), boardData(BOARD_SIZE, std::vector<Piece *>(BOARD_SIZE, nullptr)) {
 	lightSquareTex = appRef.getTextureManager().getTexture("lightSquare");
 	darkSquareTex = appRef.getTextureManager().getTexture("darkSquare");
@@ -92,11 +93,14 @@ void Board::handleMouse(int x, int y, int button) {
 	Piece * clicked = nullptr;
 	if (boardCoords != BoardPos{ -1, -1 }) {
 		clicked = getPieceAt(boardCoords);
+		if (clicked == nullptr) { //if clicked on empty square or outside of board
+			if (selectedPiece != nullptr) {
+				movePiece(Move(selectedPiece->getPos(), boardCoords));
+			}
+			selectedPiece = nullptr;
+		}
 	}
-	if (clicked == nullptr) { //if clicked on empty square or outside of board
-		selectedPiece = nullptr; //deselect current piece
-	}
-	else if (clicked == selectedPiece) { //if clicked on selected piece
+	if (clicked == selectedPiece) { //if clicked on selected piece
 		selectedPiece = nullptr; //deselect current piece
 	}
 	else { //clicked on an unselected piece
@@ -154,13 +158,22 @@ void Board::handleKeys(SDL_Keycode key) {
 }
 
 void Board::addPiece(BoardPos pos, PieceColor color, bool king) {
-	Piece * newPiece = new Piece(pos, color, king, *this, appRef);
-	boardData[pos.row][pos.col] = newPiece;
+	if (getPieceAt(pos) == nullptr) {
+		Piece * newPiece = new Piece(pos, color, king, *this, appRef);
+		boardData[pos.row][pos.col] = newPiece;
+	}
 }
 
 void Board::deletePiece(BoardPos pos) {
 	delete boardData[pos.row][pos.col];
 	boardData[pos.row][pos.col] = nullptr;
+}
+
+void Board::movePiece(Move move) {
+	if (getPieceAt(move.oldPos)->move(move.newPos) == true) {
+		boardData[move.newPos.row][move.newPos.col] = getPieceAt(move.oldPos);
+		boardData[move.oldPos.row][move.oldPos.col] = nullptr;
+	}
 }
 
 void Board::render(SpriteBatch& batch) {

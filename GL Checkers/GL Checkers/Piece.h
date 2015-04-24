@@ -23,8 +23,12 @@ public:
 	void update();
 	void render(SpriteBatch& batch);
 	void renderSelection(SpriteBatch& batch);
+
+	bool move(BoardPos newPos);
+
 	PieceColor getColor() { return color; }
 	bool getKing() { return king; }
+	BoardPos getPos() { return pos; }
 	void setKing(bool kingValue);
 
 private:

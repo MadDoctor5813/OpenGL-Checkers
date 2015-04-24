@@ -1,7 +1,10 @@
 #include "Piece.h"
 
+#include <algorithm>
+
 #include "App.h"
 #include "PieceColor.h"
+#include "Move.h"
 
 Piece::Piece(BoardPos pos, PieceColor color, bool king, Board& board, App& app) : pos(pos), color(color), king(king), boardRef(board), appRef(app) {
 
@@ -20,6 +23,19 @@ void Piece::setKing(bool kingValue) {
 void Piece::handleEvent(SDL_Event& event) {
 
 }
+
+bool Piece::move(BoardPos newPos) {
+	Move requested = { pos, newPos };
+	for (auto move : moves) {
+		if (move == requested) {
+			pos = requested.newPos;
+			return true;
+		}
+	}
+	return false;
+}
+
+
 
 void Piece::update() {
 	if (updateTexture) {
@@ -78,7 +94,7 @@ void Piece::genMovesWhite() {
 			if (topRight == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col + 1 });
 			}
-			else if (pos.col > 1 && topRight->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col < boardRef.BOARD_SIZE - 2 && topRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col + 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 });
 				}

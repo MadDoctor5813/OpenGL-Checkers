@@ -10,6 +10,7 @@
 #include "PieceColor.h"
 #include "SavedSquare.h"
 #include "BoardPos.h"
+#include "Move.h"
 
 class Piece;
 
@@ -57,6 +58,7 @@ private:
 
 	void selectPiece(Piece * piece);
 	void deselectPiece(Piece * piece);
+	void movePiece(Move move);
 
 	SavedSquare pieceToSquare(Piece * piece);
 	void addPiece(BoardPos pos, PieceColor color, bool king);

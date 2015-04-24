@@ -8,6 +8,10 @@ struct BoardPos {
 		return (rhs.row == row && rhs.col == col);
 	}
 
+	bool operator==(BoardPos& rhs) const {
+		return (rhs.row == row && rhs.col == col);
+	}
+
 	bool operator!=(BoardPos& rhs) {
 		return !(rhs.row == row && rhs.col == col);
 	}
