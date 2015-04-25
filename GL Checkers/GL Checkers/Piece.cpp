@@ -29,6 +29,9 @@ bool Piece::move(BoardPos newPos) {
 	for (auto move : moves) {
 		if (move == requested) {
 			pos = requested.newPos;
+			if (move.isCapture) {
+				boardRef.deletePiece(move.capTarget);
+			}
 			return true;
 		}
 	}
@@ -85,7 +88,7 @@ void Piece::genMovesWhite() {
 			}
 			else if (pos.col > 1 && topLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col - 2 }) == nullptr) { //and the end space is open
-					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 });
+					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 }, true, topLeft->getPos());
 				}
 			}
 		}
@@ -96,7 +99,7 @@ void Piece::genMovesWhite() {
 			}
 			else if (pos.col < boardRef.BOARD_SIZE - 2 && topRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col + 2 }) == nullptr) { //and the end space is open
-					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 });
+					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 }, true, topRight->getPos());
 				}
 			}
 		}
@@ -115,7 +118,7 @@ void Piece::genMovesBlack() {
 			}
 			else if (pos.col > 1 && bottomLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col - 2 }) == nullptr) { //and the end space is open
-					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col - 2 });
+					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col - 2 }, true, bottomLeft->getPos());
 				}
 			}
 		}
@@ -126,7 +129,7 @@ void Piece::genMovesBlack() {
 			}
 			else if (pos.col > 1 && bottomRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col + 2 }) == nullptr) { //and the end space is open
-					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col + 2 });
+					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col + 2 }, true, bottomRight->getPos());
 				}
 			}
 		}
