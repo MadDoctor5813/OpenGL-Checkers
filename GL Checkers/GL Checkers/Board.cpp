@@ -13,7 +13,11 @@ Board::Board(App& app) : appRef(app), boardData(BOARD_SIZE, std::vector<Piece *>
 
 
 Board::~Board() {
-
+	for (auto row : boardData) {
+		for (auto piece : row) {
+			delete piece;
+		}
+ 	}
 }
 
 void Board::save(const std::string& name) {
@@ -67,91 +71,6 @@ void Board::update() {
 		for (auto piece : row) {
 			if (piece != nullptr) {
 				piece->update();
-			}
-		}
-	}
-}
-
-void Board::handleInput(SDL_Event& event) {
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		if (devMode) {
-			handleMouseDev(x, y, event.button.button);
-		}
-		else {
-			handleMouse(x, y, event.button.button);
-		}
-	}
-	else if (event.type == SDL_KEYDOWN) {
-		handleKeys(event.key.keysym.sym);
-	}
-}
-
-void Board::handleMouse(int x, int y, int button) {
-	BoardPos boardCoords = mouseToBoard(glm::vec2(x, y));
-	Piece * clicked = nullptr;
-	if (boardCoords != BoardPos{ -1, -1 }) {
-		clicked = getPieceAt(boardCoords);
-		if (clicked == nullptr) { //if clicked on empty square or outside of board
-			if (selectedPiece != nullptr) {
-				movePiece(Move(selectedPiece->getPos(), boardCoords));
-			}
-			selectedPiece = nullptr;
-		}
-	}
-	if (clicked == selectedPiece) { //if clicked on selected piece
-		selectedPiece = nullptr; //deselect current piece
-	}
-	else { //clicked on an unselected piece
-		selectedPiece = clicked; //select clicked piece
-	}
-}
-
-
-void Board::handleMouseDev(int x, int y, int button) {
-	BoardPos boardCoords = mouseToBoard(glm::vec2(x, y));
-	std::cout << "Row: " << boardCoords.row << " Col: " << boardCoords.col << std::endl;
-	if (boardCoords != BoardPos{ -1, -1 }) {
-		switch (button) {
-		case SDL_BUTTON_LEFT:
-			addPiece(boardCoords, PieceColor::WHITE, false);
-			break;
-		case SDL_BUTTON_RIGHT:
-			addPiece(boardCoords, PieceColor::BLACK, false);
-			break;
-		}
-	}
-}
-
-void Board::handleKeys(SDL_Keycode key) {
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-	switch (key) {
-	case SDLK_d:
-		std::cout << "Developer mode: " << std::boolalpha << !devMode << std::endl;
-		devMode = !devMode;
-		break;
-	case SDLK_s:
-		save("default.sav");
-		break;
-	case SDLK_l:
-		load("default.sav");
-		break;
-	case SDLK_DELETE:
-		if (devMode) {
-			BoardPos coords = mouseToBoard(glm::vec2(x, y));
-			if (coords != BoardPos{ -1, -1 }) {
-				deletePiece(coords);
-			}
-		}
-		break;
-	case SDLK_k:
-		if (devMode) {
-			BoardPos coords = mouseToBoard(glm::vec2(x, y));
-			if (coords != BoardPos{ -1, -1 }) {
-				Piece * picked = getPieceAt(coords);
-				picked->setKing(!picked->getKing());
 			}
 		}
 	}

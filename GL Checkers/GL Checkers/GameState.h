@@ -13,6 +13,7 @@ public:
 	virtual void exit() = 0;
 	virtual void render(SpriteBatch& batch) = 0;
 	virtual void procEvent(SDL_Event& nextEvent) = 0;
+	virtual void update() = 0;
 
 };
 

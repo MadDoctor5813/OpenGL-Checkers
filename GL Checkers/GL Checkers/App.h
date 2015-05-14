@@ -10,6 +10,7 @@
 #include "Camera2D.h"
 #include "SpriteBatch.h"
 #include "Piece.h"
+#include "PlayState.h"
 
 class App {
 
@@ -47,7 +48,7 @@ private:
 	SaveManager saveManager;
 	SpriteBatch batch;
 
-	Board * testBoard;
+	PlayState * state;
 
 	bool exit = false;
 };

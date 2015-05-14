@@ -53,28 +53,28 @@ void App::initSystems() {
 
 
 void App::runLoop() {
-	testBoard = new Board(*this);
+	state = new PlayState(*this);
+	state->enter();
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
 		render();
 		camera.update();
+		state->update();
 		SDL_GL_SwapWindow(window);
 	}
 }
 
 void App::procInput() {
-	float const CAMERA_SPEED = 10.0f;
-	float const ZOOM_SPEED = 0.1f;
 	SDL_Event nextEvent;
-	SDL_PollEvent(&nextEvent);
-	testBoard->update();
-	if (nextEvent.type == SDL_QUIT) {
-		cleanup();
-		exit = true;
-	}
-	else {
-		testBoard->handleInput(nextEvent);
+	while (SDL_PollEvent(&nextEvent) != 0) {
+		if (nextEvent.type != SDL_QUIT) {
+			state->procEvent(nextEvent);
+		}
+		else {
+			cleanup();
+			exit = true;
+		}
 	}
 }
 
@@ -89,15 +89,14 @@ void App::render() {
 
 	batch.init();
 	batch.begin();
-	testBoard->render(batch);
+	state->render(batch);
 	batch.end();
-
 	batch.render();
 
 }
 
 void App::cleanup()  {
-	//Place for cleanup operations in the future?
+	
 }
 
 
