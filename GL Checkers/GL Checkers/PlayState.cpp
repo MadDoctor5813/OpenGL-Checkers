@@ -13,6 +13,7 @@ PlayState::~PlayState() {
 
 void PlayState::enter() {
 	board = new Board(appRef);
+	board->load("default.sav");
 }
 
 void PlayState::exit() {
@@ -21,6 +22,14 @@ void PlayState::exit() {
 
 void PlayState::update() {
 	board->update();
+	if (board->getNumBlack() == 0) { //White has won
+		std::cout << "WHITE HAS WON" << std::endl;
+		board->load("default.sav");
+	}
+	else if (board->getNumWhite() == 0) { //Black has won
+		std::cout << "BLACK HAS WON" << std::endl;
+		board->load("default.sav");
+	}
 }
 
 void PlayState::render(SpriteBatch& batch) {

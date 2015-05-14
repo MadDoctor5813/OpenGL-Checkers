@@ -80,10 +80,23 @@ void Board::addPiece(BoardPos pos, PieceColor color, bool king) {
 	if (getPieceAt(pos) == nullptr) {
 		Piece * newPiece = new Piece(pos, color, king, *this, appRef);
 		boardData[pos.row][pos.col] = newPiece;
+		if (color == PieceColor::WHITE) {
+			numWhite++;
+		}
+		else {
+			numBlack++;
+		}
 	}
 }
 
 void Board::deletePiece(BoardPos pos) {
+	PieceColor color = getPieceAt(pos)->getColor();
+	if (color == PieceColor::WHITE) {
+		numWhite--;
+	}
+	else {
+		numBlack--;
+	}
 	delete boardData[pos.row][pos.col];
 	boardData[pos.row][pos.col] = nullptr;
 }

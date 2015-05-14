@@ -18,6 +18,8 @@ private:
 	Board * board;
 	App& appRef;
 
+	PieceColor turn;
+
 	void handleKeys(int x, int y, SDL_Keycode key);
 	void handleMouse(int x, int y, int button);
 	void handleMouseDev(int x, int y, int button);

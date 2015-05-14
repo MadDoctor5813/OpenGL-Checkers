@@ -42,12 +42,18 @@ public:
 	Piece * getSelected() { return selectedPiece; }
 	void setSelected(Piece * selected) { selectedPiece = selected; }
 
+	int getNumWhite() { return numWhite; }
+	int getNumBlack() { return numBlack; }
+
 	const int BOARD_SIZE = 8; 
 private:
 	const int SQUARE_SIZE = 64;
 
 	float boardX;
 	float boardY;
+
+	int numBlack;
+	int numWhite;
 
 	bool devMode = false;
 
