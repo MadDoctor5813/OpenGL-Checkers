@@ -31,7 +31,7 @@ public:
 	Piece * getPieceAt(BoardPos pos);
 	void deletePiece(BoardPos pos);
 	void addPiece(BoardPos pos, PieceColor color, bool king);
-	void movePiece(Move move);
+	bool movePiece(Move move);
 
 	BoardPos mouseToBoard(glm::vec2 coords);
 	glm::vec2 boardToScreen(BoardPos pos);

@@ -101,10 +101,14 @@ void Board::deletePiece(BoardPos pos) {
 	boardData[pos.row][pos.col] = nullptr;
 }
 
-void Board::movePiece(Move move) {
+bool Board::movePiece(Move move) {
 	if (getPieceAt(move.oldPos)->move(move.newPos) == true) {
 		boardData[move.newPos.row][move.newPos.col] = getPieceAt(move.oldPos);
 		boardData[move.oldPos.row][move.oldPos.col] = nullptr;
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 

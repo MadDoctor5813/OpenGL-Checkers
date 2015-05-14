@@ -21,14 +21,17 @@ void PlayState::exit() {
 }
 
 void PlayState::update() {
-	board->update();
-	if (board->getNumBlack() == 0) { //White has won
-		std::cout << "WHITE HAS WON" << std::endl;
-		board->load("default.sav");
-	}
-	else if (board->getNumWhite() == 0) { //Black has won
-		std::cout << "BLACK HAS WON" << std::endl;
-		board->load("default.sav");
+	if (updateNeeded) {
+		board->update();
+		if (board->getNumBlack() == 0) { //White has won
+			std::cout << "WHITE HAS WON" << std::endl;
+			board->load("default.sav");
+		}
+		else if (board->getNumWhite() == 0) { //Black has won
+			std::cout << "BLACK HAS WON" << std::endl;
+			board->load("default.sav");
+		}
+		updateNeeded = false;
 	}
 }
 
@@ -90,7 +93,9 @@ void PlayState::handleMouse(int x, int y, int button) {
 		clicked = board->getPieceAt(boardCoords);
 		if (clicked == nullptr) { //if clicked on empty square or outside of board
 			if (board->getSelected() != nullptr) {
-				board->movePiece(Move(board->getSelected()->getPos(), boardCoords));
+				if (board->movePiece(Move(board->getSelected()->getPos(), boardCoords))) { //If piece was moved
+					nextTurn(); //go to the next turn
+				}
 			}
 			board->setSelected(nullptr);
 		}
@@ -98,7 +103,7 @@ void PlayState::handleMouse(int x, int y, int button) {
 	if (clicked == board->getSelected()) { //if clicked on selected piece
 		board->setSelected(nullptr); //deselect current piece
 	}
-	else { //clicked on an unselected piece
+	else if (clicked->getColor() == turn) { //clicked on an unselected piece
 		board->setSelected(clicked); //select clicked piece
 	}
 }
@@ -116,4 +121,15 @@ void PlayState::handleMouseDev(int x, int y, int button) {
 			break;
 		}
 	}
+}
+
+void PlayState::nextTurn() {
+	//Toggle color
+	if (turn == PieceColor::WHITE) {
+		turn = PieceColor::BLACK;
+	}
+	else {
+		turn = PieceColor::WHITE;
+	}
+	updateNeeded = true;
 }
