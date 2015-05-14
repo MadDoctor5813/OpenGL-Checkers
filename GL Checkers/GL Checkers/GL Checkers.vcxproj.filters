@@ -25,6 +25,9 @@
     <ClCompile Include="SaveManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -57,6 +60,9 @@
     </ClInclude>
     <ClInclude Include="Move.h" />
     <ClInclude Include="BoardPos.h" />
+    <ClInclude Include="GameState.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
