@@ -34,7 +34,7 @@ void App::initOpenGL() {
 	//Turn on double buffering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	//Set background
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
 	//Enable texturing
 	glEnable(GL_TEXTURE_2D);
 	//Enable transparency
