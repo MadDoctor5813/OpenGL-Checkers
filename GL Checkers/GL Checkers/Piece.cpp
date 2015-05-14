@@ -86,7 +86,7 @@ void Piece::genMovesWhite() {
 			if (topLeft == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col - 1 });
 			}
-			else if (pos.col > 1 && topLeft->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col > 1 && pos.row < boardRef.BOARD_SIZE && topLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col - 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 }, true, topLeft->getPos());
 				}
@@ -97,7 +97,7 @@ void Piece::genMovesWhite() {
 			if (topRight == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col + 1 });
 			}
-			else if (pos.col < boardRef.BOARD_SIZE - 2 && topRight->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col < boardRef.BOARD_SIZE - 2 && pos.row < boardRef.BOARD_SIZE - 2 && topRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col + 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 }, true, topRight->getPos());
 				}
@@ -116,7 +116,7 @@ void Piece::genMovesBlack() {
 			if (bottomLeft == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row - 1, pos.col - 1 });
 			}
-			else if (pos.col > 1 && bottomLeft->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col > 1 && pos.row > 1 && bottomLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col - 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col - 2 }, true, bottomLeft->getPos());
 				}
@@ -127,7 +127,7 @@ void Piece::genMovesBlack() {
 			if (bottomRight == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row - 1, pos.col + 1 });
 			}
-			else if (pos.col > 1 && bottomRight->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col > 1 && pos.row > 1 && bottomRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col + 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col + 2 }, true, bottomRight->getPos());
 				}
