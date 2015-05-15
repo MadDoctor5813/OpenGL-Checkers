@@ -86,7 +86,7 @@ void Piece::genMovesWhite() {
 			if (topLeft == nullptr) {
 				moves.emplace_back(pos, BoardPos{ pos.row + 1, pos.col - 1 });
 			}
-			else if (pos.col > 1 && pos.row < boardRef.BOARD_SIZE && topLeft->getColor() != color) { //there is room to capture and a piece to capture
+			else if (pos.col > 1 && pos.row < boardRef.BOARD_SIZE - 2 && topLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col - 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 }, true, topLeft->getPos());
 				}
