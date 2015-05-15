@@ -41,6 +41,12 @@ bool Piece::move(BoardPos newPos) {
 
 
 void Piece::update() {
+	if (color == PieceColor::WHITE && pos.row == boardRef.BOARD_SIZE - 1) {
+		setKing(true);
+	}
+	else if (color == PieceColor::BLACK && pos.row == 0) {
+		setKing(true);
+	}
 	if (updateTexture) {
 		loadTextures();
 		updateTexture = false;
