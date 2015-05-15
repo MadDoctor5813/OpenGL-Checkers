@@ -45,6 +45,8 @@ public:
 	int getNumWhite() { return numWhite; }
 	int getNumBlack() { return numBlack; }
 
+	void setMustJump(bool value) { mustJump = value; }
+
 	const int BOARD_SIZE = 8; 
 private:
 	const int SQUARE_SIZE = 64;
@@ -56,6 +58,8 @@ private:
 	int numWhite;
 
 	bool devMode = false;
+
+	bool mustJump;
 
 	GLuint darkSquareTex;
 	GLuint lightSquareTex;

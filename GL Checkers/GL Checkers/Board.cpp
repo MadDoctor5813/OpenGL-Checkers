@@ -67,10 +67,20 @@ Piece * Board::getPieceAt(BoardPos pos) {
 }
 
 void Board::update() {
+	mustJump = false;
 	for (auto row : boardData) {
 		for (auto piece : row) {
 			if (piece != nullptr) {
 				piece->update();
+			}
+		}
+	}
+	if (mustJump) {
+		for (auto row : boardData) {
+			for (auto piece : row) {
+				if (piece != nullptr) {
+					piece->pruneNonJumps();
+				}
 			}
 		}
 	}

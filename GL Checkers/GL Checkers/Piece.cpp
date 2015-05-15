@@ -69,6 +69,18 @@ void Piece::logInfo() {
 		std::cout << "Row: " << move.oldPos.row << " and " << "Col: " << move.oldPos.col << " to " << "Row: " << move.newPos.row << " and " << "Col: " << move.newPos.col << std::endl;
 	}
 }
+
+void Piece::pruneNonJumps() {
+	for (auto it = moves.begin(); it != moves.end();) {
+			if (!it->isCapture) {
+				it = moves.erase(it);
+			}
+			else {
+				++it;
+			}
+	}
+}
+
 void Piece::render(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
@@ -109,6 +121,7 @@ void Piece::genMovesWhite() {
 			else if (pos.col > 1 && pos.row < boardRef.BOARD_SIZE - 2 && topLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col - 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col - 2 }, true, topLeft->getPos());
+					boardRef.setMustJump(true);
 				}
 			}
 		}
@@ -120,6 +133,7 @@ void Piece::genMovesWhite() {
 			else if (pos.col < boardRef.BOARD_SIZE - 2 && pos.row < boardRef.BOARD_SIZE - 2 && topRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row + 2, pos.col + 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row + 2, pos.col + 2 }, true, topRight->getPos());
+					boardRef.setMustJump(true);
 				}
 			}
 		}
@@ -139,6 +153,7 @@ void Piece::genMovesBlack() {
 			else if (pos.col > 1 && pos.row > 1 && bottomLeft->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col - 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col - 2 }, true, bottomLeft->getPos());
+					boardRef.setMustJump(true);
 				}
 			}
 		}
@@ -150,6 +165,7 @@ void Piece::genMovesBlack() {
 			else if (pos.col > 1 && pos.row > 1 && bottomRight->getColor() != color) { //there is room to capture and a piece to capture
 				if (boardRef.getPieceAt(BoardPos{ pos.row - 2, pos.col + 2 }) == nullptr) { //and the end space is open
 					moves.emplace_back(pos, BoardPos{ pos.row - 2, pos.col + 2 }, true, bottomRight->getPos());
+					boardRef.setMustJump(true);
 				}
 			}
 		}

@@ -25,6 +25,7 @@ public:
 	void renderSelection(SpriteBatch& batch);
 
 	bool move(BoardPos newPos);
+	void pruneNonJumps();
 
 	void logInfo();
 
