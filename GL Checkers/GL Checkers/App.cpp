@@ -1,4 +1,5 @@
 #include <glm/glm.hpp>
+#include <iostream>
 
 #include "App.h"
 #include "ShaderManager.h"
@@ -40,6 +41,8 @@ void App::initOpenGL() {
 	//Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//Print OpenGL info
+	std::cout << "OpenGL Version String: " << glGetString(GL_VERSION) << std::endl;
 }
 
 void App::initSystems() {
