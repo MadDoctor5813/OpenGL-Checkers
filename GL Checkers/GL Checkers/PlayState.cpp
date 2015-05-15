@@ -80,7 +80,19 @@ void PlayState::handleKeys(int x, int y, SDL_Keycode key) {
 			BoardPos coords = board->mouseToBoard(glm::vec2(x, y));
 			if (coords != BoardPos{ -1, -1 }) {
 				Piece * picked = board->getPieceAt(coords);
-				picked->setKing(!picked->getKing());
+				if (picked != nullptr) {
+					picked->setKing(!picked->getKing());
+				}
+			}
+		}
+	case SDLK_i:
+		if (board->getDevMode()) {
+			BoardPos coords = board->mouseToBoard(glm::vec2(x, y));
+			if (coords != BoardPos{ -1, -1 }) {
+				Piece * picked = board->getPieceAt(coords);
+				if (picked != nullptr) {
+					picked->logInfo();
+				}
 			}
 		}
 	}

@@ -55,6 +55,20 @@ void Piece::update() {
 	genMoves();
 }
 
+void Piece::logInfo() {
+	std::string colorStr;
+	if (color == PieceColor::WHITE) {
+		colorStr = "White";
+	}
+	else {
+		colorStr = "Black";
+	}
+	std::cout << colorStr << " piece at Row: " << pos.row << " and Col: " << pos.col << std::endl;
+	std::cout << "Moves:" << std::endl;
+	for (auto move : moves) {
+		std::cout << "Row: " << move.oldPos.row << " and " << "Col: " << move.oldPos.col << " to " << "Row: " << move.newPos.row << " and " << "Col: " << move.newPos.col << std::endl;
+	}
+}
 void Piece::render(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
 	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });

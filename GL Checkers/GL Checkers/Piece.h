@@ -26,6 +26,8 @@ public:
 
 	bool move(BoardPos newPos);
 
+	void logInfo();
+
 	PieceColor getColor() { return color; }
 	bool getKing() { return king; }
 	BoardPos getPos() { return pos; }
