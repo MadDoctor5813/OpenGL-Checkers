@@ -28,7 +28,6 @@ public:
 	Camera2D& getCamera() { return camera; }
 	SpriteBatch& getBatch() { return batch; }
 
-	const int SQUARE_SIZE = 64;
 	int screenWidth = 1024;
 	int screenHeight = 720;
 

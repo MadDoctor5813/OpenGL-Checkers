@@ -134,8 +134,8 @@ void Board::renderBackground(SpriteBatch& batch) {
 	GLuint nextTex = lightSquareTex;
 	for (int row = 0; row < boardData.size(); row++) {
 		for (int col = 0; col < boardData[row].size(); col++) {
-			float x = (col * 64) + boardX;
-			float y = (row * 64) + boardY;
+			float x = (col * SQUARE_SIZE) + boardX;
+			float y = (row * SQUARE_SIZE) + boardY;
 			batch.draw(glm::vec4(x, y, SQUARE_SIZE, SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), nextTex, 0, Color{ 255, 255, 255, 255 });
 			if (nextTex == lightSquareTex) {
 				nextTex = darkSquareTex;

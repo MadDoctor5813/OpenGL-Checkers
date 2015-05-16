@@ -83,15 +83,15 @@ void Piece::pruneNonJumps() {
 
 void Piece::render(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
-	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+	batch.draw(glm::vec4(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
 }
 
 void Piece::renderSelection(SpriteBatch& batch) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
-	batch.draw(glm::vec4(coords.x, coords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+	batch.draw(glm::vec4(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
 	for (auto move : moves) {
 		glm::vec2 moveCoords = boardRef.boardToScreen(move.newPos);
-		batch.draw(glm::vec4(moveCoords.x, moveCoords.y, appRef.SQUARE_SIZE, appRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+		batch.draw(glm::vec4(moveCoords.x, moveCoords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
 	}
 }
 

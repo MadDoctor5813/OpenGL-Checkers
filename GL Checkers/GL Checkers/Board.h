@@ -48,8 +48,8 @@ public:
 	void setMustJump(bool value) { mustJump = value; }
 
 	const int BOARD_SIZE = 8; 
-private:
 	const int SQUARE_SIZE = 64;
+private:
 
 	float boardX;
 	float boardY;
