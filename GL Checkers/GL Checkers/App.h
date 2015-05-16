@@ -36,6 +36,7 @@ private:
 	SDL_Window * createWindow();
 	void initOpenGL();
 	void initSystems();
+	void setWndSize();
 	void render();
 	void procInput();
 	void cleanup();

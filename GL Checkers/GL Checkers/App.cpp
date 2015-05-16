@@ -15,6 +15,8 @@ App::~App() {
 void App::init() {
 	//Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
+	//Auto-size the window
+	//setWndSize();
 	//Init window
 	window = createWindow();
 	//Init openGL 
@@ -43,6 +45,13 @@ void App::initOpenGL() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//Print OpenGL info
 	std::cout << "OpenGL Version String: " << glGetString(GL_VERSION) << std::endl;
+}
+
+void App::setWndSize() {
+	SDL_Rect screenSize;
+	SDL_GetDisplayBounds(0, &screenSize);
+	screenWidth = screenSize.w;
+	screenHeight = screenSize.h;
 }
 
 void App::initSystems() {
