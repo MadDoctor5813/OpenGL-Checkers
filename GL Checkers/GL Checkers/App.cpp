@@ -15,10 +15,12 @@ App::~App() {
 void App::init() {
 	//Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
-	//Auto-size the window
-	//setWndSize();
 	//Init window
 	window = createWindow();
+	//Maximize window
+	SDL_MaximizeWindow(window);
+	//Determine window size
+	setWndSize();
 	//Init openGL 
 	initOpenGL();
 	//init managers
@@ -26,7 +28,7 @@ void App::init() {
 }
 
 SDL_Window * App::createWindow() {
-	return SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+	return SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 }
 
 void App::initOpenGL() {
@@ -48,10 +50,10 @@ void App::initOpenGL() {
 }
 
 void App::setWndSize() {
-	SDL_Rect screenSize;
-	SDL_GetDisplayBounds(0, &screenSize);
-	screenWidth = screenSize.w;
-	screenHeight = screenSize.h;
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+	screenHeight = h;
+	screenWidth = w;
 }
 
 void App::initSystems() {
