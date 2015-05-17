@@ -83,7 +83,9 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="SaveManager.cpp" />
@@ -98,9 +100,11 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PieceColor.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SavedSquare.h" />
     <ClInclude Include="SpriteBatch.h" />

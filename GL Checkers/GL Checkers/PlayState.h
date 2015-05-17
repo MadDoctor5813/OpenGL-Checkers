@@ -14,14 +14,13 @@ public:
 	virtual void procEvent(SDL_Event& nextEvent);
 	virtual void update();
 
+	Board& getBoard() { return *board; }
+
 private:
 	Board * board;
 	App& appRef;
 
-	PieceColor turn = PieceColor::WHITE;
-
 	bool updateNeeded = true;
-
 
 	void handleKeys(int x, int y, SDL_Keycode key);
 	void handleMouse(int x, int y, int button);

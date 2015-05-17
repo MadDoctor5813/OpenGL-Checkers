@@ -29,6 +29,8 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -65,6 +67,8 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="HumanPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
