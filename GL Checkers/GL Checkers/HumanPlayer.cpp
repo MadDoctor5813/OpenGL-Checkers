@@ -1,7 +1,7 @@
 #include "HumanPlayer.h"
 
 
-HumanPlayer::HumanPlayer(PlayState& state) : Player(state) {
+HumanPlayer::HumanPlayer(PlayState& state, PieceColor color) : Player(state, color) {
 	
 }
 

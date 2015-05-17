@@ -6,7 +6,7 @@
 class Player {
 
 public:
-	Player(PlayState& state);
+	Player(PlayState& state, PieceColor color);
 	~Player();
 
 	void startTurn();

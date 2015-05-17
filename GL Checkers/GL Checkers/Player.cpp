@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(PlayState& state) : stateRef(state) {
+Player::Player(PlayState& state, PieceColor color) : stateRef(state), color(color) {
 
 }
 
