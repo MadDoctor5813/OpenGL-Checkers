@@ -69,6 +69,7 @@
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="HumanPlayer.h" />
+    <ClInclude Include="PlayerType.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
