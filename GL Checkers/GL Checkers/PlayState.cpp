@@ -1,5 +1,6 @@
 #include "PlayState.h"
 #include "Piece.h"
+#include "HumanPlayer.h"
 
 
 PlayState::PlayState(App& app) : appRef(app){
@@ -32,6 +33,15 @@ void PlayState::update() {
 			board->load("default.sav");
 		}
 		updateNeeded = false;
+	}
+}
+
+void PlayState::addPlayer(PieceColor color, PlayerType type) {
+	switch (type) {
+	case HUMAN:
+		HumanPlayer * player = new HumanPlayer(*this, color);
+		players.push_back(player);
+		break;
 	}
 }
 
