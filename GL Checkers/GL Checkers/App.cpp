@@ -68,6 +68,8 @@ void App::initSystems() {
 
 void App::runLoop() {
 	state = new PlayState(*this);
+	state->addPlayer(PieceColor::WHITE, PlayerType::HUMAN);
+	state->addPlayer(PieceColor::BLACK, PlayerType::HUMAN);
 	state->enter();
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);

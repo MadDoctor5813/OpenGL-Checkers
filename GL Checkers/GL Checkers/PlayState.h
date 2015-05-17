@@ -2,8 +2,9 @@
 
 #include "GameState.h"
 #include "Board.h"
-#include "Player.h"
 #include "PlayerType.h"
+
+class Player;
 
 class PlayState : public GameState {
 
@@ -17,7 +18,11 @@ public:
 	virtual void procEvent(SDL_Event& nextEvent);
 	virtual void update();
 
+	void endTurn();
+
 	void addPlayer(PieceColor color, PlayerType type);
+
+	Player * getPlayer(int index) { return players[index]; }
 
 	Board& getBoard() { return *board; }
 
@@ -27,12 +32,9 @@ private:
 
 	std::vector<Player*> players;
 
+	int activePlayer;
+
 	bool updateNeeded = true;
 
-	void handleKeys(int x, int y, SDL_Keycode key);
-	void handleMouse(int x, int y, int button);
-	void handleMouseDev(int x, int y, int button);
-
-	void nextTurn();
 };
 
