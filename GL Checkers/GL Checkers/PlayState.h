@@ -27,6 +27,7 @@ public:
 	Board& getBoard() { return *board; }
 
 private:
+
 	Board * board;
 	App& appRef;
 
