@@ -66,6 +66,16 @@ Piece * Board::getPieceAt(BoardPos pos) {
 	return boardData[pos.row][pos.col];
 }
 
+Piece * Board::getClickedPiece(int x, int y) {
+	BoardPos pos = mouseToBoard(glm::vec2(x, y));
+	if (pos == BoardPos{ -1, -1 }) {
+		return nullptr;
+	}
+	else {
+		return getPieceAt(pos);
+	}
+}
+
 void Board::update() {
 	mustJump = false;
 	for (auto row : boardData) {

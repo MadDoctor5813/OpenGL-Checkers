@@ -29,6 +29,7 @@ public:
 	void save(const std::string& name);
 
 	Piece * getPieceAt(BoardPos pos);
+	Piece * getClickedPiece(int x, int y);
 	void deletePiece(BoardPos pos);
 	void addPiece(BoardPos pos, PieceColor color, bool king);
 	bool movePiece(Move move);
