@@ -58,6 +58,7 @@ void PlayState::procEvent(SDL_Event& nextEvent) {
 
 
 void PlayState::endTurn() {
+	updateNeeded = true;
 	activePlayer++;
 	activePlayer = activePlayer % players.size();
 }
