@@ -35,12 +35,6 @@ void HumanPlayer::handleKeys(int x, int y, SDL_Keycode key) {
 		std::cout << "Developer mode: " << std::boolalpha << !board.getDevMode() << std::endl;
 		board.setDevMode(!board.getDevMode());
 		break;
-	case SDLK_s:
-		board.save("default.sav");
-		break;
-	case SDLK_l:
-		board.load("default.sav");
-		break;
 	case SDLK_DELETE:
 		if (board.getDevMode()) {
 			BoardPos coords = board.mouseToBoard(glm::vec2(x, y));
