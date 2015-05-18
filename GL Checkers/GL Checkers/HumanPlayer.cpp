@@ -24,28 +24,27 @@ void HumanPlayer::handleEvent(SDL_Event nextEvent) {
 }
 
 void HumanPlayer::handleKeys(int x, int y, SDL_Keycode key) {
-
+	Board& board = stateRef.getBoard();
+	if (key == SDLK_m) {
+		Piece * picked = board.getClickedPiece(x, y);
+		if (picked != nullptr) {
+			picked->logInfo();
+		}
+	}
 }
 
 void HumanPlayer::handleMouse(int x, int y, int button) {
 	Board& board = stateRef.getBoard();
-	BoardPos boardCoords = board.mouseToBoard(glm::vec2(x, y));
-	Piece * clicked = nullptr;
-	if (boardCoords != BoardPos{ -1, -1 }) {
-		clicked = board.getPieceAt(boardCoords);
-		if (clicked == nullptr) { //if clicked on empty square or outside of board
-			if (board.getSelected() != nullptr) {
-				if (board.movePiece(Move(board.getSelected()->getPos(), boardCoords))) { //If piece was moved
-					stateRef.endTurn();
-				}
-			}
-			board.setSelected(nullptr);
+	Piece * clicked = board.getClickedPiece(x, y);
+	if (clicked == nullptr) { //If clicked on board or outside of board
+		if (board.getSelected() != nullptr) { //if we have a piece selected
+			BoardPos pos = board.mouseToBoard(glm::vec2(x, y));
+			board.movePiece(Move{ board.getSelected()->getPos(), pos });
+			board.setSelected(nullptr); //deselect piece whether or not we moved
+			stateRef.endTurn();
 		}
 	}
-	if (clicked == board.getSelected()) { //if clicked on selected piece
-		board.setSelected(nullptr); //deselect current piece
-	}
-	else if (clicked->getColor() == color) { //clicked on an unselected piece
-		board.setSelected(clicked); //select clicked piece
+	else if (clicked->getColor() == color) { //clicked a piece
+		board.setSelected(clicked); //set the selected piece to the one we just clicked on
 	}
 }
