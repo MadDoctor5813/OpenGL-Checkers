@@ -57,6 +57,12 @@
       <AdditionalDependencies>sdl2.lib;sdl2main.lib;sdl2_ttf.lib;glew32.lib;opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
+xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
+xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
+xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -74,8 +80,10 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
+xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
+xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
+xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
