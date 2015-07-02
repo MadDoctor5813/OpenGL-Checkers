@@ -17,10 +17,6 @@ void App::init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	//Init window
 	window = createWindow();
-	//Maximize window
-	SDL_MaximizeWindow(window);
-	//Determine window size
-	setWndSize();
 	//Init openGL 
 	initOpenGL();
 	//init managers
@@ -28,7 +24,9 @@ void App::init() {
 }
 
 SDL_Window * App::createWindow() {
-	return SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	SDL_Window * window = SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_GetWindowSize(window, &screenWidth, &screenHeight); //set height and width properly for the rest of the game
+	return window;
 }
 
 void App::initOpenGL() {
@@ -84,7 +82,7 @@ void App::runLoop() {
 void App::procInput() {
 	SDL_Event nextEvent;
 	while (SDL_PollEvent(&nextEvent) != 0) {
-		if (nextEvent.type != SDL_QUIT) {
+		if (nextEvent.type != SDL_QUIT && nextEvent.key.keysym.sym != SDLK_ESCAPE) {
 			state->procEvent(nextEvent);
 		}
 		else {
