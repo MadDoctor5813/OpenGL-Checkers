@@ -39,11 +39,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)deps/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)deps/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)deps\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -88,24 +88,24 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="Engine\Camera2D.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
-    <ClCompile Include="SaveManager.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Engine\SpriteBatch.cpp" />
+    <ClCompile Include="Engine\SaveManager.cpp" />
+    <ClCompile Include="Engine\TextureManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Engine\ShaderManager.cpp" />
+    <ClCompile Include="Engine\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardPos.h" />
-    <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="Engine\Camera2D.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HumanPlayer.h" />
@@ -116,12 +116,12 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="PlayerType.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SavedSquare.h" />
-    <ClInclude Include="SpriteBatch.h" />
-    <ClInclude Include="SaveManager.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Engine\SpriteBatch.h" />
+    <ClInclude Include="Engine\SaveManager.h" />
+    <ClInclude Include="Engine\TextureManager.h" />
+    <ClInclude Include="Engine\ShaderManager.h" />
+    <ClInclude Include="Engine\ShaderProgram.h" />
+    <ClInclude Include="Engine\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag" />

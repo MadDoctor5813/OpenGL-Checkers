@@ -6,61 +6,40 @@
     <ClCompile Include="App.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteBatch.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="SaveManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
+    <ClCompile Include="Engine\Camera2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SaveManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ShaderManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ShaderProgram.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SpriteBatch.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\TextureManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
     <ClInclude Include="App.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteBatch.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h" />
     <ClInclude Include="PieceColor.h" />
     <ClInclude Include="SavedSquare.h" />
-    <ClInclude Include="SaveManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Move.h" />
     <ClInclude Include="BoardPos.h" />
     <ClInclude Include="GameState.h">
@@ -70,6 +49,27 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="PlayerType.h" />
+    <ClInclude Include="Engine\Camera2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SaveManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ShaderManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ShaderProgram.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SpriteBatch.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\TextureManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Vertex.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">

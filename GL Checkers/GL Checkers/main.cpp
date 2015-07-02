@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "App.h"
-#include "ShaderProgram.h"
+#include "Engine\ShaderProgram.h"
 
 //Entry point
 int main(int argc, char** argv) {

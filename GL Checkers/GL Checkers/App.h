@@ -3,12 +3,11 @@
 #include <SDL.h>
 #include <GL/glew.h>
 
-#include "Sprite.h"
-#include "ShaderManager.h"
-#include "TextureManager.h"
-#include "SaveManager.h"
-#include "Camera2D.h"
-#include "SpriteBatch.h"
+#include "Engine\ShaderManager.h"
+#include "Engine\TextureManager.h"
+#include "Engine\SaveManager.h"
+#include "Engine\Camera2D.h"
+#include "Engine\SpriteBatch.h"
 #include "Piece.h"
 #include "PlayState.h"
 

@@ -6,7 +6,7 @@
 #include <GL\glew.h>
 #include <iostream>
 
-#include "SpriteBatch.h"
+#include "Engine\SpriteBatch.h"
 #include "PieceColor.h"
 #include "SavedSquare.h"
 #include "BoardPos.h"
