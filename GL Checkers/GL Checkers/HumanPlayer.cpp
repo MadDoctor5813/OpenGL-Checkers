@@ -39,9 +39,11 @@ void HumanPlayer::handleMouse(int x, int y, int button) {
 	if (clicked == nullptr) { //If clicked on board or outside of board
 		if (board.getSelected() != nullptr) { //if we have a piece selected
 			BoardPos pos = board.mouseToBoard(glm::vec2(x, y));
-			board.movePiece(Move{ board.getSelected()->getPos(), pos });
+			bool moveResult = board.movePiece(Move{ board.getSelected()->getPos(), pos });
 			board.setSelected(nullptr); //deselect piece whether or not we moved
-			stateRef.endTurn();
+			if (moveResult) {
+				stateRef.endTurn();
+			}
 		}
 	}
 	else if (clicked->getColor() == color) { //clicked a piece
