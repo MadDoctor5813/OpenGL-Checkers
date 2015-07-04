@@ -128,6 +128,8 @@ void SpriteBatch::sortGlyphs() {
 	case SortMethods::TEXTURE_SORT:
 		std::stable_sort(glyphs.begin(), glyphs.end(), sortFrontToBack);
 		break;
+	case SortMethods::NONE:
+		return;
 	}
 }
 
@@ -144,7 +146,6 @@ bool SpriteBatch::sortBackToFront(Glyph * a, Glyph * b) {
 }
 
 void SpriteBatch::render() {
-
 	for (auto batch : batches) {
 		renderBatch(batch);
 	}
