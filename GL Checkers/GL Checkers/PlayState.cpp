@@ -4,7 +4,6 @@
 
 
 PlayState::PlayState(App& app) : appRef(app){
-
 }
 
 
@@ -48,8 +47,12 @@ void PlayState::addPlayer(PieceColor color, PlayerType type) {
 	}
 }
 
-void PlayState::render(SpriteBatch& batch) {
+void PlayState::render() {
+	batch.init();
+	batch.begin(SortMethods::TEXTURE_SORT);
 	board->render(batch);
+	batch.end();
+	batch.render();
 }
 
 void PlayState::procEvent(SDL_Event& nextEvent) {

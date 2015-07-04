@@ -100,12 +100,7 @@ void App::render() {
 	GLint textureLoc = glGetUniformLocation(shader.getProgram(), "spriteTexture");
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(camera.getMatrix()[0][0]));
 	glUniform1i(textureLoc, 0);
-
-	batch.init();
-	batch.begin();
-	state->render(batch);
-	batch.end();
-	batch.render();
+	state->render();
 
 }
 

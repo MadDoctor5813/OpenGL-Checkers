@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.h"
+#include "Engine\GameState.h"
 #include "Board.h"
 #include "PlayerType.h"
 
@@ -14,7 +14,7 @@ public:
 
 	virtual void enter();
 	virtual void exit();
-	virtual void render(SpriteBatch& batch);
+	virtual void render();
 	virtual void procEvent(SDL_Event& nextEvent);
 	virtual void update();
 
