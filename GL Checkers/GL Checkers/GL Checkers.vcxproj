@@ -90,7 +90,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Engine\Camera2D.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Engine\GameState.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -107,7 +107,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="BoardPos.h" />
     <ClInclude Include="Engine\Camera2D.h" />
     <ClInclude Include="App.h" />
-    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Engine\GameState.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Piece.h" />

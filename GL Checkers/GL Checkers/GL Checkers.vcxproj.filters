@@ -7,9 +7,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="GameState.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
@@ -31,6 +28,9 @@
     <ClCompile Include="Engine\TextureManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GameState.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -42,9 +42,6 @@
     <ClInclude Include="SavedSquare.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="BoardPos.h" />
-    <ClInclude Include="GameState.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="HumanPlayer.h" />
@@ -68,6 +65,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Vertex.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameState.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
