@@ -18,6 +18,24 @@ GLuint TextureManager::getTexture(const std::string& textureName) {
 	return textureMap.at(textureName);
 }
 
+GLuint TextureManager::addTexture(std::string& name, int w, int h, GLubyte* data) {
+	GLuint textureId;
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE0, textureId);
+	glTexImage2D(GL_TEXTURE0, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glBindTexture(GL_TEXTURE0, 0);
+	textureMap.emplace(name, textureId);
+	return textureId;
+}
+
+void TextureManager::pruneEmptyTextures() { //THIS IS HORRIBLE, BUT THE ONLY WAY ROCKET WILL WORK
+	for (auto texture : textureMap) {
+		if (texture.second == 0) {
+			textureMap.erase(texture.first);
+		}
+	}
+}
+
 void TextureManager::loadTextures() {
 	fs::directory_iterator dirIter(imageDir);
 	fs::directory_iterator empty;

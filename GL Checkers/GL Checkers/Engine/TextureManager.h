@@ -11,6 +11,8 @@ public:
 	~TextureManager();
 
 	GLuint getTexture(const std::string& imageName);
+	GLuint addTexture(std::string& name, int w, int h, GLubyte* data);
+	void pruneEmptyTextures();
 	void loadTextures();
 
 private:
