@@ -31,6 +31,8 @@
     <ClCompile Include="Engine\GameState.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GUISystemInterface.cpp" />
+    <ClCompile Include="GUIRenderInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -70,6 +72,8 @@
     <ClInclude Include="Engine\GameState.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GUISystemInterface.h" />
+    <ClInclude Include="GUIRenderInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
