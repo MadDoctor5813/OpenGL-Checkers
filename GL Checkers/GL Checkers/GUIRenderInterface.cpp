@@ -9,6 +9,22 @@ GUIRenderInterface::GUIRenderInterface(App& app) : appRef(app) {
 GUIRenderInterface::~GUIRenderInterface() {
 }
 
+void GUIRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
+
+}
+
+Rocket::Core::CompiledGeometryHandle GUIRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture) {
+	return 0;
+}
+
+void GUIRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation) {
+
+}
+
+void GUIRenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry) {
+
+}
+
 bool GUIRenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source) {
 	GLuint textureId = appRef.getTextureManager().getTexture(source.CString());
 	if (textureId == 0) {
