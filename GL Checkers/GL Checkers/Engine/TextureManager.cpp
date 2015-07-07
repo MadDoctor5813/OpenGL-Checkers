@@ -15,7 +15,7 @@ TextureManager::~TextureManager() {
 }
 
 GLuint TextureManager::getTexture(const std::string& textureName) {
-	return textureMap.at(textureName);
+	return textureMap.at(fs::path(textureName)); //this should ensure proper backslashing
 }
 
 GLuint TextureManager::addTexture(std::string& name, int w, int h, GLubyte* data) {
@@ -37,11 +37,14 @@ void TextureManager::pruneEmptyTextures() { //THIS IS HORRIBLE, BUT THE ONLY WAY
 }
 
 void TextureManager::loadTextures() {
-	fs::directory_iterator dirIter(imageDir);
-	fs::directory_iterator empty;
+	fs::recursive_directory_iterator dirIter(imageDir);
+	fs::recursive_directory_iterator empty;
 	for (; dirIter != empty; dirIter++) {
-		GLuint currentTexture = loadTextureFromFile(dirIter->path());
-		textureMap.emplace(dirIter->path().basename(), currentTexture);
+		if (dirIter->path().extension() == ".png") {
+			std::string path = dirIter->path().string();
+			std::string texName = path.substr(path.find_first_of("/\\") + 1, path.length() - 1); //this strips the first part of the path off
+			textureMap.emplace(fs::path(texName).replace_extension(""), loadTextureFromFile(path));
+		}
 	}
 }
 
