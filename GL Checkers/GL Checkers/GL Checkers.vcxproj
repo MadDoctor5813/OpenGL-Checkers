@@ -94,6 +94,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClCompile Include="GUIRenderInterface.cpp" />
     <ClCompile Include="GUISystemInterface.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
+    <ClCompile Include="IndexedRenderer.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -113,6 +114,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="GUIRenderInterface.h" />
     <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="HumanPlayer.h" />
+    <ClInclude Include="IndexedRenderer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PieceColor.h" />

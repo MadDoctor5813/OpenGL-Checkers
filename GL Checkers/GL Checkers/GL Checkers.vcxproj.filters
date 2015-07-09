@@ -33,6 +33,7 @@
     </ClCompile>
     <ClCompile Include="GUISystemInterface.cpp" />
     <ClCompile Include="GUIRenderInterface.cpp" />
+    <ClCompile Include="IndexedRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -74,6 +75,7 @@
     </ClInclude>
     <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="GUIRenderInterface.h" />
+    <ClInclude Include="IndexedRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
