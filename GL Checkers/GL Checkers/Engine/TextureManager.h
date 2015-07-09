@@ -12,7 +12,7 @@ public:
 
 	GLuint getTexture(const std::string& imageName);
 	GLuint addTexture(std::string& name, int w, int h, GLubyte* data);
-	void pruneEmptyTextures();
+	void removeTexture(std::string name);
 	void loadTextures();
 
 private:

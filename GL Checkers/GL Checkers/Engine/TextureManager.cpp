@@ -28,12 +28,10 @@ GLuint TextureManager::addTexture(std::string& name, int w, int h, GLubyte* data
 	return textureId;
 }
 
-void TextureManager::pruneEmptyTextures() { //THIS IS HORRIBLE, BUT THE ONLY WAY ROCKET WILL WORK
-	for (auto texture : textureMap) {
-		if (texture.second == 0) {
-			textureMap.erase(texture.first);
-		}
-	}
+void TextureManager::removeTexture(std::string name) { 
+	GLuint textureId = textureMap.at(name);
+	glDeleteTextures(1, &textureId);
+	textureMap.erase(name);
 }
 
 void TextureManager::loadTextures() {
