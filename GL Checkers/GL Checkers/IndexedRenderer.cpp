@@ -2,7 +2,7 @@
 
 
 IndexedRenderer::IndexedRenderer() {
-
+	initGLObjects();
 }
 
 
@@ -31,20 +31,20 @@ void IndexedRenderer::initGLObjects() {
 	glBindVertexArray(0);
 }
 
-void IndexedRenderer::draw(std::vector<Vertex>& vertexes, std::vector<int>& indexes, GLuint texture) {
+void IndexedRenderer::draw(DrawBatch& newBatch, GLuint texture) {
 	//if the texture isn't already being batched, make a new batch
 	if (batches.count(texture) == 0) {
 		batches.emplace(texture, DrawBatch());
 	} 
 	DrawBatch batch = batches.at(texture);
 	//add vertices for this call to the batch
-	batch.vertexes.insert(batch.vertexes.end(), vertexes.begin(), vertexes.end());
+	newBatch.vertexes.insert(batch.vertexes.end(), newBatch.vertexes.begin(), newBatch.vertexes.end());
 	//modify indexes to point to proper locations after the append
-	for (int& index : indexes) {
+	for (int& index : newBatch.indexes) {
 		index += batch.indexes.size();
 	}
 	//append indexes
-	batch.indexes.insert(batch.indexes.end(), indexes.begin(), indexes.end());
+	newBatch.indexes.insert(batch.indexes.end(), newBatch.indexes.begin(), newBatch.indexes.end());
 }
 
 void IndexedRenderer::render() {
@@ -61,9 +61,12 @@ void IndexedRenderer::render() {
 	//make draw calls
 	int offset;
 	for (auto entry : batches) {
+		glBindTexture(GL_TEXTURE0, entry.first);
 		glDrawElementsBaseVertex(GL_TRIANGLES, entry.second.indexes.size(), GL_UNSIGNED_INT, (void*)&entry.second.indexes[offset], offset);
 		offset += entry.second.indexes.size();
 	}
+	//clean up batches for next frame
+	batches.clear();
 }
 
 void IndexedRenderer::compileVbo() {

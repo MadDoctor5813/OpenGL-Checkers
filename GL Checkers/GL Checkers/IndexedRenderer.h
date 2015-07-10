@@ -17,7 +17,7 @@ public:
 	IndexedRenderer();
 	~IndexedRenderer();
 
-	void draw(std::vector<Vertex>& vertexes, std::vector<int>& indexes, GLuint texture);
+	void draw(DrawBatch& batch, GLuint texture);
 	void render();
 
 private:
