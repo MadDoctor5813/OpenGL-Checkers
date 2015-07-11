@@ -85,12 +85,17 @@ GLuint ShaderProgram::compileShaders(const std::string& vertCode, const std::str
 	GLint linkStatus;
 	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
 	if (linkStatus == GL_FALSE) {
+		std::cout << "Shader link error." << std::endl;
+		GLint maxLength;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+		GLchar * log = new GLchar[maxLength];
+		glGetProgramInfoLog(program, maxLength, NULL, log);
+		std::cout << log << std::endl;
 		glDetachShader(program, vertShader);
 		glDetachShader(program, fragShader);
 		glDeleteShader(vertShader);
 		glDeleteShader(fragShader);
 		glDeleteProgram(program);
-		std::cout << "Shader link error." << std::endl;
 		return 0;
 	}
 
