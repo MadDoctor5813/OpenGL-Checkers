@@ -60,7 +60,7 @@ void App::initSystems() {
 	//Init the camera
 	camera.init(screenWidth, screenHeight);
 	camera.setScale(1.0f);
-
+	renderer.init();
 }
 
 
@@ -101,7 +101,6 @@ void App::render() {
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(camera.getMatrix()[0][0]));
 	glUniform1i(textureLoc, 0);
 	state->render();
-
 }
 
 void App::cleanup()  {

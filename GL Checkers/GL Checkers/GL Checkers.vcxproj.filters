@@ -33,7 +33,9 @@
     </ClCompile>
     <ClCompile Include="GUISystemInterface.cpp" />
     <ClCompile Include="GUIRenderInterface.cpp" />
-    <ClCompile Include="IndexedRenderer.cpp" />
+    <ClCompile Include="Engine\IndexedRenderer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -75,7 +77,9 @@
     </ClInclude>
     <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="GUIRenderInterface.h" />
-    <ClInclude Include="IndexedRenderer.h" />
+    <ClInclude Include="Engine\IndexedRenderer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">

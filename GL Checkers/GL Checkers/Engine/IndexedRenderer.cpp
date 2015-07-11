@@ -1,8 +1,10 @@
 #include "IndexedRenderer.h"
 
+#include <iostream>
+
 
 IndexedRenderer::IndexedRenderer() {
-	initGLObjects();
+
 }
 
 
@@ -10,13 +12,20 @@ IndexedRenderer::~IndexedRenderer() {
 
 }
 
+void IndexedRenderer::init() {
+	initGLObjects();
+}
+
 void IndexedRenderer::initGLObjects() {
 	//generate the needed GL objects
-	glGenBuffers(1, &vboId);
-	glGenBuffers(1, &elementBufferId); 
 	glGenVertexArrays(1, &vaoId);
 	//create VAO state
 	glBindVertexArray(vaoId);
+	//bind buffers
+	glGenBuffers(1, &vboId);
+	glGenBuffers(1, &iboId); 
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 	//Enable arrays
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -36,51 +45,54 @@ void IndexedRenderer::draw(DrawBatch& newBatch, GLuint texture) {
 	if (batches.count(texture) == 0) {
 		batches.emplace(texture, DrawBatch());
 	} 
-	DrawBatch batch = batches.at(texture);
+	DrawBatch& batch = batches.at(texture);
 	//add vertices for this call to the batch
-	newBatch.vertexes.insert(batch.vertexes.end(), newBatch.vertexes.begin(), newBatch.vertexes.end());
+	batch.vertexes.insert(batch.vertexes.end(), newBatch.vertexes.begin(), newBatch.vertexes.end());
 	//modify indexes to point to proper locations after the append
-	for (int& index : newBatch.indexes) {
+	for (GLuint& index : newBatch.indexes) {
 		index += batch.indexes.size();
 	}
 	//append indexes
-	newBatch.indexes.insert(batch.indexes.end(), newBatch.indexes.begin(), newBatch.indexes.end());
+	batch.indexes.insert(batch.indexes.end(), newBatch.indexes.begin(), newBatch.indexes.end());
 }
 
 void IndexedRenderer::render() {
 	//compile data
-	compileVbo();
+	uploadVbo();
 	compileElementBuffer();
-	//bind buffers and vertex array
+	//bind vertex array
 	glBindVertexArray(vaoId);
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferId);
-	//put data into buffers
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * compiledElementBuffer.size(), compiledElementBuffer.data(), GL_STREAM_DRAW);
-	//make draw calls
-	int offset;
+	int offset = 0;
 	for (auto entry : batches) {
-		glBindTexture(GL_TEXTURE0, entry.first);
-		glDrawElementsBaseVertex(GL_TRIANGLES, entry.second.indexes.size(), GL_UNSIGNED_INT, (void*)&entry.second.indexes[offset], offset);
+		glBindTexture(GL_TEXTURE_2D, entry.first);
+		glDrawElementsBaseVertex(GL_TRIANGLES, entry.second.indexes.size(), GL_UNSIGNED_INT, (void*)(sizeof(GLushort) * offset), offset);
 		offset += entry.second.indexes.size();
 	}
-	//clean up batches for next frame
+	//clean up
 	batches.clear();
+	glBindVertexArray(0);
 }
 
-void IndexedRenderer::compileVbo() {
+void IndexedRenderer::uploadVbo() {
 	compiledVbo.clear();
 	for (auto entry : batches) {
 		//add vertexes to total vbo
 		compiledVbo.insert(compiledVbo.end(), entry.second.vertexes.begin(), entry.second.vertexes.end());
 	}
+	//upload vbo
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void IndexedRenderer::compileElementBuffer() {
-	compiledElementBuffer.clear();
+	compiledIbo.clear();
 	for (auto entry : batches) {
 		//append the indexes
-		compiledElementBuffer.insert(compiledElementBuffer.end(), entry.second.indexes.begin(), entry.second.indexes.end());
+		compiledIbo.insert(compiledIbo.end(), entry.second.indexes.begin(), entry.second.indexes.end());
 	}
+	//upload ibo
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

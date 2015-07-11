@@ -8,6 +8,7 @@
 #include "Engine\SaveManager.h"
 #include "Engine\Camera2D.h"
 #include "Engine\SpriteBatch.h"
+#include "Engine\IndexedRenderer.h"
 #include "Piece.h"
 #include "PlayState.h"
 
@@ -26,6 +27,7 @@ public:
 	SaveManager& getSaveManager() { return saveManager; }
 	Camera2D& getCamera() { return camera; }
 	SpriteBatch& getBatch() { return batch; }
+	IndexedRenderer& getRenderer() { return renderer; }
 
 	int screenWidth = 1024;
 	int screenHeight = 720;
@@ -46,6 +48,7 @@ private:
 	Camera2D camera;
 	SaveManager saveManager;
 	SpriteBatch batch;
+	IndexedRenderer renderer;
 
 	PlayState * state;
 
