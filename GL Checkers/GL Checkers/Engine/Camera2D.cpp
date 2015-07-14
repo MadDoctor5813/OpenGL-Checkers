@@ -40,8 +40,14 @@ void Camera2D::init(float screenWidth, float screenHeight) {
 void Camera2D::update() {
 	if (updateNeeded == true) {
 		glm::mat4 orthoMatrix = glm::ortho(0.0f, width, 0.0f, height);
-		camMatrix = glm::translate(orthoMatrix, glm::vec3(-camPos.x + width / 2, -camPos.y + height / 2, 0.0f));
-		camMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(camScale, camScale, 0.0f)) * camMatrix;
+		//Camera Translation
+		glm::vec3 translate(-camPos.x, -camPos.y, 0.0f);
+		camMatrix = glm::translate(orthoMatrix, translate);
+
+		//Camera Scale
+		glm::vec3 scale(camScale, camScale, 0.0f);
+		camMatrix = glm::scale(glm::mat4(1.0f), scale) * camMatrix;
+
 		updateNeeded = false;
 	}
 }

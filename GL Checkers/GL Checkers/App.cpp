@@ -24,7 +24,7 @@ void App::init() {
 }
 
 SDL_Window * App::createWindow() {
-	SDL_Window * window = SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_Window * window = SDL_CreateWindow("OpenGL Checkers Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 720, SDL_WINDOW_OPENGL);
 	SDL_GetWindowSize(window, &screenWidth, &screenHeight); //set height and width properly for the rest of the game
 	return window;
 }
