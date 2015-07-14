@@ -7,10 +7,9 @@
 Board::Board(App& app) : appRef(app), boardData(BOARD_SIZE, std::vector<Piece *>(BOARD_SIZE, nullptr)) {
 	lightSquareTex = appRef.getTextureManager().getTexture("lightSquare");
 	darkSquareTex = appRef.getTextureManager().getTexture("darkSquare");
-	boardX = 0 - (appRef.screenWidth / 2);
-	boardY = 0 - (appRef.screenHeight / 2);
+	boardX = 0;
+	boardY = 0;
 }
-
 
 Board::~Board() {
 	for (auto row : boardData) {
@@ -177,10 +176,8 @@ void Board::renderPieces(SpriteBatch& batch) {
 //utility functions
 BoardPos Board::mouseToBoard(glm::vec2 coords) { //converts mouse coords to board row and column coords, returns -1, -1, if point is outside of board
 	BoardPos error{ -1, -1 }; //this is the error vector
-	coords.x = coords.x - (appRef.screenWidth / 2);
-	coords.y = coords.y - (appRef.screenHeight / 2); //convert to opengl coords
-	glm::vec2 boardSpace(coords.x - boardX, -(coords.y + boardY)); //transform to board space
-	BoardPos finalCoords{ glm::floor(boardSpace.y / SQUARE_SIZE), glm::floor(boardSpace.x / SQUARE_SIZE) }; //divide by square size to get row and column
+	coords.y = appRef.screenHeight - coords.y; //invert y axis to correspond with opengl coords
+	BoardPos finalCoords{ glm::floor(coords.y / SQUARE_SIZE), glm::floor(coords.x / SQUARE_SIZE) }; //divide by square size to get row and column
 	if (finalCoords.row > boardData.size() - 1) {
 		return error;
 	}
