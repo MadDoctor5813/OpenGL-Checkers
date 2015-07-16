@@ -10,7 +10,7 @@ struct DrawBatch {
 	std::vector<Vertex> vertexes;
 	std::vector<GLuint> indexes;
 
-	int depth;
+	GLuint texture;
 };
 
 class IndexedRenderer {
@@ -20,7 +20,7 @@ public:
 	~IndexedRenderer();
 
 	void init();
-	void draw(DrawBatch& batch, GLuint texture);
+	void draw(DrawBatch& batch, int depth);
 	void render();
 
 private:
@@ -33,13 +33,10 @@ private:
 
 	void initGLObjects();
 
-	void combineBatches();
-
-	void uploadVbo();
+	void sortBatches();
+	void compileVbo();
 	void compileIbo();
-
-	std::map<GLuint, std::vector<DrawBatch>> batches;
-	std::map<GLuint, int> offsetMap;
-
+	
+	std::map<int, std::vector<DrawBatch>> batches;
 };
 

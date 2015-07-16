@@ -41,74 +41,70 @@ void IndexedRenderer::initGLObjects() {
 	glBindVertexArray(0);
 }
 
-void IndexedRenderer::draw(DrawBatch& newBatch, GLuint texture) {
-	if (batches.count(texture) == 0) {
-		//make a new vector
-		batches.emplace(texture, std::vector<DrawBatch>());
+void IndexedRenderer::draw(DrawBatch& batch, int depth) {
+	if (batches.count(depth) == 0) { //batch vector for the passed depth doesn't exist
+		batches.emplace(depth, std::vector<DrawBatch>()); //make a new one
 	}
-	//add the batch to the map
-	batches.at(texture).push_back(newBatch);
+	batches.at(depth).push_back(batch); //add the batch to its respective vector
 }
 
 void IndexedRenderer::render() {
-	//combine the batches
-	combineBatches();
-	//compile data
-	uploadVbo();
+	sortBatches();
+	//compile data for buffers
+	compileVbo();
 	compileIbo();
-	//bind vertex array
 	glBindVertexArray(vaoId);
-	int offset = 0;
+	//upload buffer data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
+	int iboOffset = 0;
 	for (auto entry : batches) {
-		glBindTexture(GL_TEXTURE_2D, entry.first);
-		glDrawElementsBaseVertex(GL_TRIANGLES, entry.second[0].indexes.size(), GL_UNSIGNED_INT, (void*)(sizeof(GLushort) * offset), offset);
-		offset += entry.second[0].indexes.size();
+		int batchOffset = 0;
+		GLuint lastTex = 0;
+		int indexCount = 0;
+		for (auto batch : entry.second) {
+			indexCount += batch.indexes.size();
+			if (batch.texture != lastTex) { 
+				glBindTexture(GL_TEXTURE_2D, lastTex);
+				glDrawElementsBaseVertex(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (void*)(sizeof(GLuint) * batchOffset + iboOffset), iboOffset);
+				indexCount = 0;
+			}
+			batchOffset += batch.indexes.size();
+			lastTex = batch.texture;
+		}
+		iboOffset += batchOffset;
 	}
-	//clean up
 	batches.clear();
 	glBindVertexArray(0);
 }
 
-void IndexedRenderer::combineBatches() {
+void IndexedRenderer::sortBatches() {
 	for (auto entry : batches) {
-		//depth sort the batches
-		std::stable_sort(entry.second.begin(), entry.second.end(), [](DrawBatch b1, DrawBatch b2) {return b1.depth < b2.depth; });
-		DrawBatch combined;
-		int indexOffset;
-		for (auto batch : entry.second) {	
-			//insert vertexes
-			combined.vertexes.insert(combined.vertexes.end(), batch.vertexes.begin(), batch.vertexes.end());
-			//modify indexes
-			std::for_each(batch.indexes.begin(), batch.indexes.end(), [indexOffset](GLuint& index) {index += indexOffset; });
-			//insert indexes
-			combined.indexes.insert(combined.indexes.end(), batch.indexes.begin(), batch.indexes.end());
-			indexOffset += batch.indexes.size();
-		}
-		entry.second.clear(); //clear out all the batches
-		entry.second.push_back(combined); //insert new combined batch
+		///texture sort the batches in each depth batch
+		std::stable_sort(entry.second.begin(), entry.second.end(), [](DrawBatch b1, DrawBatch b2) {return b1.texture < b2.texture; });
 	}
 }
 
-void IndexedRenderer::uploadVbo() {
+void IndexedRenderer::compileVbo() {
 	compiledVbo.clear();
-	//compile vertexes
 	for (auto entry : batches) {
-		compiledVbo.insert(compiledVbo.end(), entry.second[0].vertexes.begin(), entry.second[0].vertexes.end());
+		for (auto batch : entry.second) {
+			compiledVbo.insert(compiledVbo.end(), batch.vertexes.begin(), batch.vertexes.end());
+		}
 	}
-	//upload vbo
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void IndexedRenderer::compileIbo() {
 	compiledIbo.clear();
-	//compile indexes
 	for (auto entry : batches) {
-		compiledIbo.insert(compiledIbo.end(), entry.second[0].indexes.begin(), entry.second[0].indexes.end());
+		int offset = 0;
+		for (auto batch : entry.second) {
+			for (GLuint& index : batch.indexes) {
+				index += offset; //make indexes valid after insertion
+			}
+			//insert indexes
+			compiledIbo.insert(compiledIbo.end(), batch.indexes.begin(), batch.indexes.end());
+			offset += batch.indexes.size();
+		}
 	}
-	//upload ibo
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
