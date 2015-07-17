@@ -1,4 +1,5 @@
 #include "IndexedRenderer.h"
+#include "ShaderProgram.h"
 
 #include <iostream>
 #include <algorithm>
@@ -13,8 +14,9 @@ IndexedRenderer::~IndexedRenderer() {
 
 }
 
-void IndexedRenderer::init() {
+void IndexedRenderer::init(App& appRef) {
 	initGLObjects();
+	initShaders(appRef);
 }
 
 void IndexedRenderer::initGLObjects() {
@@ -41,6 +43,14 @@ void IndexedRenderer::initGLObjects() {
 	glBindVertexArray(0);
 }
 
+void IndexedRenderer::initShaders(App& appRef) {
+	ShaderProgram& shader = appRef.getShaderManager().getShader("spriteShading");
+	shader.enable();
+	camTransformLoc = glGetUniformLocation(shader.getProgram(), "camTransform");
+	textureLoc = glGetUniformLocation(shader.getProgram(), "spriteTexture");
+	glActiveTexture(GL_TEXTURE0);
+}
+
 void IndexedRenderer::draw(DrawBatch& batch, int depth) {
 	if (batches.count(depth) == 0) { //batch vector for the passed depth doesn't exist
 		batches.emplace(depth, std::vector<DrawBatch>()); //make a new one
@@ -48,7 +58,10 @@ void IndexedRenderer::draw(DrawBatch& batch, int depth) {
 	batches.at(depth).push_back(batch); //add the batch to its respective vector
 }
 
-void IndexedRenderer::render() {
+void IndexedRenderer::render(App& appRef) {
+	//upload uniform data
+	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(appRef.getCamera().getMatrix()[0][0]));
+	glUniform1i(textureLoc, 0);
 	sortBatches();
 	//compile data for buffers
 	compileVbo();

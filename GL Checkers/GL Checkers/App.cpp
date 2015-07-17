@@ -60,7 +60,7 @@ void App::initSystems() {
 	//Init the camera
 	camera.init(screenWidth, screenHeight);
 	camera.setScale(1.0f);
-	renderer.init();
+	renderer.init(*this);
 }
 
 
@@ -93,13 +93,6 @@ void App::procInput() {
 }
 
 void App::render() {
-	glActiveTexture(GL_TEXTURE0);
-	ShaderProgram& shader = getShaderManager().getShader("spriteShading");
-	shader.enable();
-	GLint camTransformLoc = glGetUniformLocation(shader.getProgram(), "camTransform");
-	GLint textureLoc = glGetUniformLocation(shader.getProgram(), "spriteTexture");
-	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(camera.getMatrix()[0][0]));
-	glUniform1i(textureLoc, 0);
 	state->render();
 }
 
