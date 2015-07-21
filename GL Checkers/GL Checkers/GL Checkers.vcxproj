@@ -104,10 +104,12 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\ShaderManager.cpp" />
     <ClCompile Include="Engine\ShaderProgram.cpp" />
+    <ClCompile Include="Engine\SpriteRenderHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardPos.h" />
+    <ClInclude Include="Engine\DrawBatch.h" />
     <ClInclude Include="Engine\Camera2D.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Engine\GameState.h" />
@@ -128,6 +130,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="Engine\ShaderManager.h" />
     <ClInclude Include="Engine\ShaderProgram.h" />
     <ClInclude Include="Engine\Vertex.h" />
+    <ClInclude Include="Engine\SpriteRenderHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag" />

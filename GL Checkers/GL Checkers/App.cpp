@@ -3,6 +3,7 @@
 
 #include "App.h"
 #include "Engine\ShaderManager.h"
+#include "Engine\SpriteRenderHelper.h"
 
 App::App() { 
 

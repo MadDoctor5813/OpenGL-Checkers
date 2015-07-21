@@ -36,6 +36,9 @@
     <ClCompile Include="Engine\IndexedRenderer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\SpriteRenderHelper.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -78,6 +81,12 @@
     <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="GUIRenderInterface.h" />
     <ClInclude Include="Engine\IndexedRenderer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DrawBatch.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SpriteRenderHelper.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
