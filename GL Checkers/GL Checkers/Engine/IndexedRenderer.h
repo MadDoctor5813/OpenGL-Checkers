@@ -5,14 +5,9 @@
 #include <vector>
 
 #include "Engine\Vertex.h"
-#include "App.h"
+#include "DrawBatch.h"
 
-struct DrawBatch {
-	std::vector<Vertex> vertexes;
-	std::vector<GLuint> indexes;
-
-	GLuint texture;
-};
+class App;
 
 class IndexedRenderer {
 
@@ -41,6 +36,8 @@ private:
 	void sortBatches();
 	void compileVbo();
 	void compileIbo();
+
+	void makeDrawCall(int count, int offset, int baseVertex, GLuint texture);
 	
 	std::map<int, std::vector<DrawBatch>> batches;
 };

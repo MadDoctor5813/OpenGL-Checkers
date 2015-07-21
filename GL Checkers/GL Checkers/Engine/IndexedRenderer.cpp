@@ -1,5 +1,6 @@
 #include "IndexedRenderer.h"
 #include "ShaderProgram.h"
+#include "App.h"
 
 #include <iostream>
 #include <algorithm>
@@ -71,24 +72,30 @@ void IndexedRenderer::render(App& appRef) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
 	int iboOffset = 0;
+	int baseVertex = 0;
 	for (auto entry : batches) {
 		int batchOffset = 0;
-		GLuint lastTex = 0;
+		GLuint lastTex = entry.second[0].texture;
 		int indexCount = 0;
-		for (auto batch : entry.second) {
-			indexCount += batch.indexes.size();
-			if (batch.texture != lastTex) { 
-				glBindTexture(GL_TEXTURE_2D, lastTex);
-				glDrawElementsBaseVertex(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (void*)(sizeof(GLuint) * batchOffset + iboOffset), iboOffset);
+		for (auto batch = entry.second.begin(); batch != entry.second.end(); batch++) {
+			indexCount += batch->indexes.size();
+			if (batch->texture != lastTex || std::next(batch) == entry.second.end()) { //if the texture's changed, or we've reached the end
+				makeDrawCall(indexCount, iboOffset + batchOffset, baseVertex, lastTex);
 				indexCount = 0;
 			}
-			batchOffset += batch.indexes.size();
-			lastTex = batch.texture;
+			lastTex = batch->texture;
+			batchOffset += batch->indexes.size();
+			baseVertex += batch->vertexes.size();
 		}
 		iboOffset += batchOffset;
 	}
 	batches.clear();
 	glBindVertexArray(0);
+}
+
+void IndexedRenderer::makeDrawCall(int count, int offset, int baseVertex, GLuint texture) {
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glDrawElementsBaseVertex(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*)(sizeof(GLuint) * offset), baseVertex);
 }
 
 void IndexedRenderer::sortBatches() {
