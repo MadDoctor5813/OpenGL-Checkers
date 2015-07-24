@@ -14,7 +14,7 @@ public:
 
 	virtual void enter();
 	virtual void exit();
-	virtual void render();
+	virtual void render(IndexedRenderer& renderer);
 	virtual void procEvent(SDL_Event& nextEvent);
 	virtual void update();
 

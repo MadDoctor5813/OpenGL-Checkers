@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include "Piece.h"
 #include "HumanPlayer.h"
+#include "Engine\App.h"
 
 
 PlayState::PlayState(App& app) : appRef(app){
@@ -47,12 +48,9 @@ void PlayState::addPlayer(PieceColor color, PlayerType type) {
 	}
 }
 
-void PlayState::render() {
-	batch.init();
-	batch.begin(SortMethods::TEXTURE_SORT);
-	board->render(batch);
-	batch.end();
-	batch.render();
+void PlayState::render(IndexedRenderer& renderer) {
+	board->render(renderer);
+	renderer.render(appRef);
 }
 
 void PlayState::procEvent(SDL_Event& nextEvent) {

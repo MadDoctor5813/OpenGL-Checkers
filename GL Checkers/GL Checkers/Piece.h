@@ -21,8 +21,8 @@ public:
 
 	void handleEvent(SDL_Event& event);
 	void update();
-	void render(SpriteBatch& batch);
-	void renderSelection(SpriteBatch& batch);
+	void render(IndexedRenderer& renderer);
+	void renderSelection(IndexedRenderer& renderer);
 
 	bool move(BoardPos newPos);
 	void pruneNonJumps();

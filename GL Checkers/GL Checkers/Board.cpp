@@ -1,6 +1,7 @@
 #include "Board.h"
-#include "App.h"
+#include "Engine\App.h"
 #include "SavedSquare.h"
+#include "Engine\SpriteRenderHelper.h"
 
 
 
@@ -131,21 +132,21 @@ bool Board::movePiece(Move move) {
 	}
 }
 
-void Board::render(SpriteBatch& batch) {
-	renderBackground(batch);
-	renderPieces(batch);
+void Board::render(IndexedRenderer& renderer) {
+	renderBackground(renderer);
+	renderPieces(renderer);
 	if (selectedPiece != nullptr) {
-		selectedPiece->renderSelection(batch);
+		selectedPiece->renderSelection(renderer);
 	}
 }
 
-void Board::renderBackground(SpriteBatch& batch) {
+void Board::renderBackground(IndexedRenderer& renderer) {
 	GLuint nextTex = lightSquareTex;
 	for (int row = 0; row < boardData.size(); row++) {
 		for (int col = 0; col < boardData[row].size(); col++) {
 			float x = (col * SQUARE_SIZE) + boardX;
 			float y = (row * SQUARE_SIZE) + boardY;
-			batch.draw(glm::vec4(x, y, SQUARE_SIZE, SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), nextTex, 0, Color{ 255, 255, 255, 255 });
+			renderer.draw(SpriteRenderHelper::toBatch(x, y, SQUARE_SIZE, SQUARE_SIZE), 0, nextTex);
 			if (nextTex == lightSquareTex) {
 				nextTex = darkSquareTex;
 			}
@@ -162,12 +163,12 @@ void Board::renderBackground(SpriteBatch& batch) {
 	}
 }
 
-void Board::renderPieces(SpriteBatch& batch) {
+void Board::renderPieces(IndexedRenderer& renderer) {
 	for (int row = 0; row < boardData.size(); row++) {
 		for (int col = 0; col < boardData[row].size(); col++) {
 			Piece * next = boardData[row][col];
 			if (next != nullptr) {
-				next->render(batch);
+				next->render(renderer);
 			}
 		}
 	}

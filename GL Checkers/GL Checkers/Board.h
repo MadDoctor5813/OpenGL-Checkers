@@ -6,7 +6,7 @@
 #include <GL\glew.h>
 #include <iostream>
 
-#include "Engine\SpriteBatch.h"
+#include "Engine\IndexedRenderer.h"
 #include "PieceColor.h"
 #include "SavedSquare.h"
 #include "BoardPos.h"
@@ -23,7 +23,7 @@ public:
 
 	void handleInput(SDL_Event& event);
 	void update();
-	void render(SpriteBatch& batch);
+	void render(IndexedRenderer& renderer);
 
 	void load(const std::string& name);
 	void save(const std::string& name);
@@ -73,8 +73,8 @@ private:
 
 	SavedSquare pieceToSquare(Piece * piece);
 
-	void renderBackground(SpriteBatch& batch);
-	void renderPieces(SpriteBatch& batch);
+	void renderBackground(IndexedRenderer& renderer);
+	void renderPieces(IndexedRenderer& renderer);
 
 };
 

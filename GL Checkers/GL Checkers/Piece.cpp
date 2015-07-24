@@ -2,9 +2,10 @@
 
 #include <algorithm>
 
-#include "App.h"
+#include "Engine\App.h"
 #include "PieceColor.h"
 #include "Move.h"
+#include "Engine\SpriteRenderHelper.h"
 
 Piece::Piece(BoardPos pos, PieceColor color, bool king, Board& board, App& app) : pos(pos), color(color), king(king), boardRef(board), appRef(app) {
 
@@ -81,17 +82,17 @@ void Piece::pruneNonJumps() {
 	}
 }
 
-void Piece::render(SpriteBatch& batch) {
+void Piece::render(IndexedRenderer& renderer) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
-	batch.draw(glm::vec4(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), texture, 0, Color{ 255, 255, 255, 255 });
+	renderer.draw(SpriteRenderHelper::toBatch(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), 1, texture);
 }
 
-void Piece::renderSelection(SpriteBatch& batch) {
+void Piece::renderSelection(IndexedRenderer& renderer) {
 	glm::vec2 coords = boardRef.boardToScreen(BoardPos{ pos.row, pos.col });
-	batch.draw(glm::vec4(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+	renderer.draw(SpriteRenderHelper::toBatch(coords.x, coords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), 2, selectedTexture);
 	for (auto move : moves) {
 		glm::vec2 moveCoords = boardRef.boardToScreen(move.newPos);
-		batch.draw(glm::vec4(moveCoords.x, moveCoords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), selectedTexture, 0, Color{ 255, 255, 255, 255 });
+		renderer.draw(SpriteRenderHelper::toBatch(moveCoords.x, moveCoords.y, boardRef.SQUARE_SIZE, boardRef.SQUARE_SIZE), 2, selectedTexture);
 	}
 }
 
