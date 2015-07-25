@@ -16,7 +16,7 @@ public:
 	~IndexedRenderer();
 
 	void init(App& appRef);
-	void draw(DrawBatch& batch, int depth);
+	void draw(DrawBatch& batch, int depth, int texture);
 	void render(App& appRef);
 
 private:
@@ -33,12 +33,11 @@ private:
 	void initGLObjects();
 	void initShaders(App& appRef);
 
-	void sortBatches();
 	void compileVbo();
 	void compileIbo();
 
 	void makeDrawCall(int count, int offset, int baseVertex, GLuint texture);
 	
-	std::map<int, std::vector<DrawBatch>> batches;
+	std::map<int, std::map<GLuint, DrawBatch>> batches;
 };
 

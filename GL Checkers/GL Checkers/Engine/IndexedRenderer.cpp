@@ -52,18 +52,25 @@ void IndexedRenderer::initShaders(App& appRef) {
 	glActiveTexture(GL_TEXTURE0);
 }
 
-void IndexedRenderer::draw(DrawBatch& batch, int depth) {
-	if (batches.count(depth) == 0) { //batch vector for the passed depth doesn't exist
-		batches.emplace(depth, std::vector<DrawBatch>()); //make a new one
+void IndexedRenderer::draw(DrawBatch& newBatch, int depth, int texture) {
+	if (batches.count(depth) == 0) { //if there is no depth batch
+		batches.emplace(depth, std::map<GLuint, DrawBatch>()); //make a new one
 	}
-	batches.at(depth).push_back(batch); //add the batch to its respective vector
+	if (batches.at(depth).count(texture) == 0) { //if there is no texture batch
+		batches.at(depth).emplace(texture, DrawBatch()); //make one
+	}
+	DrawBatch& oldBatch = batches.at(depth).at(texture);
+	for (auto& index : newBatch.indexes) {
+		index += oldBatch.vertexes.size(); //update indexes to work after appending
+	}
+	oldBatch.vertexes.insert(oldBatch.vertexes.end(), newBatch.vertexes.begin(), newBatch.vertexes.end());
+	oldBatch.indexes.insert(oldBatch.indexes.end(), newBatch.indexes.begin(), newBatch.indexes.end()); //append data
 }
 
 void IndexedRenderer::render(App& appRef) {
 	//upload uniform data
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(appRef.getCamera().getMatrix()[0][0]));
 	glUniform1i(textureLoc, 0);
-	sortBatches();
 	//compile data for buffers
 	compileVbo();
 	compileIbo();
@@ -71,23 +78,17 @@ void IndexedRenderer::render(App& appRef) {
 	//upload buffer data
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
-	int iboOffset = 0;
+	int drawOffset = 0;
 	int baseVertex = 0;
-	for (auto entry : batches) {
-		int batchOffset = 0;
-		GLuint lastTex = entry.second[0].texture;
-		int indexCount = 0;
-		for (auto batch = entry.second.begin(); batch != entry.second.end(); batch++) {
-			indexCount += batch->indexes.size();
-			if (batch->texture != lastTex || std::next(batch) == entry.second.end()) { //if the texture's changed, or we've reached the end
-				makeDrawCall(indexCount, iboOffset + batchOffset, baseVertex, lastTex);
-				indexCount = 0;
-			}
-			lastTex = batch->texture;
-			batchOffset += batch->indexes.size();
-			baseVertex += batch->vertexes.size();
+	int count = 0;
+	for (auto depthBatch : batches) {
+		for (auto textureBatch : depthBatch.second) {
+			count += textureBatch.second.indexes.size();
+			makeDrawCall(count, drawOffset, baseVertex, textureBatch.first);
+			drawOffset += count;
+			count = 0;
+			baseVertex += textureBatch.second.vertexes.size();
 		}
-		iboOffset += batchOffset;
 	}
 	batches.clear();
 	glBindVertexArray(0);
@@ -98,33 +99,21 @@ void IndexedRenderer::makeDrawCall(int count, int offset, int baseVertex, GLuint
 	glDrawElementsBaseVertex(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*)(sizeof(GLuint) * offset), baseVertex);
 }
 
-void IndexedRenderer::sortBatches() {
-	for (auto entry : batches) {
-		///texture sort the batches in each depth batch
-		std::stable_sort(entry.second.begin(), entry.second.end(), [](DrawBatch b1, DrawBatch b2) {return b1.texture < b2.texture; });
-	}
-}
-
 void IndexedRenderer::compileVbo() {
 	compiledVbo.clear();
-	for (auto entry : batches) {
-		for (auto batch : entry.second) {
-			compiledVbo.insert(compiledVbo.end(), batch.vertexes.begin(), batch.vertexes.end());
+	for (auto depthBatch : batches) {
+		for (auto textureBatch : depthBatch.second) {
+			compiledVbo.insert(compiledVbo.end(), textureBatch.second.vertexes.begin(), textureBatch.second.vertexes.end());
 		}
 	}
+	
 }
 
 void IndexedRenderer::compileIbo() {
 	compiledIbo.clear();
-	for (auto entry : batches) {
-		int offset = 0;
-		for (auto batch : entry.second) {
-			for (GLuint& index : batch.indexes) {
-				index += offset; //make indexes valid after insertion
-			}
-			//insert indexes
-			compiledIbo.insert(compiledIbo.end(), batch.indexes.begin(), batch.indexes.end());
-			offset += batch.indexes.size();
+	for (auto depthBatch : batches) {
+		for (auto textureBatch : depthBatch.second) {
+			compiledIbo.insert(compiledIbo.end(), textureBatch.second.indexes.begin(), textureBatch.second.indexes.end());
 		}
 	}
 }

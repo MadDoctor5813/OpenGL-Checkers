@@ -5,6 +5,6 @@
 
 class SpriteRenderHelper {
 public:
-	static DrawBatch toBatch(int x, int y, int w, int h, GLuint texture);
+	static DrawBatch toBatch(int x, int y, int w, int h);
 };
 
