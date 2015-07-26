@@ -94,7 +94,7 @@ void App::procInput() {
 }
 
 void App::render() {
-	state->render();
+	state->render(renderer);
 }
 
 void App::cleanup()  {

@@ -89,7 +89,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Engine\Camera2D.cpp" />
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="Engine\App.cpp" />
     <ClCompile Include="Engine\GameState.cpp" />
     <ClCompile Include="GUIRenderInterface.cpp" />
     <ClCompile Include="GUISystemInterface.cpp" />
@@ -111,7 +111,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="BoardPos.h" />
     <ClInclude Include="Engine\DrawBatch.h" />
     <ClInclude Include="Engine\Camera2D.h" />
-    <ClInclude Include="App.h" />
+    <ClInclude Include="Engine\App.h" />
     <ClInclude Include="Engine\GameState.h" />
     <ClInclude Include="GUIRenderInterface.h" />
     <ClInclude Include="GUISystemInterface.h" />

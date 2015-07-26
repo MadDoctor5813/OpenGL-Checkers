@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 
-#include "App.h"
+#include "Engine\App.h"
 #include "Engine\ShaderProgram.h"
 
 //Entry point

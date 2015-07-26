@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="App.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -39,12 +36,12 @@
     <ClCompile Include="Engine\SpriteRenderHelper.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\App.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
-    <ClInclude Include="App.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h" />
     <ClInclude Include="PieceColor.h" />
     <ClInclude Include="SavedSquare.h" />
@@ -87,6 +84,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\SpriteRenderHelper.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\App.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
