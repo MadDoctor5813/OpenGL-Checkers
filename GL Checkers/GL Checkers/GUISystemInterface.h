@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Rocket\Core\SystemInterface.h>
-class GUISystemInterface : Rocket::Core::SystemInterface {
+class GUISystemInterface : public Rocket::Core::SystemInterface {
 public:
 	GUISystemInterface();
 	~GUISystemInterface();
