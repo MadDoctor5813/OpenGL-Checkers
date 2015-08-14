@@ -1,6 +1,6 @@
 #include "SpriteRenderHelper.h"
 
-DrawBatch SpriteRenderHelper::toBatch(int x, int y, int w, int h) {
+DrawBatch SpriteRenderHelper::toBatch(float x, float y, float w, float h) {
 	Vertex v1, v2, v3, v4;
 	v1.color = { 255, 255, 255, 255 };
 	v1.pos = { x, y };
