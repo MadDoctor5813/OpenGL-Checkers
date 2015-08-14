@@ -22,6 +22,8 @@ void App::init() {
 	initOpenGL();
 	//init managers
 	initSystems();
+	//init librocket
+	initLibrocket();
 }
 
 SDL_Window * App::createWindow() {
@@ -62,6 +64,17 @@ void App::initSystems() {
 	camera.init(screenWidth, screenHeight);
 	camera.setScale(1.0f);
 	renderer.init(*this);
+}
+
+void App::initLibrocket() {
+	renderInterface = new GUIRenderInterface(*this);
+	systemInterface = new GUISystemInterface; //these should die when the game does
+	Rocket::Core::SetSystemInterface(systemInterface);
+	Rocket::Core::SetRenderInterface(renderInterface);
+	if (Rocket::Core::Initialise() == false) {
+		std::cout << "libRocket init error" << std::endl;
+	}
+	rocketContext = Rocket::Core::CreateContext("OpenGL Checkers Game", Rocket::Core::Vector2i(screenWidth, screenHeight));
 }
 
 
