@@ -2,7 +2,7 @@
 
 #include <Rocket/Core/Core.h>
 
-#include "Engine\App.h"
+class App;
 
 class GUIRenderInterface : public Rocket::Core::RenderInterface {
 

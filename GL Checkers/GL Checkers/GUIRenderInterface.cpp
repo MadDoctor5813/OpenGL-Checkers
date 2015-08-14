@@ -1,6 +1,7 @@
 #include "GUIRenderInterface.h"
 
 #include <GL\glew.h>
+#include "Engine\App.h"
 
 GUIRenderInterface::GUIRenderInterface(App& app) : appRef(app) {
 }
