@@ -22,7 +22,7 @@ void ShaderManager::loadPrograms() {
 	fs::directory_iterator shaderIterator(shaderDir);
 	fs::directory_iterator end;
 	for (; shaderIterator != end; shaderIterator++) { //Loop through all files in shader directory
-		shaderNames.insert(shaderIterator->path().basename()); //add basenames of all files to set, std::set ensures uniqueness
+		shaderNames.insert(shaderIterator->path().stem().string()); //add basenames of all files to set, std::set ensures uniqueness
 	}
 	for (auto shader : shaderNames) { //For every unique name
 		std::string vertData = loadShaderData(shader + ".vert"); //Load vert and frag shaders
