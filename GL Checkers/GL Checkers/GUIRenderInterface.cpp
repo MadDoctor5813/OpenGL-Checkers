@@ -2,6 +2,7 @@
 
 #include <GL\glew.h>
 #include "Engine\App.h"
+#include "GUIRenderHelper.h"
 
 GUIRenderInterface::GUIRenderInterface(App& app) : appRef(app) {
 }
@@ -11,7 +12,10 @@ GUIRenderInterface::~GUIRenderInterface() {
 }
 
 void GUIRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
-
+	//This method of clearing the batch every time libRocket renders a bit of geometry is hugely inefficient, but will be fixed later
+	DrawBatch batch = GUIRenderHelper::toBatch(vertices, num_vertices, indices, num_indices, texture, translation);
+	appRef.getRenderer().draw(batch, 99, (GLuint)texture); //drawing at depth 99 to ensure everything draws below GUI. Probably doesn't need to be that high
+	appRef.getRenderer().render(appRef); //immediately render that batch, as libRocket's API demands everything must be drawn in the order sent
 }
 
 Rocket::Core::CompiledGeometryHandle GUIRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture) {
