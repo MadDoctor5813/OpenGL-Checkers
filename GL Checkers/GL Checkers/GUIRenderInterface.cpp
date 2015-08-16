@@ -14,21 +14,25 @@ GUIRenderInterface::~GUIRenderInterface() {
 void GUIRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
 	//This method of clearing the batch every time libRocket renders a bit of geometry is hugely inefficient, but will be fixed later
 	DrawBatch batch = GUIRenderHelper::toBatch(vertices, num_vertices, indices, num_indices, texture, translation);
+	//Because rocket draws top left, we have to invert the y axis
+	for (auto vert : batch.vertexes) {
+		vert.pos.y = appRef.screenHeight - vert.pos.y;
+	}
 	appRef.getRenderer().draw(batch, 99, (GLuint)texture); //drawing at depth 99 to ensure everything draws below GUI. Probably doesn't need to be that high
 	appRef.getRenderer().render(appRef); //immediately render that batch, as libRocket's API demands everything must be drawn in the order sent
 }
 
-Rocket::Core::CompiledGeometryHandle GUIRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture) {
-	return 0;
-}
-
-void GUIRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation) {
-
-}
-
-void GUIRenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry) {
-
-}
+//Rocket::Core::CompiledGeometryHandle GUIRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture) {
+//	return 0;
+//}
+//
+//void GUIRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation) {
+//
+//}
+//
+//void GUIRenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry) {
+//
+//}
 
 bool GUIRenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source) {
 	GLuint textureId = appRef.getTextureManager().getTexture(source.CString());
