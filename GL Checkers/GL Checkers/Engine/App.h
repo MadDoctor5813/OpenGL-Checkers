@@ -23,6 +23,7 @@ public:
 
 	void init();
 	void runLoop();
+	void cleanup();
 
 	GLuint getCurrentProgram();
 	ShaderManager& getShaderManager() { return shaderManager; }
@@ -44,7 +45,6 @@ private:
 	void setWndSize();
 	void render();
 	void procInput();
-	void cleanup();
 
 	SDL_Window * window;
 	ShaderManager shaderManager;

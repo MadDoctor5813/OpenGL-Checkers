@@ -102,7 +102,6 @@ void App::procInput() {
 			state->procEvent(nextEvent);
 		}
 		else {
-			cleanup();
 			exit = true;
 		}
 	}
@@ -113,6 +112,8 @@ void App::render() {
 }
 
 void App::cleanup()  {
+	rocketContext->RemoveReference();
+	Rocket::Core::Shutdown();
 }
 
 
