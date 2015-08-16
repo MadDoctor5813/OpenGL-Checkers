@@ -87,8 +87,10 @@ void App::runLoop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
 		render();
+		rocketContext->Render();
 		camera.update();
 		state->update();
+		rocketContext->Update();
 		SDL_GL_SwapWindow(window);
 	}
 }
@@ -111,7 +113,6 @@ void App::render() {
 }
 
 void App::cleanup()  {
-	
 }
 
 
