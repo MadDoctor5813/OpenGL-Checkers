@@ -40,11 +40,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir);$(ProjectDir)deps/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)deps\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)deps\libs\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir);C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\Kevin\Programming Projects\GL Checkers\GL Checkers\GL Checkers\deps\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,11 +54,11 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2.lib;sdl2main.lib;sdl2_ttf.lib;glew32.lib;opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies);RocketCore.lib;RocketControls.lib;RocketDebugger.lib</AdditionalDependencies>
+      <AdditionalDependencies>sdl2.lib;sdl2main.lib;sdl2_ttf.lib;glew32.lib;opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies);CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
+      <Command>xcopy "$(ProjectDir)deps\dlls\Debug\*.dll" "$(TargetDir)" /y /s
 xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
 xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
 xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s
@@ -77,11 +77,11 @@ xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SOIL.lib;SDL2_ttf.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies);RocketCore.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SOIL.lib;SDL2_ttf.lib;glew32.lib;opengl32.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
+      <Command>xcopy "$(ProjectDir)deps\dlls\Release\*.dll" "$(TargetDir)" /y /s
 xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
 xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
 xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s
