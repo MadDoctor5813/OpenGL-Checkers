@@ -91,6 +91,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClCompile Include="Engine\Camera2D.cpp" />
     <ClCompile Include="Engine\App.cpp" />
     <ClCompile Include="Engine\GameState.cpp" />
+    <ClCompile Include="GUIRenderHelper.cpp" />
     <ClCompile Include="GUIRenderInterface.cpp" />
     <ClCompile Include="GUISystemInterface.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
@@ -113,6 +114,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <ClInclude Include="Engine\Camera2D.h" />
     <ClInclude Include="Engine\App.h" />
     <ClInclude Include="Engine\GameState.h" />
+    <ClInclude Include="GUIRenderHelper.h" />
     <ClInclude Include="GUIRenderInterface.h" />
     <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="HumanPlayer.h" />
@@ -146,6 +148,9 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <Image Include="Images\pieceWhite.png" />
     <Image Include="Images\pieceWhiteKing.png" />
     <Image Include="Images\selection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="deps\gui\test_doc.rml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

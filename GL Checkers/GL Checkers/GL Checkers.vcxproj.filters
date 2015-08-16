@@ -39,6 +39,7 @@
     <ClCompile Include="Engine\App.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GUIRenderHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Engine\App.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GUIRenderHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
@@ -137,5 +139,8 @@
     <Image Include="Images\pieceBlackKing.png">
       <Filter>Sprites</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="deps\gui\test_doc.rml" />
   </ItemGroup>
 </Project>
