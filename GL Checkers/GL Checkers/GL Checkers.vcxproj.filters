@@ -116,6 +116,9 @@
     <Filter Include="Sprites">
       <UniqueIdentifier>{d39853bf-674c-44f7-8cc2-380b30a65414}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{93124b73-5da5-4800-9b11-fc36d04140ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\darkSquare.png">
@@ -141,6 +144,11 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="deps\gui\test_doc.rml" />
+    <None Include="deps\gui\test_doc.rcss">
+      <Filter>Gui</Filter>
+    </None>
+    <None Include="deps\gui\test_doc.rml">
+      <Filter>Gui</Filter>
+    </None>
   </ItemGroup>
 </Project>

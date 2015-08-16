@@ -61,7 +61,8 @@
       <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
 xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
 xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
-xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
+xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s
+xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,7 +84,8 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
       <Command>xcopy "$(ProjectDir)deps\dlls\*.dll" "$(TargetDir)" /y /s
 xcopy "$(ProjectDir)deps\Images" "$(TargetDir)Images\" /y /s 
 xcopy "$(ProjectDir)deps\Saves" "$(TargetDir)Saves\" /y /s
-xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
+xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s
+xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@ xcopy "$(ProjectDir)deps\Shaders" "$(TargetDir)Shaders\" /y /s</Command>
     <Image Include="Images\selection.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="deps\gui\test_doc.rcss" />
     <None Include="deps\gui\test_doc.rml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

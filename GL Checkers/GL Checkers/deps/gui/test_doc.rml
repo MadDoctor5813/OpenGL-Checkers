@@ -1,0 +1,9 @@
+<rml>
+  <head>
+    <title>I'm a test</title>
+    <link type="text/rcss" href="test_doc.rcss"/>
+  </head>
+  <body class="window">
+    Hello World!
+  </body>
+</rml>
