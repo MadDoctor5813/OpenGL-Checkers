@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 #include <GL/glew.h>
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 
 #include "Engine\ShaderManager.h"
 #include "Engine\TextureManager.h"
@@ -38,6 +40,8 @@ private:
 	SDL_Window * createWindow();
 	void initOpenGL();
 	void initSystems();
+	void initCEGUI();
+	void initCEGUIResources();
 	void setWndSize();
 	void render();
 	void procInput();
@@ -49,6 +53,7 @@ private:
 	SaveManager saveManager;
 	SpriteBatch batch;
 	IndexedRenderer renderer;
+	CEGUI::OpenGL3Renderer * guiRenderer;
 
 	PlayState * state;
 

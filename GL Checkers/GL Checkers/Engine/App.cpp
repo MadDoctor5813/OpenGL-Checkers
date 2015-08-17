@@ -64,6 +64,29 @@ void App::initSystems() {
 	renderer.init(*this);
 }
 
+void App::initCEGUI() {
+	guiRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
+	initCEGUIResources();
+
+}
+
+void App::initCEGUIResources() {
+	CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>
+		(CEGUI::System::getSingleton().getResourceProvider());
+	rp->setResourceGroupDirectory("schemes", "gui/schemes/");
+	rp->setResourceGroupDirectory("imagesets", "gui/imagesets/");
+	rp->setResourceGroupDirectory("fonts", "gui/fonts/");
+	rp->setResourceGroupDirectory("layouts", "gui/layouts/");
+	rp->setResourceGroupDirectory("looknfeels", "gui/looknfeel/");
+	rp->setResourceGroupDirectory("lua_scripts", "gui/lua_scripts/");
+	CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+	CEGUI::Font::setDefaultResourceGroup("fonts");
+	CEGUI::Scheme::setDefaultResourceGroup("schemes");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
+}
+
 void App::runLoop() {
 	state = new PlayState(*this);
 	state->addPlayer(PieceColor::WHITE, PlayerType::HUMAN);
