@@ -13,7 +13,8 @@
 #include "Engine\IndexedRenderer.h"
 #include "Piece.h"
 #include "PlayState.h"
-#include "GUI.h"
+class GUI;
+
 
 class App {
 

@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Engine\ShaderManager.h"
 #include "Engine\SpriteRenderHelper.h"
+#include "GUI.h"
 
 App::App() { 
 
@@ -22,6 +23,8 @@ void App::init() {
 	initOpenGL();
 	//init managers
 	initSystems();
+	//init cegui
+	initCEGUI();
 }
 
 SDL_Window * App::createWindow() {
@@ -87,7 +90,7 @@ void App::initCEGUIResources() {
 	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 
 	CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
-	testGui = new GUI();
+	testGui = new GUI;
 	testGui->init(guiRenderer);
 	testGui->setFont("DejaVuSans-10");
 	CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(testGui->addWidget("TaharezLook/Button", "button", glm::vec4(0.0f), glm::vec4(0.5f, 0.5f, 0.1f, 0.05f)));
@@ -124,7 +127,6 @@ void App::procInput() {
 void App::render() {
 	//state->render(renderer);
 	testGui->render();
-
 }
 
 void App::cleanup()  {

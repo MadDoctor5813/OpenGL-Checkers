@@ -1,5 +1,7 @@
 #include "GUI.h"
 
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+
 GUI::GUI(){
 }
 

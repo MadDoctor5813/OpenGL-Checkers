@@ -1,7 +1,10 @@
 #pragma once
 
 #include <CEGUI/GUIContext.h>
-#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+
+namespace CEGUI { //forward declare to fix gl.h being included before glew.h
+	class OpenGL3Renderer;
+};
 
 #include "App.h"
 
