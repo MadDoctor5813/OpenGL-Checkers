@@ -37,6 +37,9 @@
     <ClCompile Include="Engine\App.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GUI.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -85,6 +88,9 @@
     <ClInclude Include="Engine\App.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\GUI.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">
@@ -109,9 +115,6 @@
     </Filter>
     <Filter Include="Sprites">
       <UniqueIdentifier>{d39853bf-674c-44f7-8cc2-380b30a65414}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Gui">
-      <UniqueIdentifier>{93124b73-5da5-4800-9b11-fc36d04140ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
