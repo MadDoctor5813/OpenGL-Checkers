@@ -13,6 +13,7 @@
 #include "Engine\IndexedRenderer.h"
 #include "Piece.h"
 #include "PlayState.h"
+#include "GUI.h"
 
 class App {
 
@@ -56,6 +57,7 @@ private:
 	CEGUI::OpenGL3Renderer * guiRenderer;
 
 	PlayState * state;
+	GUI* testGui;
 
 	bool exit = false;
 };
