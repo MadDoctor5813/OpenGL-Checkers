@@ -137,12 +137,4 @@
       <Filter>Sprites</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="deps\gui\test_doc.rcss">
-      <Filter>Gui</Filter>
-    </None>
-    <None Include="deps\gui\test_doc.rml">
-      <Filter>Gui</Filter>
-    </None>
-  </ItemGroup>
 </Project>

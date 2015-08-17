@@ -145,10 +145,6 @@ xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
     <Image Include="Images\pieceWhiteKing.png" />
     <Image Include="Images\selection.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="deps\gui\test_doc.rcss" />
-    <None Include="deps\gui\test_doc.rml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
