@@ -16,7 +16,7 @@ public:
 	void render();
 	void setFont(const std::string& font);
 
-	CEGUI::Window* addWidget(const std::string& type, const std::string& name, glm::vec4& dest);
+	CEGUI::Window* addWidget(const std::string& type, const std::string& name, const glm::vec4 & destAbs, const glm::vec4 & destRel);
 
 private:
 	CEGUI::GUIContext* context;
