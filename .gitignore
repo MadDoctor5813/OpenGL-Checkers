@@ -25,6 +25,10 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+#This reincludes the unfortunately named Debug and Release dll and lib folders
+!deps/dlls/
+!deps/libs/
+
 # Visual Studo 2015 cache/options directory
 .vs/
 
