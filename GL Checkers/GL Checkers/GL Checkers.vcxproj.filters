@@ -28,8 +28,6 @@
     <ClCompile Include="Engine\GameState.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GUISystemInterface.cpp" />
-    <ClCompile Include="GUIRenderInterface.cpp" />
     <ClCompile Include="Engine\IndexedRenderer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -39,7 +37,6 @@
     <ClCompile Include="Engine\App.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GUIRenderHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
@@ -76,8 +73,6 @@
     <ClInclude Include="Engine\GameState.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GUISystemInterface.h" />
-    <ClInclude Include="GUIRenderInterface.h" />
     <ClInclude Include="Engine\IndexedRenderer.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -90,7 +85,6 @@
     <ClInclude Include="Engine\App.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GUIRenderHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\colorShading.frag">

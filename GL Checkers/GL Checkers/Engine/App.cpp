@@ -22,8 +22,6 @@ void App::init() {
 	initOpenGL();
 	//init managers
 	initSystems();
-	//init librocket
-	initLibrocket();
 }
 
 SDL_Window * App::createWindow() {
@@ -66,22 +64,6 @@ void App::initSystems() {
 	renderer.init(*this);
 }
 
-void App::initLibrocket() {
-	renderInterface = new GUIRenderInterface(*this);
-	systemInterface = new GUISystemInterface; //these should die when the game does
-	Rocket::Core::SetSystemInterface(systemInterface);
-	Rocket::Core::SetRenderInterface(renderInterface);
-	if (Rocket::Core::Initialise() == false) {
-		std::cout << "libRocket init error" << std::endl;
-	}
-	rocketContext = Rocket::Core::CreateContext("OpenGL Checkers Game", Rocket::Core::Vector2i(screenWidth, screenHeight));
-	Rocket::Core::ElementDocument* doc = rocketContext->LoadDocument("gui/test_doc.rml");
-	if (doc != nullptr) {
-		doc->Show();
-		doc->RemoveReference();
-	}
-}
-
 void App::runLoop() {
 	state = new PlayState(*this);
 	state->addPlayer(PieceColor::WHITE, PlayerType::HUMAN);
@@ -90,11 +72,9 @@ void App::runLoop() {
 	while (exit == false) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		procInput();
-		rocketContext->Update();
 		camera.update();
-		//state->update();
-		//render();
-		rocketContext->Render();
+		state->update();
+		render();
 		SDL_GL_SwapWindow(window);
 	}
 }
@@ -116,8 +96,6 @@ void App::render() {
 }
 
 void App::cleanup()  {
-	rocketContext->RemoveReference();
-	Rocket::Core::Shutdown();
 }
 
 

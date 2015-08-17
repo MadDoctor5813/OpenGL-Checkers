@@ -93,9 +93,6 @@ xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
     <ClCompile Include="Engine\Camera2D.cpp" />
     <ClCompile Include="Engine\App.cpp" />
     <ClCompile Include="Engine\GameState.cpp" />
-    <ClCompile Include="GUIRenderHelper.cpp" />
-    <ClCompile Include="GUIRenderInterface.cpp" />
-    <ClCompile Include="GUISystemInterface.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Engine\IndexedRenderer.cpp" />
     <ClCompile Include="Piece.cpp" />
@@ -112,13 +109,10 @@ xcopy "$(ProjectDir)deps\gui" "$(TargetDir)gui\" /y /s</Command>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardPos.h" />
+    <ClInclude Include="Engine\App.h" />
     <ClInclude Include="Engine\DrawBatch.h" />
     <ClInclude Include="Engine\Camera2D.h" />
-    <ClInclude Include="Engine\App.h" />
     <ClInclude Include="Engine\GameState.h" />
-    <ClInclude Include="GUIRenderHelper.h" />
-    <ClInclude Include="GUIRenderInterface.h" />
-    <ClInclude Include="GUISystemInterface.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Engine\IndexedRenderer.h" />
     <ClInclude Include="Move.h" />

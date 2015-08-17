@@ -2,7 +2,6 @@
 
 #include <SDL.h>
 #include <GL/glew.h>
-#include <Rocket\Core.h>
 
 #include "Engine\ShaderManager.h"
 #include "Engine\TextureManager.h"
@@ -10,8 +9,6 @@
 #include "Engine\Camera2D.h"
 #include "Engine\SpriteBatch.h"
 #include "Engine\IndexedRenderer.h"
-#include "GUIRenderInterface.h"
-#include "GUISystemInterface.h"
 #include "Piece.h"
 #include "PlayState.h"
 
@@ -41,7 +38,6 @@ private:
 	SDL_Window * createWindow();
 	void initOpenGL();
 	void initSystems();
-	void initLibrocket();
 	void setWndSize();
 	void render();
 	void procInput();
@@ -53,11 +49,6 @@ private:
 	SaveManager saveManager;
 	SpriteBatch batch;
 	IndexedRenderer renderer;
-
-	GUIRenderInterface * renderInterface;
-	GUISystemInterface * systemInterface;
-	Rocket::Core::Context * rocketContext;
-
 
 	PlayState * state;
 
