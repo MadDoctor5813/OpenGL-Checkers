@@ -125,8 +125,8 @@ void App::procInput() {
 }
 
 void App::render() {
-	//state->render(renderer);
-	testGui->render();
+	state->render(renderer);
+	//testGui->render();
 }
 
 void App::cleanup()  {
