@@ -46,7 +46,6 @@ void IndexedRenderer::initGLObjects() {
 
 void IndexedRenderer::initShaders(App& appRef) {
 	ShaderProgram& shader = appRef.getShaderManager().getShader("spriteShading");
-	shader.enable();
 	camTransformLoc = glGetUniformLocation(shader.getProgram(), "camTransform");
 	textureLoc = glGetUniformLocation(shader.getProgram(), "spriteTexture");
 	glActiveTexture(GL_TEXTURE0);
@@ -68,6 +67,8 @@ void IndexedRenderer::draw(DrawBatch& newBatch, int depth, int texture) {
 }
 
 void IndexedRenderer::render(App& appRef) {
+	appRef.getShaderManager().getShader("spriteShading").enable();
+	glActiveTexture(GL_TEXTURE0);
 	//upload uniform data
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(appRef.getCamera().getMatrix()[0][0]));
 	glUniform1i(textureLoc, 0);
