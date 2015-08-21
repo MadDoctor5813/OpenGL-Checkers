@@ -67,8 +67,11 @@ void IndexedRenderer::draw(DrawBatch& newBatch, int depth, int texture) {
 }
 
 void IndexedRenderer::render(App& appRef) {
+	//set needed opengl state
 	appRef.getShaderManager().getShader("spriteShading").enable();
 	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//upload uniform data
 	glUniformMatrix4fv(camTransformLoc, 1, GL_FALSE, &(appRef.getCamera().getMatrix()[0][0]));
 	glUniform1i(textureLoc, 0);
