@@ -30,8 +30,9 @@ private:
 	CEGUI::Window* root;
 
 	bool injectMouseEvent(SDL_Event& injected);
-	bool injectKeyPress(SDL_Event& injected);
+	bool injectKeyEvent(SDL_Event& injected);
 
 	CEGUI::MouseButton toCEGUIButton(Uint8 button);
+	CEGUI::Key::Scan toCEGUIKey(SDL_Keycode key);
 };
 
