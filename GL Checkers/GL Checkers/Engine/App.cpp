@@ -89,12 +89,12 @@ void App::initCEGUIResources() {
 	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
 	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 
-	CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
+	CEGUI::SchemeManager::getSingleton().createFromFile("Generic.scheme");
+	CEGUI::SchemeManager::getSingleton().createFromFile("GameMenu.scheme");
 	testGui = new GUI;
 	testGui->init(guiRenderer);
 	testGui->setFont("DejaVuSans-10");
-	CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(testGui->addWidget("TaharezLook/Button", "button", glm::vec4(0.0f), glm::vec4(0.5f, 0.5f, 0.1f, 0.05f)));
-	button->setText("PLEASE WORK");
+	testGui->loadLayout("GameMenu.layout");
 }
 
 void App::runLoop() {
@@ -126,7 +126,7 @@ void App::procInput() {
 
 void App::render() {
 	state->render(renderer);
-	//testGui->render();
+	testGui->render();
 }
 
 void App::cleanup()  {

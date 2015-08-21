@@ -26,6 +26,11 @@ void GUI::setFont(const std::string& font) {
 	context->setDefaultFont(font);
 }
 
+void GUI::loadLayout(const std::string & layout) {
+	CEGUI::Window* layoutRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile(layout);
+	root->addChild(layoutRoot);
+}
+
 CEGUI::Window* GUI::addWidget(const std::string & type, const std::string & name, const glm::vec4 & destAbs, const glm::vec4 & destRel) {
 	CEGUI::Window* widget = CEGUI::WindowManager::getSingleton().createWindow(type, name);
 	root->addChild(widget);
