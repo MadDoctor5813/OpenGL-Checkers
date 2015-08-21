@@ -23,11 +23,11 @@ void IndexedRenderer::init(App& appRef) {
 void IndexedRenderer::initGLObjects() {
 	//generate the needed GL objects
 	glGenVertexArrays(1, &vaoId);
+	glGenBuffers(1, &vboId);
+	glGenBuffers(1, &iboId); 
 	//create VAO state
 	glBindVertexArray(vaoId);
 	//bind buffers
-	glGenBuffers(1, &vboId);
-	glGenBuffers(1, &iboId); 
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 	//Enable arrays
@@ -76,6 +76,9 @@ void IndexedRenderer::render(App& appRef) {
 	compileVbo();
 	compileIbo();
 	glBindVertexArray(vaoId);
+	//bind the buffers again
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 	//upload buffer data
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * compiledVbo.size(), compiledVbo.data(), GL_STREAM_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * compiledIbo.size(), compiledIbo.data(), GL_STREAM_DRAW);
