@@ -90,11 +90,11 @@ void App::initCEGUIResources() {
 	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 
 	CEGUI::SchemeManager::getSingleton().createFromFile("Generic.scheme");
-	CEGUI::SchemeManager::getSingleton().createFromFile("GameMenu.scheme");
+	CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
 	testGui = new GUI;
 	testGui->init(guiRenderer);
 	testGui->setFont("DejaVuSans-10");
-	testGui->loadLayout("GameMenu.layout");
+	testGui->loadLayout("VanillaConsole.layout");
 }
 
 void App::runLoop() {
@@ -116,7 +116,9 @@ void App::procInput() {
 	SDL_Event nextEvent;
 	while (SDL_PollEvent(&nextEvent) != 0) {
 		if (nextEvent.type != SDL_QUIT && nextEvent.key.keysym.sym != SDLK_ESCAPE) {
-			state->procEvent(nextEvent);
+			if (testGui->injectInput(nextEvent) == false) { //false means the gui didn't consume it and input should be passed to the game
+				state->procEvent(nextEvent); //remember to move gui event processing into the state class later
+			}
 		}
 		else {
 			exit = true;

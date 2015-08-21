@@ -20,11 +20,18 @@ public:
 	void setFont(const std::string& font);
 	void loadLayout(const std::string& layout);
 
+	bool injectInput(SDL_Event& injected);
+
 	CEGUI::Window* addWidget(const std::string& type, const std::string& name, const glm::vec4 & destAbs, const glm::vec4 & destRel);
 
 private:
 	CEGUI::GUIContext* context;
 	CEGUI::OpenGL3Renderer* renderer;
 	CEGUI::Window* root;
+
+	bool injectMouseEvent(SDL_Event& injected);
+	bool injectKeyPress(SDL_Event& injected);
+
+	CEGUI::MouseButton toCEGUIButton(Uint8 button);
 };
 
